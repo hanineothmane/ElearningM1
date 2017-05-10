@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "InfosModule";
+}
+
+<h2>Informations concernant le module</h2>
+
+<p>@ViewData["NomModule"] : @ViewData["Coeff"]</p>
+<body>
+    <table>
+        <tr>
+            <th>Identifiant</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Date de naissance</th>
+            <th>Email</th>
+        </tr>
+        @foreach (ElearningM1.Models.Apprenant apprenant in ViewData["ApprenantsModule"] as List<ElearningM1.Models.Apprenant>)
+        {
+            <tr>
+                <td>@apprenant.Id</td>
+                <td>@Html.ActionLink(apprenant.Nom, "#", "#", new { nom = apprenant.Nom }, null)</td>
+                <td>@apprenant.Prenom</td>
+                <td>@apprenant.DateNaiss</td>
+                <td>@apprenant.Courriel</td>
+            </tr>
+        }
+    </table>
+</body>

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MyPlateformMIAGE.Models;
+using ElearningM1.Models;
 
-namespace MyPlateformMIAGE.Controllers
+namespace ElearningM1.Controllers
 {
     public class RPController : Controller
     {
@@ -15,6 +15,7 @@ namespace MyPlateformMIAGE.Controllers
             return View();
         }
 
+        //Commun
         public ActionResult ListeModules()
         {
             Modules lesModules = new Modules();
@@ -22,6 +23,7 @@ namespace MyPlateformMIAGE.Controllers
             return View();
         }
 
+        //Commun
         public ActionResult ChercheModule(string nom)
         {
             ViewData["NomModule"] = nom;
@@ -36,6 +38,7 @@ namespace MyPlateformMIAGE.Controllers
             return View("Error");
         }
 
+        //Commun
         public ActionResult ChercheApprenant(string nom)
         {
             ViewData["NomApprenant"] = nom;
@@ -44,7 +47,7 @@ namespace MyPlateformMIAGE.Controllers
             if (apprenant != null)
             {
                 ViewData["Apprenant"] = apprenant;
-                return View("InfosModule");
+                return View("InfosApprenant");
             }
             return View("Error");
         }
