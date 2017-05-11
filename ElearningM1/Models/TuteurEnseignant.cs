@@ -5,12 +5,26 @@ using System.Web;
 
 namespace ElearningM1.Models
 {
-    public class TuteurEnseignant
+    public class TuteurEnseignant : Profil
     {
-        public int id { get; set; }
-        public String nom { get; set; }
-        public String prenom { get; set; }
+        private List<Module> lesModules;
+        private string nom, dateNaiss, prenom, courriel, id, mdp, telephone;
 
-        public List<Models.Apprenant> ListApprenant { get; set; }
+        public TuteurEnseignant(string nom, string dateNaiss, string prenom, string courriel, string id, string mdp, string telephone) : base(nom, dateNaiss, prenom, courriel, id, mdp, telephone)
+        {
+            
+        }
+        
+        
+
+        public void consulterInfoApprenant(Apprenant a)
+        {
+
+        }
+
+        public void verifierRenduDevoir(Apprenant a, Devoir d)
+        {
+
+        }
     }
 }

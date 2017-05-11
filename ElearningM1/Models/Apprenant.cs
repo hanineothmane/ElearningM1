@@ -5,12 +5,29 @@ using System.Web;
 
 namespace ElearningM1.Models
 {
-    public class Apprenant
+    public class Apprenant : Profil
     {
-        public int id { get; set; }
-        public String nom { get; set; }
-        public string prenom { get; set; }
+        private string dateInscription;
+        private List<Module> lesModules;
+        public Apprenant(string nom, string dateNaiss, string prenom, string courriel, string id, string mdp, string telephone, string dateInscription) : base(nom, dateNaiss, prenom, courriel, id, mdp, telephone)
+        {
+            this.dateInscription = dateInscription;
+        }
+        
 
-        public String dateinscription { get; set;}
+        public void add(Module m)
+        {
+            this.lesModules.Add(m);
+        }
+
+        public Boolean aRendu(Devoir d)
+        {
+            return false;
+        }
+
+        public void modifierInfos()
+        {
+
+        }
     }
 }
