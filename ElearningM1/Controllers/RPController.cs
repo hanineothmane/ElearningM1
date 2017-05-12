@@ -20,7 +20,7 @@ namespace ElearningM1.Controllers
         {
             Modules lesModules = new Modules();
             ViewData["Modules"] = lesModules.getModules();
-            return View();
+            return View(lesModules.getModules());
         }
 
         //Commun
@@ -37,6 +37,23 @@ namespace ElearningM1.Controllers
             }
             return View("Error");
         }
+
+        //Commun
+        public ActionResult ListeApprenants()
+        {
+            Apprenants lesApprenants = new Apprenants();
+            ViewData["Apprenants"] = lesApprenants.getApprenants();
+            return View(lesApprenants.getApprenants());
+        }
+
+        //Commun
+        public ActionResult ListeTuteursEnseignant()
+        {
+            TuteursEnseignant lesTuteursEnseignant = new TuteursEnseignant();
+            ViewData["TuteursEnseignant"] = lesTuteursEnseignant.getTuteursEnseignant();
+            return View(lesTuteursEnseignant.getTuteursEnseignant());
+        }
+
 
         //Commun
         public ActionResult ChercheApprenant(string nom)

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Liste des apprenants";
+}
+<head>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css"/>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<h2>Les apprenants</h2>
+<body>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de naissance</th>
+                <th>Courriel</th>
+                <th>Téléphone</th>
+            </tr>
+        </thead>
+        @foreach (ElearningM1.Models.Apprenant apprenant in ViewData["Apprenants"] as List<ElearningM1.Models.Apprenant>)
+        {
+            <tr>
+                <td>@Html.ActionLink(apprenant.Nom, "#", "#", new { nom = apprenant.Nom }, null)</td>
+                <td>@Html.ActionLink(apprenant.Prenom, "#", "#", new { nom = apprenant.Nom }, null)</td>
+                <td>@apprenant.DateNaiss</td>
+                <td>@apprenant.Courriel</td>
+                <td>@apprenant.Telephone</td>
+            </tr>
+        }
+    </table>
+</body>

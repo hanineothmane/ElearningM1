@@ -181,6 +181,7 @@
     <Compile Include="Models\SessionRegroupement.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\TuteurEnseignant.cs" />
+    <Compile Include="Models\TuteursEnseignant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +256,8 @@
     <Content Include="Views\RP\ListeModules.cshtml" />
     <Content Include="Views\TuteurEnseignant\AllApprenant.cshtml" />
     <Content Include="Views\TuteurEnseignant\Index.cshtml" />
+    <Content Include="Views\RP\ListeApprenants.cshtml" />
+    <Content Include="Views\RP\ListeTuteursEnseignant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

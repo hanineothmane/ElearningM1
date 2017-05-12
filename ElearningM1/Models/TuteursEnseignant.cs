@@ -10,9 +10,9 @@ using System.Web.Mvc;
 
 namespace ElearningM1.Models
 {
-    public class Apprenants
+    public class TuteursEnseignant
     {
-        public List<Apprenant> getApprenants()
+        public List<TuteurEnseignant> getTuteursEnseignant()
         {
             NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=postgres;port=5432");
 
@@ -28,9 +28,9 @@ namespace ElearningM1.Models
 
 
 
-            List<Apprenant> module = MyData.AsEnumerable().Select(row =>
+            List<TuteurEnseignant> te = MyData.AsEnumerable().Select(row =>
 
-                new Apprenant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<string>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"),null)
+                new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<string>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"))
                 {
 
                     Nom = row.Field<string>("nom"),
@@ -43,11 +43,11 @@ namespace ElearningM1.Models
                 }
 
             ).ToList();
-            module.Cast<Apprenant>();
+            te.Cast<TuteurEnseignant>();
 
 
 
-            return module;
+            return te;
         }
     }
 }
