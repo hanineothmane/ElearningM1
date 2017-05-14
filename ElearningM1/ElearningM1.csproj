@@ -203,6 +203,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\init.js" />
+    <Content Include="Scripts\js\materialize.js" />
+    <Content Include="Scripts\js\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -222,6 +225,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\TuteurEnseignant\AllApprenant.cshtml" />
     <Content Include="Views\TuteurEnseignant\Index.cshtml" />
+    <Content Include="Views\Shared\_nav.cshtml" />
+    <Content Include="Views\TuteurEnseignant\InfoTe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -86,16 +86,38 @@ namespace ElearningM1.Controllers
 
         }
 
-        public ActionResult InfoApprenant(int id)
+        public ActionResult InfoTe(int id)
         {
+            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearning;port=5433");
+
+            DataTable MyData = new DataTable();
+            NpgsqlDataAdapter da;
+
+            conn.Open();
+            string select = "SELECT * FROM \"Utilisateur\" WHERE id = @id";
+            NpgsqlCommand MyCmd = new NpgsqlCommand(select, conn);
+            da = new NpgsqlDataAdapter(MyCmd);
+            da.Fill(MyData);
+            conn.Close();
+
+
+            List<TuteurEnseignant> te = MyData.AsEnumerable().Select(row =>
+
+                new TuteurEnseignant
+                {
+                    id = row.Field<int>("id"),
+                    nom = row.Field<String>("nom"),
+                    prenom = row.Field<String>("prenom")
+
+                }
+
+            ).ToList();
+            te.Cast<TuteurEnseignant>();
+
             
+
+            return View(te);
             
-
-
-
-            return View();
-
-
         }
         public void connexionBDD()
         {

@@ -3,7 +3,9 @@
     <html>
     <head>
         @{
-            ViewBag.Title = "AllApprenant";
+            ViewBag.Title = "My Plateform MIAGE";
+            Layout = "~/Views/Shared/_nav.cshtml";
+
         }
         <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
         <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css/>
@@ -30,6 +32,7 @@
                             <td> @tuteur.id </td>
                             <td> @tuteur.nom </td>
                             <td>@tuteur.prenom</td>
+
                         </tr>
                     }
                 }
