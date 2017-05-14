@@ -24,7 +24,7 @@ namespace ElearningM1.Controllers
         public ActionResult AllApprenant()
         {
 
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearning;port=5433");
+            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=postgres;port=5432");
 
             DataTable MyData = new DataTable();
             NpgsqlDataAdapter da;
@@ -40,11 +40,15 @@ namespace ElearningM1.Controllers
 
             List<TuteurEnseignant> te = MyData.AsEnumerable().Select(row =>
 
-                new TuteurEnseignant
-                {
-                    id = row.Field<int>("id"),
-                    nom = row.Field<String>("nom"),
-                    prenom = row.Field<String>("prenom")
+                new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<string>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"))              {
+                    
+                    Nom = row.Field<string>("nom"),
+                    DateNaiss = row.Field<string>("dateNaiss"),
+                    Prenom = row.Field<string>("prenom"),
+                    Courriel = row.Field<string>("courriel"),
+                    Id = row.Field<string>("id"),
+                    Mdp = row.Field<string>("mdp"),
+                    Telephone = row.Field<string>("telephone"),
 
                 }
 

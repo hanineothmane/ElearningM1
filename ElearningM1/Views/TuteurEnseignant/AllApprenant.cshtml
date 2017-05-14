@@ -1,44 +1,47 @@
 ﻿
 @model IEnumerable<ElearningM1.Models.TuteurEnseignant>
-    <html>
-    <head>
-        @{
-            ViewBag.Title = "My Plateform MIAGE";
-            Layout = "~/Views/Shared/_nav.cshtml";
-
-        }
-        <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
-        <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css/>
-        <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
-    </head>
-    <body>
-        <h2>Veuillez selectionner un apprenant </h2>
+<html>
+<head>
+    @{
+        ViewBag.Title = "AllApprenant";
+    }
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<body>
+    <h2>Veuillez selectionner un apprenant </h2>
 
 
 
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom du Tuteur</th>
-                    <th>Prenom du Tuteur</th>
-                </tr>
-            </thead>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom du Tuteur</th>
+                <th>Prenom du Tuteur</th>
+                <th>Date de naisse du Tuteur</th>
+                <th>Courriel du Tuteur</th>
+                <th>Telephone du Tuteur</th>
+            </tr>
+        </thead>
 
-            <tbody>
-                @{ foreach (var tuteur in Model)
+        <tbody>
+            @{ foreach (var tuteur in Model)
             {
-                        <tr>
-                            <td> @tuteur.id </td>
-                            <td> @tuteur.nom </td>
-                            <td>@tuteur.prenom</td>
-
-                        </tr>
-                    }
+                    <tr>
+                        <td>@tuteur.Id </td>
+                        <td>@tuteur.Nom </td>
+                        <td>@tuteur.Prenom</td>
+                        <td>@tuteur.DateNaiss</td>
+                        <td>@tuteur.Courriel</td>
+                        <td>@tuteur.Telephone</td>
+                    </tr>
                 }
-            </tbody>
+            }
+        </tbody>
 
-        </table>
-    </body>
+    </table>
+</body>
 
 </html>
