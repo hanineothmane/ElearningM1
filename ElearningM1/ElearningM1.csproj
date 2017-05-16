@@ -166,6 +166,7 @@
     <Compile Include="Models\Administration.cs" />
     <Compile Include="Models\Apprenant.cs" />
     <Compile Include="Models\Apprenants.cs" />
+    <Compile Include="Models\BDD.cs" />
     <Compile Include="Models\Devoir.cs" />
     <Compile Include="Models\Etablissement.cs" />
     <Compile Include="Models\Examen.cs" />

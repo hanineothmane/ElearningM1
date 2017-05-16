@@ -14,17 +14,17 @@ namespace ElearningM1.Models
     {
         public List<Apprenant> getApprenants()
         {
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=postgres;port=5432");
+            BDD.Initialize();
 
             DataTable MyData = new DataTable();
             NpgsqlDataAdapter da;
 
-            conn.Open();
+            BDD.Open();
             string select = "SELECT * FROM \"Utilisateur\"";
-            NpgsqlCommand MyCmd = new NpgsqlCommand(select, conn);
+            NpgsqlCommand MyCmd = new NpgsqlCommand(select, BDD.Connexion());
             da = new NpgsqlDataAdapter(MyCmd);
             da.Fill(MyData);
-            conn.Close();
+            BDD.Close();
 
 
 
