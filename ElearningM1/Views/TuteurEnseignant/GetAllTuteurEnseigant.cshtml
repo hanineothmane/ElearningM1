@@ -1,12 +1,11 @@
-﻿
-@model IEnumerable<ElearningM1.Models.TuteurEnseignant>
+﻿@model IEnumerable<ElearningM1.Models.TuteurEnseignant>
 <html>
 <head>
     @{
-        ViewBag.Title = "AllApprenant";
+        ViewBag.Title = "AllTuteurEnseigant";
     }
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
-    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css  />
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
 </head>
 <body>
@@ -30,12 +29,9 @@
             @{ foreach (var tuteur in Model)
             {
                     <tr>
-                        <td>@tuteur.Id </td>
-                        <td>@tuteur.Nom </td>
-                        <td>@tuteur.Prenom</td>
-                        <td>@tuteur.DateNaiss</td>
-                        <td>@tuteur.Courriel</td>
-                        <td>@tuteur.Telephone</td>
+                        <td>@Html.ActionLink(tuteur.Nom, "InfoTe" , "TuteurEnseignant", new { id = tuteur.Id } , null) </td>
+                        <td>@Html.ActionLink(tuteur.Prenom, "InfoTe", "TuteurEnseignant", new { id = tuteur.Id }, null) </td>
+                        
                     </tr>
                 }
             }

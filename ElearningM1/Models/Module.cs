@@ -60,8 +60,8 @@ namespace ElearningM1.Models
         {
             return new List<Apprenant>
             {
-                new Apprenant("Ajili","12/03/1996","Wassim","wassim-ajili@hotmail.fr","wass","000","06","hier"),
-                new Apprenant("Toto","01/01/2010","Titi","titi-toto@hotmail.fr","toto","000","06","demain")
+                //new Apprenant("Ajili","12/03/1996","Wassim","wassim-ajili@hotmail.fr","wass","000","06","hier"),
+                //new Apprenant("Toto","01/01/2010","Titi","titi-toto@hotmail.fr","toto","000","06","demain")
             };
         }
     }

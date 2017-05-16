@@ -68,6 +68,5 @@ namespace ElearningM1.Controllers
             }
             return View("Error");
         }
-        
     }
 }

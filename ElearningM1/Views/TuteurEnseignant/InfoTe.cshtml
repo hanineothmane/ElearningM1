@@ -1,29 +1,24 @@
-﻿
-<html>
+﻿@model IEnumerable<ElearningM1.Models.TuteurEnseignant>
+@{
+    ViewBag.Title = "InfoTe";
+}
 
-<head>
-    @{
-        ViewBag.Title = "Information tuteur enseignant";
-        Layout = "~/Views/Shared/_nav";
+<h2>InfoTe</h2>
+
+<p>je suis dans la page info te voici le nom du tuteur que j'ai recupéré</p>
+
+<p>
+    @{ foreach (var tuteur in Model)
+            {
+           
+                @tuteur.Id <br />
+                @tuteur.Nom <br />
+               @tuteur.Prenom<br />
+                @tuteur.DateNaiss<br />
+                @tuteur.Courriel<br />
+                @tuteur.Adresse <br />
+                @tuteur.Telephone
+           
+        }
     }
-</head>
-<body>
-
-
-
-
-
-
-
-</body>
-
-
-
-
-
-
-
-</html>
-
-
-
+</p>

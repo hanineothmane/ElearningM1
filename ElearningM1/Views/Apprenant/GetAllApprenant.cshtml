@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ElearningM1.Models.Apprenant>
+
+    @{
+        ViewBag.Title = "GetAllApprenant";
+    }
+
+    <h2>Voici tous les apprenant affecter aux tuteur enseignant</h2>
+
+    <table class="striped">
+        <thead>
+            <tr>
+
+                <th>Nom de l'apprenant</th>
+                <th>Prenom de l'apprenant</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @{ foreach (var apprenant in Model)
+            {
+                    <tr>
+                        <td>@apprenant.Nom </td>
+                        <td>@apprenant.Prenom </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+
+
+
+
+

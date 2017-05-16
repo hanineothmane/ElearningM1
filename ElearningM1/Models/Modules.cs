@@ -15,17 +15,17 @@ namespace ElearningM1.Models
         public List<Module> getModules()
         {
 
-            BDD.Initialize();
+            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=postgres;port=5432");
 
             DataTable MyData = new DataTable();
             NpgsqlDataAdapter da;
 
-            BDD.Open();
+            conn.Open();
             string select = "SELECT * FROM \"Module\"";
-            NpgsqlCommand MyCmd = new NpgsqlCommand(select, BDD.Connexion());
+            NpgsqlCommand MyCmd = new NpgsqlCommand(select, conn);
             da = new NpgsqlDataAdapter(MyCmd);
             da.Fill(MyData);
-            BDD.Close();
+            conn.Close();
 
 
 

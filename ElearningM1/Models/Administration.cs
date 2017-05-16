@@ -7,7 +7,7 @@ namespace ElearningM1.Models
 {
     public class Administration : Profil
     {
-        public Administration(string nom, string dateNaiss, string prenom, string courriel, string id, string mdp, string telephone) : base(nom, dateNaiss, prenom, courriel, id, mdp, telephone)
+        public Administration(string nom, string dateNaiss, string prenom, string courriel, int id, string mdp, string telephone, String adresse) : base(nom, dateNaiss, prenom, courriel, id, mdp, telephone, adresse)
         {
             
         }

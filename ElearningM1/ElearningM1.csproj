@@ -143,6 +143,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BDD\BDD.cs" />
+    <Compile Include="Controllers\ApprenantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RPController.cs" />
     <Compile Include="Controllers\TuteurEnseignantController.cs" />
@@ -166,7 +167,6 @@
     <Compile Include="Models\Administration.cs" />
     <Compile Include="Models\Apprenant.cs" />
     <Compile Include="Models\Apprenants.cs" />
-    <Compile Include="Models\BDD.cs" />
     <Compile Include="Models\Devoir.cs" />
     <Compile Include="Models\Etablissement.cs" />
     <Compile Include="Models\Examen.cs" />
@@ -233,6 +233,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\init.js" />
+    <Content Include="Scripts\js\materialize.js" />
+    <Content Include="Scripts\js\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -255,10 +258,10 @@
     <Content Include="Views\RP\Index.cshtml" />
     <Content Include="Views\RP\InfosModule.cshtml" />
     <Content Include="Views\RP\ListeModules.cshtml" />
-    <Content Include="Views\TuteurEnseignant\AllApprenant.cshtml" />
     <Content Include="Views\TuteurEnseignant\Index.cshtml" />
-    <Content Include="Views\RP\ListeApprenants.cshtml" />
-    <Content Include="Views\RP\ListeTuteursEnseignant.cshtml" />
+    <Content Include="Views\TuteurEnseignant\GetAllTuteurEnseigant.cshtml" />
+    <Content Include="Views\TuteurEnseignant\InfoTe.cshtml" />
+    <Content Include="Views\Apprenant\GetAllApprenant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

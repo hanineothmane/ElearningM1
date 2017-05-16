@@ -21,32 +21,20 @@ namespace ElearningM1.Controllers
             return View();
         }
 
-        public ActionResult AllApprenant()
+        public ActionResult GetAllTuteurEnseigant()
         {
-
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=postgres;port=5432");
-
-            DataTable MyData = new DataTable();
-            NpgsqlDataAdapter da;
-
-            conn.Open();
+            
             string select = "SELECT * FROM \"Utilisateur\"";
-            NpgsqlCommand MyCmd = new NpgsqlCommand(select, conn);
-            da = new NpgsqlDataAdapter(MyCmd);
-            da.Fill(MyData);
-            conn.Close();
+          
+            List<TuteurEnseignant> te = Connexion(select).AsEnumerable().Select(row =>
 
-
-
-            List<TuteurEnseignant> te = MyData.AsEnumerable().Select(row =>
-
-                new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<string>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"))              {
+                new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"))              {
                     
                     Nom = row.Field<string>("nom"),
-                    DateNaiss = row.Field<string>("dateNaiss"),
+                    DateNaiss = row.Field<string>("datenaissance"),
                     Prenom = row.Field<string>("prenom"),
                     Courriel = row.Field<string>("courriel"),
-                    Id = row.Field<string>("id"),
+                    Id = row.Field<int>("id"),
                     Mdp = row.Field<string>("mdp"),
                     Telephone = row.Field<string>("telephone"),
 
@@ -54,64 +42,31 @@ namespace ElearningM1.Controllers
 
             ).ToList();
             te.Cast<TuteurEnseignant>();
-
-
-
-
-
-
-
-
-            //            IList<Class1> items = dt.AsEnumerable().Select(row =>
-            //new Class1
-            //{
-            //    id = row.Field<string>("id"),
-            //    name = row.Field<string>("name")
-            //}).ToList();
-
-            //var Te = new TuteurEnseignant()
-            //{
-            //    id = 1,
-            //    nom = "Haninos",
-            //    prenom = "othmanos",
-            //    ListApprenant = new List<Apprenant>()
-            //    {
-            //        new Apprenant{id = 1, nom = "hanine", prenom = "othmane", dateinscription = "28/10/2017"},
-            //        new Apprenant{id = 2,nom = "hanine",prenom = "oussama", dateinscription = "28/11/2017"}
-            //    }
-
-
-            //};
-            // on affiche le premier element de la liste de tuteur enseigant te
-            //te.First()
-
-
+            
             return View(te) ;
 
         }
 
         public ActionResult InfoTe(int id)
         {
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearning;port=5433");
+            
+            string select = "SELECT * FROM \"Utilisateur\" WHERE id =" +id ;
 
-            DataTable MyData = new DataTable();
-            NpgsqlDataAdapter da;
-
-            conn.Open();
-            string select = "SELECT * FROM \"Utilisateur\" WHERE id = @id";
-            NpgsqlCommand MyCmd = new NpgsqlCommand(select, conn);
-            da = new NpgsqlDataAdapter(MyCmd);
-            da.Fill(MyData);
-            conn.Close();
+            
 
 
-            List<TuteurEnseignant> te = MyData.AsEnumerable().Select(row =>
+            List<TuteurEnseignant> te = Connexion(select).AsEnumerable().Select(row =>
 
-                new TuteurEnseignant
+                new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"))
                 {
-                    id = row.Field<int>("id"),
-                    nom = row.Field<String>("nom"),
-                    prenom = row.Field<String>("prenom")
+                    Id = row.Field<int>("id"),
+                    Nom = row.Field<String>("nom"),
+                    Prenom = row.Field<String>("prenom"),
+                    DateNaiss = row.Field<String>("datenaissance"),
+                    Courriel = row.Field<String>("courriel"),
+                    Mdp = row.Field<String>("mdp"),
+                    Telephone = row.Field<String>("telephone"),
+                    Adresse = row.Field<String>("adresse")
 
                 }
 
@@ -123,19 +78,58 @@ namespace ElearningM1.Controllers
             return View(te);
             
         }
-        public void connexionBDD()
+
+
+        public void consulterInfoApprenants()
         {
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearning;port=5433");
-            conn.Open();
-            // Define a query
-            //string insert = "INSERT INTO \"Utilisateur\"(id,courriel,nom,prenom,telephone,adresse,mdp,datenaissance) values(DEFAULT,\'hanine@gmail.com\',\'Hanine\',\'othmane\',\'0663734496\',\'3 rue auguste poullain \',\'root\',\'28/11/1991\')";
 
-            //NpgsqlCommand MyCmd = new NpgsqlCommand(insert, conn);
+            string select = "SELECT * FROM \"Utilisateur\" WHERE id = " ;
 
+            List<TuteurEnseignant> te = Connexion(select).AsEnumerable().Select(row =>
 
-            //MyCmd.ExecuteNonQuery(); //Exécution
-            //conn.Close();
+                new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"))
+                {
+                    Id = row.Field<int>("id"),
+                    Nom = row.Field<String>("nom"),
+                    Prenom = row.Field<String>("prenom"),
+                    DateNaiss = row.Field<String>("datenaissance"),
+                    Courriel = row.Field<String>("courriel"),
+                    Mdp = row.Field<String>("mdp"),
+                    Telephone = row.Field<String>("telephone"),
+                    Adresse = row.Field<String>("adresse")
+
+                }
+
+            ).ToList();
+            te.Cast<TuteurEnseignant>();
+
 
         }
+
+
+
+
+
+
+
+
+        public DataTable Connexion(String requette)
+        {
+
+            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearning;port=5433");
+
+            DataTable MyData = new DataTable();
+            NpgsqlDataAdapter da;
+
+            conn.Open();
+           
+            NpgsqlCommand MyCmd = new NpgsqlCommand(requette, conn);
+            da = new NpgsqlDataAdapter(MyCmd);
+            da.Fill(MyData);
+            conn.Close();
+
+            return MyData;
+        }
+
     }
 }
