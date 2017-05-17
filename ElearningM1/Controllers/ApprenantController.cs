@@ -6,14 +6,13 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ElearningM1.BD;
 
 namespace ElearningM1.Controllers
 {
     public class ApprenantController : Controller
     {
        
-
-
         public ActionResult GetAllApprenant()
         {
             string select = "SELECT * FROM \"Utilisateur\" WHERE type = 'a'";
@@ -41,17 +40,17 @@ namespace ElearningM1.Controllers
         public DataTable Connexion(String requette)
         {
 
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearning;port=5433");
+            BDD.Initialize();
 
             DataTable MyData = new DataTable();
             NpgsqlDataAdapter da;
 
-            conn.Open();
+            BDD.Open();
 
-            NpgsqlCommand MyCmd = new NpgsqlCommand(requette, conn);
+            NpgsqlCommand MyCmd = new NpgsqlCommand(requette, BDD.Connexion());
             da = new NpgsqlDataAdapter(MyCmd);
             da.Fill(MyData);
-            conn.Close();
+            BDD.Close();
 
             return MyData;
         }

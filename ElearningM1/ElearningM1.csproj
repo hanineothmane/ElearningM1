@@ -142,7 +142,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BDD\BDD.cs" />
+    <Compile Include="BD\BDD.cs" />
     <Compile Include="Controllers\ApprenantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RPController.cs" />
