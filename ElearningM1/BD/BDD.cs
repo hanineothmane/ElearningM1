@@ -57,5 +57,17 @@ namespace ElearningM1.BD
             MyCmd.ExecuteNonQuery();
             Close();
         }
+
+        public static bool ConnexionAppli(string mail, string mdp)
+        {
+            string select = "select * from \"Utilisateur\" where courriel = '" + mail + "' and mdp = '" + mdp + "'";
+
+            if (Execute(select).Rows.Count > 0)
+            {
+                return true;
+            }
+            else return false;
+
+        }
     }
 }
