@@ -12,12 +12,12 @@ namespace ElearningM1.Models
         //private int id;
         public TuteurEnseignant(string nom, string dateNaiss, string prenom, string courriel, int id, string mdp, string telephone,String adresse) : base(nom, dateNaiss, prenom, courriel, id, mdp, telephone,adresse)
         {
-            
+             
         }
         
         
 
-        
+
 
         public void verifierRenduDevoir(Apprenant a, Devoir d)
         {

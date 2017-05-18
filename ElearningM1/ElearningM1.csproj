@@ -262,6 +262,9 @@
     <Content Include="Views\TuteurEnseignant\GetAllTuteurEnseigant.cshtml" />
     <Content Include="Views\TuteurEnseignant\InfoTe.cshtml" />
     <Content Include="Views\Apprenant\GetAllApprenant.cshtml" />
+
+    <Content Include="Views\TuteurEnseignant\consulterInfoApprenants.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
