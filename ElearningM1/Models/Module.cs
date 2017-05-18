@@ -8,6 +8,7 @@ namespace ElearningM1.Models
     public class Module
     {
         private string nom;
+        private int id;
         private double coeff, noteCC;
         private bool estNational;
         private List<Apprenant> lesApprenants;
@@ -17,8 +18,14 @@ namespace ElearningM1.Models
         private List<Examen> lesExamens;
         private List<Semestre> lesSemestres;
 
-        public Module(string nom, double coeff, bool estNational, TuteurEnseignant ens)
+        public Module()
         {
+
+        }
+
+        public Module(int id, string nom, double coeff, bool estNational, TuteurEnseignant ens)
+        {
+            this.id = id;
             this.nom = nom;
             this.coeff = coeff;
             this.ens = ens;
@@ -35,6 +42,7 @@ namespace ElearningM1.Models
         public List<Devoir> LesDevoirs { get => lesDevoirs; set => lesDevoirs = value; }
         public List<Examen> LesExamens { get => lesExamens; set => lesExamens = value; }
         public List<Semestre> LesSemestres { get => lesSemestres; set => lesSemestres = value; }
+        public int Id { get => id; set => id = value; }
 
         public void add(Apprenant a)
         {

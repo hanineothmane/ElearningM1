@@ -11,27 +11,16 @@ using ElearningM1.BD;
 
 namespace ElearningM1.Models
 {
-    public class Apprenants
+    public static class Apprenants
     {
-        public List<Apprenant> getApprenants()
+        public static List<Apprenant> getApprenants()
         {
-            BDD.Initialize();
+            
+            string select = "SELECT * FROM \"Utilisateur\" WHERE type='apprenant' ORDER BY nom";
+            
+            List<Apprenant> apprenant = BDD.Execute(select).AsEnumerable().Select(row =>
 
-            DataTable MyData = new DataTable();
-            NpgsqlDataAdapter da;
-
-            BDD.Open();
-            string select = "SELECT * FROM \"Utilisateur\"";
-            NpgsqlCommand MyCmd = new NpgsqlCommand(select, BDD.Connexion());
-            da = new NpgsqlDataAdapter(MyCmd);
-            da.Fill(MyData);
-            BDD.Close();
-
-
-
-            List<Apprenant> module = MyData.AsEnumerable().Select(row =>
-
-                new Apprenant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"),null)
+                new Apprenant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), null, row.Field<string>("adresse"))
                 {
 
                     Nom = row.Field<string>("nom"),
@@ -39,16 +28,26 @@ namespace ElearningM1.Models
                     DateNaiss = row.Field<string>("dateNaiss"),
                     Courriel = row.Field<string>("courriel"),
                     Telephone = row.Field<string>("telephone"),
-                    Adresse = row.Field<string>("adresse")
+                    Adresse = row.Field<string>("adresse"),
 
                 }
 
             ).ToList();
-            module.Cast<Apprenant>();
+            apprenant.Cast<Apprenant>();
+            
+            return apprenant;
+        }
 
+        public static void AddApprenant(Apprenant a)
+        {
+            string select = "INSERT INTO \"Utilisateur\" VALUES ('" + a.Nom + "','" + a.DateNaiss + "','" + a.Prenom + "','" + a.Courriel + "','" + a.Mdp + "', '" + a.Telephone + "', '', 'apprenant', '')";
+            BDD.ExecuteNonQuery(select);
+        }
 
-
-            return module;
+        public static void Update(Apprenant a)
+        {
+            string select = "UPDATE \"Utilisateur\" SET nom='" + a.Nom + "', datenaiss='" + a.DateNaiss + "', prenom='" + a.Prenom + "', courriel='" + a.Courriel + "', mdp='" + a.Mdp + "', telephone='" + a.Telephone + "' WHERE id=" + a.Id + "";
+            BDD.ExecuteNonQuery(select);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace ElearningM1.Controllers
             
             string select = "SELECT * FROM \"Utilisateur\"";
           
-            List<TuteurEnseignant> te = Connexion(select).AsEnumerable().Select(row =>
+            List<TuteurEnseignant> te = BDD.Execute(select).AsEnumerable().Select(row =>
 
                 new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"))              {
                     
@@ -56,7 +56,7 @@ namespace ElearningM1.Controllers
             
 
 
-            List<TuteurEnseignant> te = Connexion(select).AsEnumerable().Select(row =>
+            List<TuteurEnseignant> te = BDD.Execute(select).AsEnumerable().Select(row =>
 
                 new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"))
                 {
@@ -86,7 +86,7 @@ namespace ElearningM1.Controllers
 
             string select = "SELECT * FROM \"Utilisateur\" WHERE id = " ;
 
-            List<TuteurEnseignant> te = Connexion(select).AsEnumerable().Select(row =>
+            List<TuteurEnseignant> te = BDD.Execute(select).AsEnumerable().Select(row =>
 
                 new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"))
                 {
@@ -105,31 +105,6 @@ namespace ElearningM1.Controllers
             te.Cast<TuteurEnseignant>();
 
 
-        }
-
-
-
-
-
-
-
-
-        public DataTable Connexion(String requette)
-        {
-
-            BDD.Initialize();
-
-            DataTable MyData = new DataTable();
-            NpgsqlDataAdapter da;
-
-            BDD.Open();
-           
-            NpgsqlCommand MyCmd = new NpgsqlCommand(requette, BDD.Connexion());
-            da = new NpgsqlDataAdapter(MyCmd);
-            da.Fill(MyData);
-            BDD.Close();
-
-            return MyData;
         }
 
     }

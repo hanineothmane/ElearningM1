@@ -17,10 +17,10 @@
                 <th>Est-il national ?</th>
             </tr>
         </thead>
-        @foreach (ElearningM1.Models.Module module in ViewData["Modules"] as List<ElearningM1.Models.Module>)
+        @foreach (ElearningM1.Models.Module module in ElearningM1.Models.Modules.getModules() as List<ElearningM1.Models.Module>)
         {
             <tr>
-                <td>@Html.ActionLink(module.Nom, "ChercheModule", "RP", new { nom = module.Nom }, null)</td>
+                <td>@Html.ActionLink(module.Nom, "ModifierModule", "RP", new { id = module.Id }, null)</td>
                 <td>@module.Coeff</td>
                 @if (module.EstNational)
                 {

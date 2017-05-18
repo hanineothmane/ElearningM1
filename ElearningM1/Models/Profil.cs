@@ -9,7 +9,7 @@ namespace ElearningM1.Models
     {
         private string nom, dateNaiss, prenom, courriel, mdp, telephone, adresse;
         private int id;
-        public Profil(string nom, string dateNaiss, string prenom, string courriel, int id, string mdp, string telephone, String adresse)
+        public Profil(string nom, string dateNaiss, string prenom, string courriel, int id, string mdp, string telephone, string adresse)
         {
             this.nom = nom;
             this.dateNaiss = dateNaiss;

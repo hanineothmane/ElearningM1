@@ -15,21 +15,10 @@ namespace ElearningM1.Models
     {
         public List<TuteurEnseignant> getTuteursEnseignant()
         {
-            BDD.Initialize();
-
-            DataTable MyData = new DataTable();
-            NpgsqlDataAdapter da;
-
-            BDD.Open();
-            string select = "SELECT * FROM \"Utilisateur\"";
-            NpgsqlCommand MyCmd = new NpgsqlCommand(select, BDD.Connexion());
-            da = new NpgsqlDataAdapter(MyCmd);
-            da.Fill(MyData);
-            BDD.Close();
-
-
-
-            List<TuteurEnseignant> te = MyData.AsEnumerable().Select(row =>
+            
+            string select = "SELECT * FROM \"Utilisateur\" WHERE type='te' ORDER BY nom";
+            
+            List<TuteurEnseignant> te = BDD.Execute(select).AsEnumerable().Select(row =>
 
                 new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"))
                 {
@@ -38,7 +27,7 @@ namespace ElearningM1.Models
                     Prenom = row.Field<string>("prenom"),
                     DateNaiss = row.Field<string>("dateNaiss"),
                     Courriel = row.Field<string>("courriel"),
-                    Telephone = row.Field<string>("telephone"),
+                    Telephone = row.Field<string>("adresse"),
 
 
                 }

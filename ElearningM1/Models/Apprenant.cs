@@ -9,7 +9,9 @@ namespace ElearningM1.Models
     {
         private string dateInscription;
         private List<Module> lesModules;
-        public Apprenant(string nom, string dateNaiss, string prenom, string courriel, int id, string mdp, string telephone, string dateInscription, string adresse) : base(nom, dateNaiss, prenom, courriel, id, mdp, telephone,adresse)
+
+
+        public Apprenant(string nom, string dateNaiss, string prenom, string courriel, int id, string mdp, string telephone, string dateInscription, string adresse) : base(nom, dateNaiss, prenom, courriel, id, mdp, telephone, adresse)
         {
             this.dateInscription = dateInscription;
         }

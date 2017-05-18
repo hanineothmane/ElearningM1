@@ -262,6 +262,12 @@
     <Content Include="Views\TuteurEnseignant\GetAllTuteurEnseigant.cshtml" />
     <Content Include="Views\TuteurEnseignant\InfoTe.cshtml" />
     <Content Include="Views\Apprenant\GetAllApprenant.cshtml" />
+    <Content Include="Views\RP\InsererModule.cshtml" />
+    <Content Include="Views\RP\ListeApprenants.cshtml" />
+    <Content Include="Views\RP\ListeTuteursEnseignant.cshtml" />
+    <Content Include="Views\RP\ModifierModule.cshtml" />
+    <Content Include="Views\RP\InsererApprenant.cshtml" />
+    <Content Include="Views\RP\ModifierApprenant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
