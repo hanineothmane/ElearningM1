@@ -88,6 +88,8 @@ namespace ElearningM1.Controllers
             List<Apprenant> te = Connexion(select).AsEnumerable().Select(row =>
 
                 new Apprenant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"),null, row.Field<int>("id"), null, row.Field<string>("telephone"), row.Field<string>("adresse"),null)
+
+       
                 {
                     Id = row.Field<int>("id"),
                     Nom = row.Field<String>("nom"),
@@ -99,10 +101,10 @@ namespace ElearningM1.Controllers
                 }
 
             ).ToList();
+
             te.Cast<Apprenant>();
 
-            return View(te);
-            
+                return View(te);
         }
 
 
