@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ElearningM1.Models.Apprenant>
+<html>
+<head>
+   @{
+       ViewBag.Title = "consulterInfoApprenants";
+}
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css   />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<body>
+    <h2>Veuillez selectionner un apprenant </h2>
+
+
+
+    <table class="striped">
+        <thead>
+            <tr>
+                
+                <th>Nom de l'apprenant</th>
+                <th>Prenom de l'apprenant</th>
+                <th>Telephone de l'apprenant</th>
+                <th>Adresse de l'apprenant</th>
+                <th>Date de naissance de l'apprenant</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{ foreach (var Apprenant in Model)
+            {
+                    <tr>
+                       <td>@Apprenant.Nom</td>
+                        <td>@Apprenant.Prenom</td>
+                        <td>@Apprenant.Telephone</td>
+                        <td>@Apprenant.Adresse</td>
+                        <td>@Apprenant.DateNaiss</td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+</body>
+
+</html>
+
+
+
+

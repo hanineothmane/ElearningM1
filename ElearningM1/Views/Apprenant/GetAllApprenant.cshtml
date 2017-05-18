@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ElearningM1.Models.Apprenant>
+
+    @{
+        ViewBag.Title = "GetAllApprenant";
+    }
+
+    <h2>Voici tous les apprenants : </h2>
+
+    <table class="striped">
+        <thead>
+            <tr>
+
+                <th>Nom de l'apprenant</th>
+                <th>Prenom de l'apprenant</th>
+               
+            </tr>
+        </thead>
+
+        <tbody>
+            @{ foreach (var apprenant in Model)
+            {   
+                    <tr>
+                        <td>@Html.ActionLink(apprenant.Nom, "consulterInfoApprenants", "TuteurEnseignant", new { id = apprenant.Id }, null) </td>
+                        <td>@Html.ActionLink(apprenant.Prenom, "consulterInfoApprenants", "TuteurEnseignant", new { id = apprenant.Id }, null)
+                        
+</tr>
+                }
+            }
+        </tbody>
+
+    </table>
+
+
+
+
+

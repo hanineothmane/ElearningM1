@@ -14,23 +14,23 @@ namespace ElearningM1.Models
     {
         public List<Apprenant> getApprenants()
         {
-            BDD.Initialize();
+            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=postgres;port=5432");
 
             DataTable MyData = new DataTable();
             NpgsqlDataAdapter da;
 
-            BDD.Open();
+            conn.Open();
             string select = "SELECT * FROM \"Utilisateur\"";
-            NpgsqlCommand MyCmd = new NpgsqlCommand(select, BDD.Connexion());
+            NpgsqlCommand MyCmd = new NpgsqlCommand(select, conn);
             da = new NpgsqlDataAdapter(MyCmd);
             da.Fill(MyData);
-            BDD.Close();
+            conn.Close();
 
 
 
             List<Apprenant> module = MyData.AsEnumerable().Select(row =>
 
-                new Apprenant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<string>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"),null)
+                new Apprenant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"),null)
                 {
 
                     Nom = row.Field<string>("nom"),
@@ -38,7 +38,7 @@ namespace ElearningM1.Models
                     DateNaiss = row.Field<string>("dateNaiss"),
                     Courriel = row.Field<string>("courriel"),
                     Telephone = row.Field<string>("telephone"),
-
+                    Adresse = row.Field<string>("adresse")
 
                 }
 
