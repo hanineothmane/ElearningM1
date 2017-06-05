@@ -1,0 +1,1184 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Started on 2017-05-19 01:26:17
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+--
+-- TOC entry 1915 (class 1262 OID 16577)
+-- Name: elearningM1; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE "elearningM1" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'French_France.1252' LC_CTYPE = 'French_France.1252';
+
+
+ALTER DATABASE "elearningM1" OWNER TO postgres;
+
+\connect "elearningM1"
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+--
+-- TOC entry 512 (class 2612 OID 16386)
+-- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: postgres
+--
+
+CREATE PROCEDURAL LANGUAGE plpgsql;
+
+
+ALTER PROCEDURAL LANGUAGE plpgsql OWNER TO postgres;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 145 (class 1259 OID 16596)
+-- Dependencies: 3
+-- Name: Administration; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Administration" (
+    id_admin integer NOT NULL,
+    nom character varying(50),
+    prenom character varying(50),
+    adresse character varying(100),
+    telephone character varying(50),
+    datenaissance character varying(50),
+    email character varying(50),
+    mdp character varying(50)
+);
+
+
+ALTER TABLE public."Administration" OWNER TO postgres;
+
+--
+-- TOC entry 144 (class 1259 OID 16594)
+-- Dependencies: 3 145
+-- Name: Administration_id_admin_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Administration_id_admin_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Administration_id_admin_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1918 (class 0 OID 0)
+-- Dependencies: 144
+-- Name: Administration_id_admin_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Administration_id_admin_seq" OWNED BY "Administration".id_admin;
+
+
+--
+-- TOC entry 1919 (class 0 OID 0)
+-- Dependencies: 144
+-- Name: Administration_id_admin_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Administration_id_admin_seq"', 1, false);
+
+
+--
+-- TOC entry 163 (class 1259 OID 24771)
+-- Dependencies: 3
+-- Name: Affecter_A_Examen; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Affecter_A_Examen" (
+    id_apprenant integer NOT NULL,
+    id_examen integer NOT NULL,
+    note_examen double precision
+);
+
+
+ALTER TABLE public."Affecter_A_Examen" OWNER TO postgres;
+
+--
+-- TOC entry 161 (class 1259 OID 24741)
+-- Dependencies: 3
+-- Name: Affecter_A_Module; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Affecter_A_Module" (
+    id_apprenant integer NOT NULL,
+    id_module integer NOT NULL,
+    note_final double precision
+);
+
+
+ALTER TABLE public."Affecter_A_Module" OWNER TO postgres;
+
+--
+-- TOC entry 160 (class 1259 OID 24713)
+-- Dependencies: 3
+-- Name: Affecter_A_TE; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Affecter_A_TE" (
+    id_apprenant integer NOT NULL,
+    id_te integer NOT NULL
+);
+
+
+ALTER TABLE public."Affecter_A_TE" OWNER TO postgres;
+
+--
+-- TOC entry 162 (class 1259 OID 24756)
+-- Dependencies: 3
+-- Name: Affecter_Module_Semestre; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Affecter_Module_Semestre" (
+    id_semestre integer NOT NULL,
+    id_module integer NOT NULL
+);
+
+
+ALTER TABLE public."Affecter_Module_Semestre" OWNER TO postgres;
+
+--
+-- TOC entry 147 (class 1259 OID 16604)
+-- Dependencies: 3
+-- Name: Apprenant; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Apprenant" (
+    id_apprenant integer NOT NULL,
+    nom character varying(50),
+    prenom character varying(50),
+    adresse character varying(100),
+    telephone character varying(50),
+    datenaissance character varying(50),
+    email character varying(50),
+    dateinscription character varying(50)
+);
+
+
+ALTER TABLE public."Apprenant" OWNER TO postgres;
+
+--
+-- TOC entry 146 (class 1259 OID 16602)
+-- Dependencies: 3 147
+-- Name: Apprenant_id_apprenant_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Apprenant_id_apprenant_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Apprenant_id_apprenant_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1920 (class 0 OID 0)
+-- Dependencies: 146
+-- Name: Apprenant_id_apprenant_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Apprenant_id_apprenant_seq" OWNED BY "Apprenant".id_apprenant;
+
+
+--
+-- TOC entry 1921 (class 0 OID 0)
+-- Dependencies: 146
+-- Name: Apprenant_id_apprenant_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Apprenant_id_apprenant_seq"', 1, false);
+
+
+--
+-- TOC entry 153 (class 1259 OID 16628)
+-- Dependencies: 3
+-- Name: Devoir; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Devoir" (
+    id_devoir integer NOT NULL,
+    nom character varying(50),
+    datedevoir character varying(50),
+    id_module integer
+);
+
+
+ALTER TABLE public."Devoir" OWNER TO postgres;
+
+--
+-- TOC entry 152 (class 1259 OID 16626)
+-- Dependencies: 153 3
+-- Name: Devoir_id_devoir_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Devoir_id_devoir_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Devoir_id_devoir_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1922 (class 0 OID 0)
+-- Dependencies: 152
+-- Name: Devoir_id_devoir_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Devoir_id_devoir_seq" OWNED BY "Devoir".id_devoir;
+
+
+--
+-- TOC entry 1923 (class 0 OID 0)
+-- Dependencies: 152
+-- Name: Devoir_id_devoir_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Devoir_id_devoir_seq"', 1, false);
+
+
+--
+-- TOC entry 155 (class 1259 OID 24671)
+-- Dependencies: 3
+-- Name: Etablissement; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Etablissement" (
+    id_etab integer NOT NULL,
+    nom_etab character varying(50),
+    adresse character varying(100),
+    id_examen integer NOT NULL
+);
+
+
+ALTER TABLE public."Etablissement" OWNER TO postgres;
+
+--
+-- TOC entry 154 (class 1259 OID 24669)
+-- Dependencies: 155 3
+-- Name: Etablissement_id_etab_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Etablissement_id_etab_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Etablissement_id_etab_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1924 (class 0 OID 0)
+-- Dependencies: 154
+-- Name: Etablissement_id_etab_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Etablissement_id_etab_seq" OWNED BY "Etablissement".id_etab;
+
+
+--
+-- TOC entry 1925 (class 0 OID 0)
+-- Dependencies: 154
+-- Name: Etablissement_id_etab_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Etablissement_id_etab_seq"', 1, false);
+
+
+--
+-- TOC entry 157 (class 1259 OID 24679)
+-- Dependencies: 3
+-- Name: Examen; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Examen" (
+    id_examen integer NOT NULL,
+    type_examen character varying(50),
+    id_module integer
+);
+
+
+ALTER TABLE public."Examen" OWNER TO postgres;
+
+--
+-- TOC entry 156 (class 1259 OID 24677)
+-- Dependencies: 157 3
+-- Name: Examen_id_examen_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Examen_id_examen_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Examen_id_examen_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1926 (class 0 OID 0)
+-- Dependencies: 156
+-- Name: Examen_id_examen_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Examen_id_examen_seq" OWNED BY "Examen".id_examen;
+
+
+--
+-- TOC entry 1927 (class 0 OID 0)
+-- Dependencies: 156
+-- Name: Examen_id_examen_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Examen_id_examen_seq"', 1, false);
+
+
+--
+-- TOC entry 149 (class 1259 OID 16612)
+-- Dependencies: 3
+-- Name: Module; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Module" (
+    id_module integer NOT NULL,
+    nom character varying(50),
+    datecreation character varying(50),
+    coef double precision,
+    typemodule character varying(50),
+    id_te integer,
+    id_session integer
+);
+
+
+ALTER TABLE public."Module" OWNER TO postgres;
+
+--
+-- TOC entry 148 (class 1259 OID 16610)
+-- Dependencies: 149 3
+-- Name: Module_id_module_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Module_id_module_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Module_id_module_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1928 (class 0 OID 0)
+-- Dependencies: 148
+-- Name: Module_id_module_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Module_id_module_seq" OWNED BY "Module".id_module;
+
+
+--
+-- TOC entry 1929 (class 0 OID 0)
+-- Dependencies: 148
+-- Name: Module_id_module_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Module_id_module_seq"', 1, false);
+
+
+--
+-- TOC entry 141 (class 1259 OID 16580)
+-- Dependencies: 3
+-- Name: RP; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "RP" (
+    id_rp integer NOT NULL,
+    nom character varying(50),
+    prenom character varying(50),
+    adresse character varying(100),
+    telephone character varying(50),
+    datenaissance character varying(50),
+    email character varying(50),
+    mdp character varying(50)
+);
+
+
+ALTER TABLE public."RP" OWNER TO postgres;
+
+--
+-- TOC entry 140 (class 1259 OID 16578)
+-- Dependencies: 3 141
+-- Name: RP_id_rp_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "RP_id_rp_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."RP_id_rp_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1930 (class 0 OID 0)
+-- Dependencies: 140
+-- Name: RP_id_rp_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "RP_id_rp_seq" OWNED BY "RP".id_rp;
+
+
+--
+-- TOC entry 1931 (class 0 OID 0)
+-- Dependencies: 140
+-- Name: RP_id_rp_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"RP_id_rp_seq"', 1, false);
+
+
+--
+-- TOC entry 159 (class 1259 OID 24687)
+-- Dependencies: 3
+-- Name: Semestre; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Semestre" (
+    id_semestre integer NOT NULL,
+    numero_semestre character varying(50)
+);
+
+
+ALTER TABLE public."Semestre" OWNER TO postgres;
+
+--
+-- TOC entry 158 (class 1259 OID 24685)
+-- Dependencies: 159 3
+-- Name: Semestre_id_semestre_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Semestre_id_semestre_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Semestre_id_semestre_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1932 (class 0 OID 0)
+-- Dependencies: 158
+-- Name: Semestre_id_semestre_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Semestre_id_semestre_seq" OWNED BY "Semestre".id_semestre;
+
+
+--
+-- TOC entry 1933 (class 0 OID 0)
+-- Dependencies: 158
+-- Name: Semestre_id_semestre_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Semestre_id_semestre_seq"', 1, false);
+
+
+--
+-- TOC entry 151 (class 1259 OID 16620)
+-- Dependencies: 3
+-- Name: SessionReg; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "SessionReg" (
+    id_session integer NOT NULL,
+    nom character varying(50),
+    datesession character varying(50)
+);
+
+
+ALTER TABLE public."SessionReg" OWNER TO postgres;
+
+--
+-- TOC entry 150 (class 1259 OID 16618)
+-- Dependencies: 3 151
+-- Name: SessionReg_id_session_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "SessionReg_id_session_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."SessionReg_id_session_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1934 (class 0 OID 0)
+-- Dependencies: 150
+-- Name: SessionReg_id_session_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "SessionReg_id_session_seq" OWNED BY "SessionReg".id_session;
+
+
+--
+-- TOC entry 1935 (class 0 OID 0)
+-- Dependencies: 150
+-- Name: SessionReg_id_session_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"SessionReg_id_session_seq"', 1, false);
+
+
+--
+-- TOC entry 143 (class 1259 OID 16588)
+-- Dependencies: 3
+-- Name: TE; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "TE" (
+    id_te integer NOT NULL,
+    nom character varying(50),
+    prenom character varying(50),
+    adresse character varying(100),
+    telephone character varying(50),
+    datenaissance character varying(50),
+    email character varying(50),
+    mdp character varying(50)
+);
+
+
+ALTER TABLE public."TE" OWNER TO postgres;
+
+--
+-- TOC entry 142 (class 1259 OID 16586)
+-- Dependencies: 143 3
+-- Name: TE_id_te_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "TE_id_te_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."TE_id_te_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1936 (class 0 OID 0)
+-- Dependencies: 142
+-- Name: TE_id_te_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "TE_id_te_seq" OWNED BY "TE".id_te;
+
+
+--
+-- TOC entry 1937 (class 0 OID 0)
+-- Dependencies: 142
+-- Name: TE_id_te_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"TE_id_te_seq"', 1, false);
+
+
+--
+-- TOC entry 1845 (class 2604 OID 16599)
+-- Dependencies: 144 145 145
+-- Name: id_admin; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Administration" ALTER COLUMN id_admin SET DEFAULT nextval('"Administration_id_admin_seq"'::regclass);
+
+
+--
+-- TOC entry 1846 (class 2604 OID 16607)
+-- Dependencies: 147 146 147
+-- Name: id_apprenant; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Apprenant" ALTER COLUMN id_apprenant SET DEFAULT nextval('"Apprenant_id_apprenant_seq"'::regclass);
+
+
+--
+-- TOC entry 1849 (class 2604 OID 16631)
+-- Dependencies: 152 153 153
+-- Name: id_devoir; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Devoir" ALTER COLUMN id_devoir SET DEFAULT nextval('"Devoir_id_devoir_seq"'::regclass);
+
+
+--
+-- TOC entry 1850 (class 2604 OID 24674)
+-- Dependencies: 155 154 155
+-- Name: id_etab; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Etablissement" ALTER COLUMN id_etab SET DEFAULT nextval('"Etablissement_id_etab_seq"'::regclass);
+
+
+--
+-- TOC entry 1851 (class 2604 OID 24682)
+-- Dependencies: 157 156 157
+-- Name: id_examen; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Examen" ALTER COLUMN id_examen SET DEFAULT nextval('"Examen_id_examen_seq"'::regclass);
+
+
+--
+-- TOC entry 1847 (class 2604 OID 16615)
+-- Dependencies: 148 149 149
+-- Name: id_module; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Module" ALTER COLUMN id_module SET DEFAULT nextval('"Module_id_module_seq"'::regclass);
+
+
+--
+-- TOC entry 1843 (class 2604 OID 16583)
+-- Dependencies: 141 140 141
+-- Name: id_rp; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "RP" ALTER COLUMN id_rp SET DEFAULT nextval('"RP_id_rp_seq"'::regclass);
+
+
+--
+-- TOC entry 1852 (class 2604 OID 24690)
+-- Dependencies: 159 158 159
+-- Name: id_semestre; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Semestre" ALTER COLUMN id_semestre SET DEFAULT nextval('"Semestre_id_semestre_seq"'::regclass);
+
+
+--
+-- TOC entry 1848 (class 2604 OID 16623)
+-- Dependencies: 150 151 151
+-- Name: id_session; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "SessionReg" ALTER COLUMN id_session SET DEFAULT nextval('"SessionReg_id_session_seq"'::regclass);
+
+
+--
+-- TOC entry 1844 (class 2604 OID 16591)
+-- Dependencies: 143 142 143
+-- Name: id_te; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "TE" ALTER COLUMN id_te SET DEFAULT nextval('"TE_id_te_seq"'::regclass);
+
+
+--
+-- TOC entry 1901 (class 0 OID 16596)
+-- Dependencies: 145
+-- Data for Name: Administration; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Administration" (id_admin, nom, prenom, adresse, telephone, datenaissance, email, mdp) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1912 (class 0 OID 24771)
+-- Dependencies: 163
+-- Data for Name: Affecter_A_Examen; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Affecter_A_Examen" (id_apprenant, id_examen, note_examen) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1910 (class 0 OID 24741)
+-- Dependencies: 161
+-- Data for Name: Affecter_A_Module; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Affecter_A_Module" (id_apprenant, id_module, note_final) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1909 (class 0 OID 24713)
+-- Dependencies: 160
+-- Data for Name: Affecter_A_TE; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Affecter_A_TE" (id_apprenant, id_te) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1911 (class 0 OID 24756)
+-- Dependencies: 162
+-- Data for Name: Affecter_Module_Semestre; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Affecter_Module_Semestre" (id_semestre, id_module) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1902 (class 0 OID 16604)
+-- Dependencies: 147
+-- Data for Name: Apprenant; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Apprenant" (id_apprenant, nom, prenom, adresse, telephone, datenaissance, email, dateinscription) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1905 (class 0 OID 16628)
+-- Dependencies: 153
+-- Data for Name: Devoir; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Devoir" (id_devoir, nom, datedevoir, id_module) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1906 (class 0 OID 24671)
+-- Dependencies: 155
+-- Data for Name: Etablissement; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Etablissement" (id_etab, nom_etab, adresse, id_examen) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1907 (class 0 OID 24679)
+-- Dependencies: 157
+-- Data for Name: Examen; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Examen" (id_examen, type_examen, id_module) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1903 (class 0 OID 16612)
+-- Dependencies: 149
+-- Data for Name: Module; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Module" (id_module, nom, datecreation, coef, typemodule, id_te, id_session) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1899 (class 0 OID 16580)
+-- Dependencies: 141
+-- Data for Name: RP; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "RP" (id_rp, nom, prenom, adresse, telephone, datenaissance, email, mdp) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1908 (class 0 OID 24687)
+-- Dependencies: 159
+-- Data for Name: Semestre; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Semestre" (id_semestre, numero_semestre) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1904 (class 0 OID 16620)
+-- Dependencies: 151
+-- Data for Name: SessionReg; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "SessionReg" (id_session, nom, datesession) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1900 (class 0 OID 16588)
+-- Dependencies: 143
+-- Data for Name: TE; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "TE" (id_te, nom, prenom, adresse, telephone, datenaissance, email, mdp) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1858 (class 2606 OID 16601)
+-- Dependencies: 145 145
+-- Name: Administration_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Administration"
+    ADD CONSTRAINT "Administration_pkey" PRIMARY KEY (id_admin);
+
+
+--
+-- TOC entry 1885 (class 2606 OID 24775)
+-- Dependencies: 163 163 163
+-- Name: Affecter_A_Examen_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Affecter_A_Examen"
+    ADD CONSTRAINT "Affecter_A_Examen_pkey" PRIMARY KEY (id_examen, id_apprenant);
+
+
+--
+-- TOC entry 1881 (class 2606 OID 24745)
+-- Dependencies: 161 161 161
+-- Name: Affecter_A_Module_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Affecter_A_Module"
+    ADD CONSTRAINT "Affecter_A_Module_pkey" PRIMARY KEY (id_apprenant, id_module);
+
+
+--
+-- TOC entry 1879 (class 2606 OID 24720)
+-- Dependencies: 160 160 160
+-- Name: Affecter_A_TE_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Affecter_A_TE"
+    ADD CONSTRAINT "Affecter_A_TE_pkey" PRIMARY KEY (id_apprenant, id_te);
+
+
+--
+-- TOC entry 1883 (class 2606 OID 24760)
+-- Dependencies: 162 162 162
+-- Name: Affecter_Module_Semestre_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Affecter_Module_Semestre"
+    ADD CONSTRAINT "Affecter_Module_Semestre_pkey" PRIMARY KEY (id_semestre, id_module);
+
+
+--
+-- TOC entry 1860 (class 2606 OID 16609)
+-- Dependencies: 147 147
+-- Name: Apprenant_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Apprenant"
+    ADD CONSTRAINT "Apprenant_pkey" PRIMARY KEY (id_apprenant);
+
+
+--
+-- TOC entry 1868 (class 2606 OID 16633)
+-- Dependencies: 153 153
+-- Name: Devoir_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Devoir"
+    ADD CONSTRAINT "Devoir_pkey" PRIMARY KEY (id_devoir);
+
+
+--
+-- TOC entry 1871 (class 2606 OID 24837)
+-- Dependencies: 155 155 155
+-- Name: Etablissement_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Etablissement"
+    ADD CONSTRAINT "Etablissement_pkey" PRIMARY KEY (id_etab, id_examen);
+
+
+--
+-- TOC entry 1874 (class 2606 OID 24684)
+-- Dependencies: 157 157
+-- Name: Examen_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Examen"
+    ADD CONSTRAINT "Examen_pkey" PRIMARY KEY (id_examen);
+
+
+--
+-- TOC entry 1862 (class 2606 OID 16617)
+-- Dependencies: 149 149
+-- Name: Module_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Module"
+    ADD CONSTRAINT "Module_pkey" PRIMARY KEY (id_module);
+
+
+--
+-- TOC entry 1854 (class 2606 OID 16585)
+-- Dependencies: 141 141
+-- Name: RP_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "RP"
+    ADD CONSTRAINT "RP_pkey" PRIMARY KEY (id_rp);
+
+
+--
+-- TOC entry 1877 (class 2606 OID 24692)
+-- Dependencies: 159 159
+-- Name: Semestre_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Semestre"
+    ADD CONSTRAINT "Semestre_pkey" PRIMARY KEY (id_semestre);
+
+
+--
+-- TOC entry 1866 (class 2606 OID 16625)
+-- Dependencies: 151 151
+-- Name: SessionReg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "SessionReg"
+    ADD CONSTRAINT "SessionReg_pkey" PRIMARY KEY (id_session);
+
+
+--
+-- TOC entry 1856 (class 2606 OID 16593)
+-- Dependencies: 143 143
+-- Name: TE_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "TE"
+    ADD CONSTRAINT "TE_pkey" PRIMARY KEY (id_te);
+
+
+--
+-- TOC entry 1869 (class 1259 OID 24791)
+-- Dependencies: 153
+-- Name: fki_; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_ ON "Devoir" USING btree (id_module);
+
+
+--
+-- TOC entry 1872 (class 1259 OID 24835)
+-- Dependencies: 155
+-- Name: fki_id_examen; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_id_examen ON "Etablissement" USING btree (id_examen);
+
+
+--
+-- TOC entry 1875 (class 1259 OID 24829)
+-- Dependencies: 157
+-- Name: fki_id_module; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_id_module ON "Examen" USING btree (id_module);
+
+
+--
+-- TOC entry 1863 (class 1259 OID 24823)
+-- Dependencies: 149
+-- Name: fki_id_session; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_id_session ON "Module" USING btree (id_session);
+
+
+--
+-- TOC entry 1864 (class 1259 OID 24812)
+-- Dependencies: 149
+-- Name: fki_id_te; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_id_te ON "Module" USING btree (id_te);
+
+
+--
+-- TOC entry 1897 (class 2606 OID 24776)
+-- Dependencies: 147 163 1859
+-- Name: Affecter_A_Examen_id_apprenant_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Affecter_A_Examen"
+    ADD CONSTRAINT "Affecter_A_Examen_id_apprenant_fkey" FOREIGN KEY (id_apprenant) REFERENCES "Apprenant"(id_apprenant);
+
+
+--
+-- TOC entry 1898 (class 2606 OID 24781)
+-- Dependencies: 157 163 1873
+-- Name: Affecter_A_Examen_id_module_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Affecter_A_Examen"
+    ADD CONSTRAINT "Affecter_A_Examen_id_module_fkey" FOREIGN KEY (id_examen) REFERENCES "Examen"(id_examen);
+
+
+--
+-- TOC entry 1893 (class 2606 OID 24746)
+-- Dependencies: 1859 147 161
+-- Name: Affecter_A_Module_id_apprenant_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Affecter_A_Module"
+    ADD CONSTRAINT "Affecter_A_Module_id_apprenant_fkey" FOREIGN KEY (id_apprenant) REFERENCES "Apprenant"(id_apprenant);
+
+
+--
+-- TOC entry 1894 (class 2606 OID 24751)
+-- Dependencies: 161 149 1861
+-- Name: Affecter_A_Module_id_module_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Affecter_A_Module"
+    ADD CONSTRAINT "Affecter_A_Module_id_module_fkey" FOREIGN KEY (id_module) REFERENCES "Module"(id_module);
+
+
+--
+-- TOC entry 1891 (class 2606 OID 24721)
+-- Dependencies: 160 1859 147
+-- Name: Affecter_A_TE_id_apprenant_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Affecter_A_TE"
+    ADD CONSTRAINT "Affecter_A_TE_id_apprenant_fkey" FOREIGN KEY (id_apprenant) REFERENCES "Apprenant"(id_apprenant);
+
+
+--
+-- TOC entry 1892 (class 2606 OID 24726)
+-- Dependencies: 160 1855 143
+-- Name: Affecter_A_TE_id_te_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Affecter_A_TE"
+    ADD CONSTRAINT "Affecter_A_TE_id_te_fkey" FOREIGN KEY (id_te) REFERENCES "TE"(id_te);
+
+
+--
+-- TOC entry 1896 (class 2606 OID 24766)
+-- Dependencies: 1861 162 149
+-- Name: Affecter_Module_Semestre_id_module_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Affecter_Module_Semestre"
+    ADD CONSTRAINT "Affecter_Module_Semestre_id_module_fkey" FOREIGN KEY (id_module) REFERENCES "Module"(id_module);
+
+
+--
+-- TOC entry 1895 (class 2606 OID 24761)
+-- Dependencies: 162 159 1876
+-- Name: Affecter_Module_Semestre_id_semestre_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Affecter_Module_Semestre"
+    ADD CONSTRAINT "Affecter_Module_Semestre_id_semestre_fkey" FOREIGN KEY (id_semestre) REFERENCES "Semestre"(id_semestre);
+
+
+--
+-- TOC entry 1888 (class 2606 OID 24786)
+-- Dependencies: 153 149 1861
+-- Name: Devoir_id_module_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Devoir"
+    ADD CONSTRAINT "Devoir_id_module_fkey" FOREIGN KEY (id_module) REFERENCES "Module"(id_module);
+
+
+--
+-- TOC entry 1889 (class 2606 OID 24830)
+-- Dependencies: 1873 155 157
+-- Name: id_examen; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Etablissement"
+    ADD CONSTRAINT id_examen FOREIGN KEY (id_examen) REFERENCES "Examen"(id_examen);
+
+
+--
+-- TOC entry 1890 (class 2606 OID 24824)
+-- Dependencies: 157 149 1861
+-- Name: id_module; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Examen"
+    ADD CONSTRAINT id_module FOREIGN KEY (id_module) REFERENCES "Module"(id_module);
+
+
+--
+-- TOC entry 1887 (class 2606 OID 24818)
+-- Dependencies: 149 1865 151
+-- Name: id_session; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Module"
+    ADD CONSTRAINT id_session FOREIGN KEY (id_session) REFERENCES "SessionReg"(id_session);
+
+
+--
+-- TOC entry 1886 (class 2606 OID 24807)
+-- Dependencies: 1855 143 149
+-- Name: id_te; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Module"
+    ADD CONSTRAINT id_te FOREIGN KEY (id_te) REFERENCES "TE"(id_te);
+
+
+--
+-- TOC entry 1917 (class 0 OID 0)
+-- Dependencies: 3
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2017-05-19 01:26:17
+
+--
+-- PostgreSQL database dump complete
+--
+
