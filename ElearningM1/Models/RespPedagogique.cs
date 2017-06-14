@@ -7,7 +7,7 @@ namespace ElearningM1.Models
 {
     public class RespPedagogique : Profil
     {
-        public RespPedagogique(string nom, string dateNaiss, string prenom, string courriel, string id, string mdp, string telephone) : base(nom, dateNaiss, prenom, courriel, id, mdp, telephone)
+        public RespPedagogique(string nom, string dateNaiss, string prenom, string email, int id, string mdp, string telephone, string adresse) : base(nom, dateNaiss, prenom, email, id, mdp, telephone, adresse)
         {
 
         }
