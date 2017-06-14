@@ -10,17 +10,17 @@ using System.Web.Mvc;
 
 namespace ElearningM1.Models
 {
-    public class Apprenants
+    public static class Apprenants
     {
-        public List<Apprenant> getApprenants()
+        public static List<Apprenant>  getApprenants()
         {
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=postgres;port=5432");
+            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearningM1;port=5433");
 
             DataTable MyData = new DataTable();
             NpgsqlDataAdapter da;
 
             conn.Open();
-            string select = "SELECT * FROM \"Utilisateur\"";
+            string select = "SELECT * FROM \"Apprenant\"";
             NpgsqlCommand MyCmd = new NpgsqlCommand(select, conn);
             da = new NpgsqlDataAdapter(MyCmd);
             da.Fill(MyData);
@@ -28,26 +28,25 @@ namespace ElearningM1.Models
 
 
 
-            List<Apprenant> module = MyData.AsEnumerable().Select(row =>
+            List<Apprenant> apprenant = MyData.AsEnumerable().Select(row =>
 
-                new Apprenant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"),null)
+                new Apprenant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<int>("id_apprenant"), row.Field<string>("telephone"), row.Field<string>("adresse"),null)
                 {
-
+                    Id = row.Field<int>("id_apprenant"),
                     Nom = row.Field<string>("nom"),
                     Prenom = row.Field<string>("prenom"),
-                    DateNaiss = row.Field<string>("dateNaiss"),
-                    Courriel = row.Field<string>("courriel"),
+                    DateNaiss = row.Field<string>("datenaissance"),
                     Telephone = row.Field<string>("telephone"),
                     Adresse = row.Field<string>("adresse")
 
                 }
 
             ).ToList();
-            module.Cast<Apprenant>();
+            apprenant.Cast<Apprenant>();
 
 
 
-            return module;
+            return apprenant;
         }
     }
 }

@@ -10,12 +10,12 @@ using System.Web.Mvc;
 
 namespace ElearningM1.Models
 {
-    public class Modules
+    public static class Modules
     {
-        public List<Module> getModules()
+        public static List<Module> getModules()
         {
 
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=postgres;port=5432");
+            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearningM1;port=5433");
 
             DataTable MyData = new DataTable();
             NpgsqlDataAdapter da;
@@ -31,12 +31,12 @@ namespace ElearningM1.Models
 
             List<Module> module = MyData.AsEnumerable().Select(row =>
 
-                new Module(row.Field<string>("nom"), row.Field<double>("coeff"), row.Field<bool>("estNational"),null)
+                new Module(row.Field<int>("id_module"),row.Field<string>("nom"), row.Field<double>("coef"), row.Field<string>("typemodule"))
                 {
-
+                    Id = row.Field<int>("id_module"),
                     Nom = row.Field<string>("nom"),
-                    Coeff = row.Field<double>("coeff"),
-                    EstNational = row.Field<bool>("estNational"),
+                    Coeff = row.Field<double>("coef"),
+                    TypeModule = row.Field<String>("typemodule")
 
                 }
 

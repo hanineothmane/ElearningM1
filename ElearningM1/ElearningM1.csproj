@@ -167,6 +167,9 @@
     <Compile Include="Models\Administration.cs" />
     <Compile Include="Models\Apprenant.cs" />
     <Compile Include="Models\Apprenants.cs" />
+    <Compile Include="Models\A_TE_Module_View.cs" />
+    <Compile Include="Models\Examens.cs" />
+    <Compile Include="Models\RespPedagogiques.cs" />
     <Compile Include="Models\Devoir.cs" />
     <Compile Include="Models\Etablissement.cs" />
     <Compile Include="Models\Examen.cs" />
@@ -177,8 +180,7 @@
     <Compile Include="Models\Profil.cs" />
     <Compile Include="Models\RespPedagogique.cs" />
     <Compile Include="Models\Semestre.cs" />
-    <Compile Include="Models\Semestre1.cs" />
-    <Compile Include="Models\Semestre2.cs" />
+    <Compile Include="Models\Semestres.cs" />
     <Compile Include="Models\SessionRegroupement.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\TuteurEnseignant.cs" />
@@ -263,6 +265,15 @@
     <Content Include="Views\TuteurEnseignant\InfoTe.cshtml" />
     <Content Include="Views\Apprenant\GetAllApprenant.cshtml" />
     <Content Include="Views\TuteurEnseignant\consulterInfoApprenants.cshtml" />
+    <Content Include="Views\TuteurEnseignant\Affecter_A_Te.cshtml" />
+    <Content Include="Views\TuteurEnseignant\getAllApprenant.cshtml" />
+    <Content Include="Views\TuteurEnseignant\insert_A_TE.cshtml" />
+    <Content Include="Views\TuteurEnseignant\Affecter_A_Module.cshtml" />
+    <Content Include="Views\TuteurEnseignant\Affecter_Module_Semestre.cshtml" />
+    <Content Include="Views\TuteurEnseignant\Succees.cshtml" />
+    <Content Include="Views\TuteurEnseignant\Affecter_A_Examen.cshtml" />
+    <Content Include="Views\Shared\Navigateur.cshtml" />
+    <Content Include="Views\TuteurEnseignant\AffectationTe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

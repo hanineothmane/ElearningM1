@@ -7,7 +7,7 @@ namespace ElearningM1.Models
 {
     public class ExamenNational : Examen
     {
-        public ExamenNational(string date, string lieu, double noteEF) : base(date, lieu, noteEF)
+        public ExamenNational(string date, string type, Module LeModule) : base(date, type, LeModule)
         {
 
         }

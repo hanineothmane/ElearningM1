@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace ElearningM1.Controllers
 {
@@ -87,7 +88,7 @@ namespace ElearningM1.Controllers
 
             List<Apprenant> te = Connexion(select).AsEnumerable().Select(row =>
 
-                new Apprenant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"),null, row.Field<int>("id"), null, row.Field<string>("telephone"), row.Field<string>("adresse"),null)
+                new Apprenant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<int>("id_te"),row.Field<string>("telephone"), row.Field<string>("dateinscription"), row.Field<string>("adresse"))
                 {
                     Id = row.Field<int>("id"),
                     Nom = row.Field<String>("nom"),
@@ -106,7 +107,153 @@ namespace ElearningM1.Controllers
         }
 
 
+        public ActionResult Affecter_A_Te()
+        {
 
+            var list_principale = new A_TE_Module_View();
+            
+
+            list_principale.Te = TuteursEnseignant.getTuteursEnseignant();
+            
+            list_principale.Apprenant = Apprenants.getApprenants();
+            
+            list_principale.Module = Modules.getModules();
+            
+            return View(list_principale);
+        }
+
+        [HttpPost]
+        public ActionResult insert_A_TE(int id_app, int id_tuteur)
+        {
+           
+            try
+            {
+                RespPedagogiques.Aff_A_Te(id_app, id_tuteur);
+                
+            }catch(NpgsqlException)
+            {
+                ViewBag.erreur = "Erreur lors de l'affectation !";
+                return Redirect("Affecter_A_Te");
+            }
+            
+            return View();
+        }
+        
+
+        public ActionResult Affecter_A_Module()
+        {
+
+            var list_principale = new A_TE_Module_View();
+            
+
+            list_principale.Apprenant = Apprenants.getApprenants();
+            
+            list_principale.Module = Modules.getModules();
+
+            return View(list_principale);
+        }
+
+        [HttpPost]
+        public ActionResult insert_A_Module(int id_module, int id_A)
+        {
+            try
+            {
+
+                RespPedagogiques.Aff_A_Module(id_module,id_A);
+
+            }
+            catch (NpgsqlException)
+            {
+                ViewBag.erreur = "Erreur lors de l'affectation !";
+                return Redirect("Affecter_A_Module");
+            }
+            
+            return Redirect("");// il faut creer une page de succées ! 
+
+        }
+
+        public ActionResult Affecter_Module_Semestre()
+        {
+
+            var list_principal = new A_TE_Module_View();
+            // si la liste semestre et vide ou module et vide on le redirige vers la page saisir un module ou un semestre
+            list_principal.Semestre = Semestres.getAllSemestre();
+
+            list_principal.Module = Modules.getModules();
+
+
+            return View(list_principal); 
+        }
+        
+        [HttpPost]
+        public ActionResult insert_Module_Semestre(int id_semestre, int id_module)
+        {
+
+            try
+            {
+
+                RespPedagogiques.Aff_Module_Semestre(id_semestre,id_module);
+            }
+            catch (NpgsqlException)
+            {
+                ViewBag.erreur = "Erreur lors de l'affectation !";
+                return Redirect("Error");
+            }
+            
+            return View();
+        }
+
+
+        public ActionResult Affecter_A_Examen()
+        {
+
+            var list_principal = new A_TE_Module_View();
+            // si la liste semestre et vide ou module et vide on le redirige vers la page saisir un module ou un semestre
+            list_principal.Apprenant = Apprenants.getApprenants();
+
+            list_principal.Examen = Examens.getAllExamen();
+
+
+            return View(list_principal);
+        }
+
+        [HttpPost]
+        public ActionResult insert_A_Examen(int id_A, int id_Exam)
+        {
+
+            try
+            {
+                RespPedagogiques.Aff_A_Exam(id_A, id_Exam);
+            }
+            catch (NpgsqlException)
+            {
+                ViewBag.erreur = "Erreur lors de l'affectation !";
+                return Redirect("Error");
+            }
+
+            return View("Succees");
+        }
+
+
+        public ActionResult getAffectationTe(int id)
+        {
+            var listApp = new List<Apprenant>();
+            try
+            {
+
+               listApp =  TuteursEnseignant.getAllApprenant(id);
+
+
+            }
+            catch (NpgsqlException)
+            {
+                ViewBag.erreur = "Erreur lors de l'affectation !";
+                return Redirect("Error");
+            }
+
+
+            return View(listApp);
+        }
 
 
 
@@ -115,7 +262,7 @@ namespace ElearningM1.Controllers
         public DataTable Connexion(String requette)
         {
 
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearning;port=5433");
+            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearningM1;port=5433");
 
             DataTable MyData = new DataTable();
             NpgsqlDataAdapter da;
@@ -129,6 +276,8 @@ namespace ElearningM1.Controllers
 
             return MyData;
         }
+
+        
 
     }
 }
