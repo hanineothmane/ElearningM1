@@ -1,0 +1,60 @@
+﻿@model ElearningM1.Models.A_TE_Module_View
+@{
+    Layout = "~/Views/Shared/Navigateur.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Affecter_Te_Module</title>
+</head>
+<body>
+    <fieldset>
+        <h2>Affectation d'un apprenant a un module : </h2>
+        <br />
+        <br />
+
+        <span style="color:red">@ViewBag.erreur</span>
+
+        @using (Html.BeginForm("insert_A_Module", "TuteurEnseignant", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.Label("Apprenant")
+                @Html.DropDownList("id_A", new SelectList(ElearningM1.Models.Apprenants.getApprenants(), "id", "nom"), new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Module")
+                @Html.DropDownList("id_module", new SelectList(ElearningM1.Models.Modules.getModules(), "id", "nom"), new { @class = "form-control" })
+            </div>
+            <br />
+            <input type="submit" class="btn btn-primary" value="Valider" />
+        }
+
+
+
+        @*@{
+                string id = "";
+                string id_module = "";
+                if (IsPost)
+                {
+
+                    id = Request.Form["id_A"];
+                    id_module = Request.Form["id_module"];
+
+                    <text>
+                        You entered: <br />
+                        Company Name: @id <br />
+                        Contact Name: @id_module <br />
+
+                    </text>
+                }
+
+
+            }*@
+
+    </fieldset>
+</body>
+</html>

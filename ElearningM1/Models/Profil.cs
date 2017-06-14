@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,7 @@ namespace ElearningM1.Models
 {
     public class Profil
     {
+        
         private string nom, dateNaiss, prenom, courriel, mdp, telephone, adresse;
         private int id;
         public Profil(string nom, string dateNaiss, string prenom, string courriel, int id, string mdp, string telephone, String adresse)
@@ -14,7 +16,6 @@ namespace ElearningM1.Models
             this.nom = nom;
             this.dateNaiss = dateNaiss;
             this.prenom = prenom;
-            this.courriel = courriel;
             this.id = id;
             this.mdp = mdp;
             this.telephone = telephone;

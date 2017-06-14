@@ -1,0 +1,17 @@
+﻿@model List<ElearningM1.Models.Apprenant>
+@{
+    ViewBag.Title = "getAllApprenant";
+    
+}
+
+<h2>getAllApprenant</h2>
+@{
+    foreach (var apprenant in Model)
+    {
+
+        <p>@apprenant.Nom</p>
+
+
+
+    }
+}

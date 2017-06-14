@@ -7,19 +7,28 @@ namespace ElearningM1.Models
 {
     public class Examen
     {
-        private string date, lieu;
-        private double noteEF;
+        private string date, type;
+        private int id;
         private Module leModule;
 
-        public Examen(string date, string lieu, double noteEF)
+
+        public Examen()
+        {
+
+        }
+
+
+        public Examen(string date, string type, Module leModule)
         {
             this.date = date;
-            this.lieu = lieu;
-            this.noteEF = noteEF;
+            this.type = type;
+            this.LeModule = leModule;
         }
 
         public string Date { get => date; set => date = value; }
-        public string Lieu { get => lieu; set => lieu = value; }
-        public double NoteEF { get => noteEF; set => noteEF = value; }
+        public string Type { get; set; }
+        public int Id { get ; set ; }
+        public Module LeModule { get; set; }
     }
+
 }

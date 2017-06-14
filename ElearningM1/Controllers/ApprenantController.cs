@@ -14,32 +14,7 @@ namespace ElearningM1.Controllers
        
 
 
-        public ActionResult GetAllApprenant()
-        {
-
-            string select = "SELECT * FROM \"Apprenant\"";
-
-            List<Apprenant> te = Connexion(select).AsEnumerable().Select(row =>
-               
-               new Apprenant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"),  null,row.Field<int>("id"), null, row.Field<string>("telephone"), row.Field<string>("adresse"),null)
-
-
-                   {
-                       Id = row.Field<int>("id"),
-                       Nom = row.Field<String>("nom"),
-                       Prenom = row.Field<String>("prenom"),
-                       DateNaiss = row.Field<String>("datenaissance"),
-
-
-                       Telephone = row.Field<String>("telephone"),
-                       Adresse = row.Field<String>("adresse")
-
-                   }
-
-            ).ToList();
-            te.Cast<Apprenant>();
-            return View(te);
-        }
+       
 
         public DataTable Connexion(String requette)
         {
