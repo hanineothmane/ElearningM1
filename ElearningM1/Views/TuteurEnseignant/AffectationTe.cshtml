@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Liste Apprenant";
+    Layout = "~/Views/Shared/Navigateur.cshtml";
+}
+<head>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<body>
+    <div class="input-group">
+        <h3>Les modules</h3>
+       @* @Html.ActionLink("+ Ajouter", "InsererModule", "RP", new { @class = "btn btn-default" })*@
+    </div>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Telephone</th>
+                <th>Adresse</th>
+            </tr>
+        </thead>
+        @if (ElearningM1.Models.TuteursEnseignant.getAllApprenant(1).Count > 0)// dynamiser l'id
+        {
+            foreach (ElearningM1.Models.Apprenant apprenant in ElearningM1.Models.TuteursEnseignant.getAllApprenant(1) as List<ElearningM1.Models.Apprenant>)
+            {
+                <tr>
+                    <td>@Html.ActionLink(apprenant.Nom, "ModifierApprenant", "RP", new { id = apprenant.Id }, null)</td>
+                    <td>@apprenant.Prenom</td>
+                    <td>@apprenant.Telephone</td>
+                    <td>@apprenant.Adresse</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour ajouter un nouveau module @Html.ActionLink("Cliquer ici", "InsererModule", "RP")</td></tr>
+        }
+    </table>
+</body>

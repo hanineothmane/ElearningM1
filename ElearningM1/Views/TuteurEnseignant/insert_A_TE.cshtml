@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>insert_A_TE</title>
+</head>
+<body>
+    <div> 
+        @{
+            if (ViewBag.erreur == "")
+            {
+            <p>l'apprenant @ViewBag.erreur à été affécter avec succées au tuteur</p>
+
+            }
+            else
+            {
+                <p>erreur lors de l'affectation !!</p>
+                }
+
+            }
+    </div>
+ 
+</body>
+</html>

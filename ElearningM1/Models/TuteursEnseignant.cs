@@ -13,7 +13,7 @@ namespace ElearningM1.Models
 {
     public static class TuteursEnseignant
     {
-        public static List<TuteurEnseignant> getTuteursEnseignant()
+        public List<TuteurEnseignant> getTuteursEnseignant()
         {
             
             string select = "SELECT * FROM \"TE\" ORDER BY nom";
@@ -40,17 +40,44 @@ namespace ElearningM1.Models
             return te;
         }
 
-        public static void AddTE(TuteurEnseignant te)
+        public static List<Apprenant> getAllApprenant(int id_te)
         {
-            //string select = "INSERT INTO \"Utilisateur\" VALUES ('" + a.Nom + "','" + a.DateNaiss + "','" + a.Prenom + "','" + a.Email + "','" + a.DateInscription + "', '" + a.Telephone + "', '', 'apprenant', '')";
-            string select = "SELECT inserer_te('" + te.Nom + "','" + te.Prenom + "', '" + te.Adresse + "', '" + te.Telephone + "', '" + te.DateNaiss + "' ,'" + te.Email + "', '" + te.Mdp + "' )";
-            BDD.ExecuteNonQuery(select);
-        }
 
-        public static void Update(TuteurEnseignant te)
-        {
-            string select = "SELECT modifier_te('" + te.Id + "','" + te.Nom + "','" + te.Prenom + "', '" + te.Adresse + "', '" + te.Telephone + "', '" + te.DateNaiss + "' ,'" + te.Email + "', '" + te.Mdp + "' )";
-            BDD.ExecuteNonQuery(select);
+            String requette = "Select * from \"TE\" where id in(Select * from \"Affecter_A_Te\" where id_Te =" + id_te + ")";
+
+            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearningM1;port=5433");
+
+            DataTable MyData = new DataTable();
+            NpgsqlDataAdapter da;
+
+            conn.Open();
+           
+            NpgsqlCommand MyCmd = new NpgsqlCommand(requette, conn);
+            da = new NpgsqlDataAdapter(MyCmd);
+            da.Fill(MyData);
+            conn.Close();
+
+            List<Apprenant> apprenant = MyData.AsEnumerable().Select(row =>
+
+              new Apprenant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<int>("id_apprenant"), row.Field<string>("telephone"), row.Field<string>("adresse"), null)
+              {
+                  Id = row.Field<int>("id_apprenant"),
+                  Nom = row.Field<string>("nom"),
+                  Prenom = row.Field<string>("prenom"),
+                  DateNaiss = row.Field<string>("datenaissance"),
+                  Telephone = row.Field<string>("telephone"),
+                  Adresse = row.Field<string>("adresse")
+
+              }
+
+            ).ToList();
+            apprenant.Cast<Apprenant>();
+
+
+
+            return apprenant;
+
+           
         }
     }
 }

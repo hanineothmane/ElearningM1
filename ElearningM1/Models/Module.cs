@@ -27,9 +27,9 @@ namespace ElearningM1.Models
         {
             this.id = id;
             this.nom = nom;
-            this.DateCreation = dateCreation;
+            this.dateCreation = dateCreation;
             this.coef = coef;
-            this.TypeModule = typeModule;
+            this.typeModule = typeModule;
             this.ens = ens;
             this.sr = sr;
         }
