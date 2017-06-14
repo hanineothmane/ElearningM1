@@ -7,15 +7,25 @@ namespace ElearningM1.Models
 {
     public class SessionRegroupement
     {
-        private string date;
+        private int id;
+        private string nom, date;
         private List<Module> lesModules;
 
-        public SessionRegroupement(string date)
+        public SessionRegroupement()
         {
+
+        }
+
+        public SessionRegroupement(int id, string nom, string date)
+        {
+            this.Id = id;
+            this.Nom = nom;
             this.date = date;
         }
 
         public string Date { get => date; set => date = value; }
+        public int Id { get => id; set => id = value; }
+        public string Nom { get => nom; set => nom = value; }
 
         public bool isPresent(Apprenant a)
         {

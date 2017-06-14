@@ -1,36 +1,41 @@
 ﻿
 @{
     ViewBag.Title = "ListeModules";
+    Layout = "~/Views/Shared/_LayoutRP.cshtml";
 }
 <head>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css"/>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
 </head>
-<h2>Les modules</h2>
 <body>
+    <div class="input-group">
+        <h3>Les modules</h3>
+        @Html.ActionLink("+ Ajouter", "InsererModule", "RP", new { @class = "btn btn-default" })
+    </div>
+
     <table class="striped">
         <thead>
             <tr>
                 <th>Nom</th>
                 <th>Coefficient</th>
-                <th>Est-il national ?</th>
+                <th>Type de module</th>
             </tr>
         </thead>
-        @foreach (ElearningM1.Models.Module module in ElearningM1.Models.Modules.getModules() as List<ElearningM1.Models.Module>)
+        @if (ElearningM1.Models.Modules.getModules().Count > 0)
         {
-            <tr>
-                <td>@Html.ActionLink(module.Nom, "ModifierModule", "RP", new { id = module.Id }, null)</td>
-                <td>@module.Coeff</td>
-                @if (module.EstNational)
-                {
-                    <td>Oui</td>
-                }
-                else
-                {
-                    <td>Non</td>
-                }
-            </tr>
+            foreach (ElearningM1.Models.Module module in ElearningM1.Models.Modules.getModules() as List<ElearningM1.Models.Module>)
+            {
+                <tr>
+                    <td>@Html.ActionLink(module.Nom, "ModifierModule", "RP", new { id = module.Id }, null)</td>
+                    <td>@module.Coef</td>
+                    <td>@module.TypeModule</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour ajouter un nouveau module @Html.ActionLink("Cliquer ici", "InsererModule", "RP")</td></tr>
         }
     </table>
 </body>

@@ -19,18 +19,17 @@ namespace ElearningM1.Controllers
 
             List<Apprenant> te = Connexion(select).AsEnumerable().Select(row =>
 
-               new Apprenant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"),null)
-                   {
-                       Id = row.Field<int>("id"),
-                       Nom = row.Field<String>("nom"),
-                       Prenom = row.Field<String>("prenom"),
-                       DateNaiss = row.Field<String>("datenaissance"),
-                       Courriel = row.Field<String>("courriel"),
-                       Mdp = row.Field<String>("mdp"),
-                       Telephone = row.Field<String>("telephone"),
-                       Adresse = row.Field<String>("adresse")
-
-                   }
+               new Apprenant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("email"), row.Field<int>("id"), row.Field<string>("telephone"), row.Field<string>("dateinscription"), row.Field<string>("adresse"))
+                    {
+                        Id = row.Field<int>("id"),
+                        Nom = row.Field<String>("nom"),
+                        Prenom = row.Field<String>("prenom"),
+                        DateNaiss = row.Field<String>("datenaissance"),
+                        Email = row.Field<String>("email"),
+                        Telephone = row.Field<String>("telephone"),
+                        Adresse = row.Field<String>("adresse"),
+                        DateInscription = row.Field<String>("dateinscription"),
+                    }
 
             ).ToList();
             te.Cast<Apprenant>();

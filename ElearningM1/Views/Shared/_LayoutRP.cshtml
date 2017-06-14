@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -24,12 +23,25 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                    <li>@Html.ActionLink("A Propos", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li>@Html.ActionLink("Connexion", "SignIn", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informations <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Liste des modules", "ListeModules", "RP")</li>
+                            <li>@Html.ActionLink("Liste des apprenants", "ListeApprenants", "RP")</li>
+                            <li>@Html.ActionLink("Liste des tuteurs", "ListeTuteursEnseignant", "RP")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ajout <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Module", "InsererModule", "RP")</li>
+                            <li>@Html.ActionLink("Apprenant", "InsererApprenant", "RP")</li>
+                            <li>@Html.ActionLink("Tuteur", "InsererTE", "RP")</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Déconnexion", "SignOut", "Home")</li>
                 </ul>
             </div>
         </div>

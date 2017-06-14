@@ -29,12 +29,12 @@ namespace ElearningM1.Controllers
           
             List<TuteurEnseignant> te = BDD.Execute(select).AsEnumerable().Select(row =>
 
-                new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"))              {
+                new TuteurEnseignant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("email"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), row.Field<string>("adresse"))              {
                     
                     Nom = row.Field<string>("nom"),
                     DateNaiss = row.Field<string>("datenaissance"),
                     Prenom = row.Field<string>("prenom"),
-                    Courriel = row.Field<string>("courriel"),
+                    Email = row.Field<string>("email"),
                     Id = row.Field<int>("id"),
                     Mdp = row.Field<string>("mdp"),
                     Telephone = row.Field<string>("telephone"),
@@ -64,7 +64,7 @@ namespace ElearningM1.Controllers
                     Nom = row.Field<String>("nom"),
                     Prenom = row.Field<String>("prenom"),
                     DateNaiss = row.Field<String>("datenaissance"),
-                    Courriel = row.Field<String>("courriel"),
+                    Email = row.Field<String>("email"),
                     Mdp = row.Field<String>("mdp"),
                     Telephone = row.Field<String>("telephone"),
                     Adresse = row.Field<String>("adresse")
@@ -94,7 +94,7 @@ namespace ElearningM1.Controllers
                     Nom = row.Field<String>("nom"),
                     Prenom = row.Field<String>("prenom"),
                     DateNaiss = row.Field<String>("datenaissance"),
-                    Courriel = row.Field<String>("courriel"),
+                    Email = row.Field<String>("email"),
                     Mdp = row.Field<String>("mdp"),
                     Telephone = row.Field<String>("telephone"),
                     Adresse = row.Field<String>("adresse")

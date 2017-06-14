@@ -9,12 +9,6 @@
   {
     Response.Redirect("Home");
   }
-
-  void Signout_Click(object sender, EventArgs e)
-  {
-    FormsAuthentication.SignOut();
-    Response.Redirect("Logon.aspx");
-  }
 </script>
 
 <body>

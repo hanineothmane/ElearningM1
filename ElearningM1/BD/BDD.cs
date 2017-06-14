@@ -8,6 +8,11 @@ using NpgsqlTypes;
 //Fin
 using System.Data;
 using System.Text;
+using System.Web.Security;
+using System.Web.Mvc;
+using System.Web.Configuration;
+using System.Data.SqlClient;
+
 namespace ElearningM1.BD
 {
     public static class BDD
@@ -16,7 +21,8 @@ namespace ElearningM1.BD
 
         public static void Initialize() { 
             // conn = new NpgsqlConnection("Server=localhost:5432;User Id=postgres;Password=root;Database=Elearning;");
-            conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=postgres;port=5432");
+            // conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=elearningM1;port=5432");
+            conn = new NpgsqlConnection(WebConfigurationManager.ConnectionStrings["elearningM1"].ConnectionString);
         }
 
         public static NpgsqlConnection Connexion() { 
@@ -58,16 +64,37 @@ namespace ElearningM1.BD
             Close();
         }
 
-        public static bool ConnexionAppli(string mail, string mdp)
+        public static bool ConnexionRP(string mail, string mdp)
         {
-            string select = "select * from \"Utilisateur\" where courriel = '" + mail + "' and mdp = '" + mdp + "'";
-
+            string select = "select * from \"RP\" where email = '" + mail + "' and mdp = '" + mdp + "'";
             if (Execute(select).Rows.Count > 0)
             {
                 return true;
             }
             else return false;
-
         }
+
+        public static bool ConnexionTE(string mail, string mdp)
+        {
+            string select = "select * from \"TE\" where email = '" + mail + "' and mdp = '" + mdp + "'";
+            if (Execute(select).Rows.Count > 0)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public static bool ConnexionAdministration(string mail, string mdp)
+        {
+            string select = "select * from \"Administration\" where email = '" + mail + "' and mdp = '" + mdp + "'";
+            if (Execute(select).Rows.Count > 0)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        
+
     }
 }

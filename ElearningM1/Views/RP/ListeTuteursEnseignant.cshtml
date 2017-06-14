@@ -1,14 +1,18 @@
 ﻿
 @{
     ViewBag.Title = "Liste des tuteurs";
+    Layout = "~/Views/Shared/_LayoutRP.cshtml";
 }
 <head>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
 </head>
-<h2>Les tuteurs enseignant</h2>
 <body>
+    <div class="input-group">
+        <h3>Les enseignants</h3>
+        @Html.ActionLink("+ Ajouter", "InsererTE", "RP", new { @class = "btn btn-default" })
+    </div>
     <table class="striped">
         <thead>
             <tr>
@@ -19,15 +23,22 @@
                 <th>Téléphone</th>
             </tr>
         </thead>
-        @foreach (ElearningM1.Models.TuteurEnseignant te in ViewData["TuteursEnseignant"] as List<ElearningM1.Models.TuteurEnseignant>)
+        @if (ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant().Count > 0)
         {
+            foreach (ElearningM1.Models.TuteurEnseignant te in ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant() as List<ElearningM1.Models.TuteurEnseignant>)
+            {
             <tr>
-                <td>@Html.ActionLink(te.Nom, "#", "#", new { nom = te.Nom }, null)</td>
-                <td>@Html.ActionLink(te.Prenom, "#", "#", new { nom = te.Nom }, null)</td>
+                <td>@Html.ActionLink(te.Nom, "ModifierTE", "RP", new { id = te.Id }, null)</td>
+                <td>@Html.ActionLink(te.Prenom, "ModifierTE", "RP", new { id = te.Id }, null)</td>
                 <td>@te.DateNaiss</td>
-                <td>@te.Courriel</td>
+                <td>@te.Email</td>
                 <td>@te.Adresse</td>
             </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour ajouter un nouvel enseignant @Html.ActionLink("Cliquer ici", "InsererTE", "RP")</td></tr>
         }
     </table>
 </body>

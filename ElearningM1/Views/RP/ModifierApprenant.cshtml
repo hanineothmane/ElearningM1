@@ -1,49 +1,55 @@
 ﻿@model ElearningM1.Models.Apprenant
 @{
     ViewBag.Title = "Modifier : " + Model.Nom;
+    Layout = "~/Views/Shared/_LayoutRP.cshtml";
 }
+<head>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<body>
+    <h4>Modifier informations concernant : @Model.Prenom @Model.Nom</h4>
 
-<h2>Modifier @Model.Nom</h2>
+    @using (Html.BeginForm("ModifierApprenant", "RP", FormMethod.Post))
+    {
 
-@using (Html.BeginForm("ModifierApprenant", "RP", FormMethod.Post))
-{
+        <div class="form-group">
+            @Html.LabelFor(a => a.Nom)
+            @Html.TextBoxFor(a => a.Nom, new { @class = "form-control" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(a => a.Nom)
-        @Html.TextBoxFor(a => a.Nom, new { @class = "form-control" })
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.Prenom)
+            @Html.TextBoxFor(a => a.Prenom, new { @class = "form-control" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(a => a.Prenom)
-        @Html.TextBoxFor(a => a.Prenom, new { @class = "form-control" })
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.DateNaiss)
+            @Html.TextBoxFor(a => a.DateNaiss, new { @class = "form-control" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(a => a.DateNaiss)
-        @Html.TextBoxFor(a => a.DateNaiss, new { @class = "form-control" })
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.Email)
+            @Html.TextBoxFor(a => a.Email, new { @class = "form-control" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(a => a.Courriel)
-        @Html.TextBoxFor(a => a.Courriel, new { @class = "form-control" })
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.DateInscription)
+            @Html.TextBoxFor(a => a.DateInscription, new { @class = "form-control" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(a => a.Mdp)
-        @Html.TextBoxFor(a => a.Mdp, new { @class = "form-control" })
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.Telephone)
+            @Html.TextBoxFor(a => a.Telephone, new { @class = "form-control" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(a => a.Telephone)
-        @Html.TextBoxFor(a => a.Telephone, new { @class = "form-control" })
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(a => a.Adresse)
+            @Html.TextBoxFor(a => a.Adresse, new { @class = "form-control" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(a => a.Adresse)
-        @Html.TextBoxFor(a => a.Adresse, new { @class = "form-control" })
-    </div>
-
-    <input type="submit" class="btn btn-primary" value="Modifier" />
-}
-
+        <input type="submit" class="btn btn-primary" value="Modifier" />
+    }
+</body>
 

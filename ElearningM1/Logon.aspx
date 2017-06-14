@@ -39,13 +39,29 @@
 
 <script runat="server">
 
-   void Logon_Click(object sender, EventArgs e)
+    void Logon_Click(object sender, EventArgs e)
     {
-        
-        if (BDD.ConnexionAppli(UserEmail.Text, UserPass.Text))
+
+        if (BDD.ConnexionRP(UserEmail.Text, UserPass.Text))
         {
             FormsAuthentication.RedirectFromLoginPage
                 (UserEmail.Text, Persist.Checked);
+            Session["typeUtilisateur"] = "RP";
+            Response.Redirect("Home/Index");
+        }
+        else if(BDD.ConnexionTE(UserEmail.Text, UserPass.Text))
+        {
+            FormsAuthentication.RedirectFromLoginPage
+                (UserEmail.Text, Persist.Checked);
+            Session["typeUtilisateur"] = "TE";
+            Response.Redirect("Home/Index");
+        }
+        else if(BDD.ConnexionAdministration(UserEmail.Text, UserPass.Text))
+        {
+            FormsAuthentication.RedirectFromLoginPage
+                (UserEmail.Text, Persist.Checked);
+            Session["typeUtilisateur"] = "Admin";
+            Response.Redirect("Home/Index");
         }
         else
         {

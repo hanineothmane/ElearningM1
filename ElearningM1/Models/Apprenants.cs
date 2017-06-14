@@ -16,20 +16,20 @@ namespace ElearningM1.Models
         public static List<Apprenant> getApprenants()
         {
             
-            string select = "SELECT * FROM \"Utilisateur\" WHERE type='apprenant' ORDER BY nom";
+            string select = "SELECT * FROM \"Apprenant\" ORDER BY nom";
             
             List<Apprenant> apprenant = BDD.Execute(select).AsEnumerable().Select(row =>
 
-                new Apprenant(row.Field<string>("nom"), row.Field<string>("dateNaiss"), row.Field<string>("prenom"), row.Field<string>("courriel"), row.Field<int>("id"), row.Field<string>("mdp"), row.Field<string>("telephone"), null, row.Field<string>("adresse"))
+                new Apprenant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("email"), row.Field<int>("id_apprenant"), row.Field<string>("telephone"), row.Field<string>("dateinscription"), row.Field<string>("adresse"))
                 {
-
-                    Nom = row.Field<string>("nom"),
-                    Prenom = row.Field<string>("prenom"),
-                    DateNaiss = row.Field<string>("dateNaiss"),
-                    Courriel = row.Field<string>("courriel"),
-                    Telephone = row.Field<string>("telephone"),
-                    Adresse = row.Field<string>("adresse"),
-
+                    Id = row.Field<int>("id_apprenant"),
+                    Nom = row.Field<String>("nom"),
+                    Prenom = row.Field<String>("prenom"),
+                    DateNaiss = row.Field<String>("datenaissance"),
+                    Email = row.Field<String>("email"),
+                    Telephone = row.Field<String>("telephone"),
+                    Adresse = row.Field<String>("adresse"),
+                    DateInscription = row.Field<String>("dateinscription"),
                 }
 
             ).ToList();
@@ -40,13 +40,14 @@ namespace ElearningM1.Models
 
         public static void AddApprenant(Apprenant a)
         {
-            string select = "INSERT INTO \"Utilisateur\" VALUES ('" + a.Nom + "','" + a.DateNaiss + "','" + a.Prenom + "','" + a.Courriel + "','" + a.Mdp + "', '" + a.Telephone + "', '', 'apprenant', '')";
+            //string select = "INSERT INTO \"Utilisateur\" VALUES ('" + a.Nom + "','" + a.DateNaiss + "','" + a.Prenom + "','" + a.Email + "','" + a.DateInscription + "', '" + a.Telephone + "', '', 'apprenant', '')";
+            string select = "SELECT inserer_apprenant('" + a.Nom + "','" + a.Prenom + "', '" + a.Adresse + "', '" + a.Telephone + "', '" + a.DateNaiss + "' ,'" + a.Email + "', '" + a.DateInscription + "' )";
             BDD.ExecuteNonQuery(select);
         }
 
         public static void Update(Apprenant a)
         {
-            string select = "UPDATE \"Utilisateur\" SET nom='" + a.Nom + "', datenaiss='" + a.DateNaiss + "', prenom='" + a.Prenom + "', courriel='" + a.Courriel + "', mdp='" + a.Mdp + "', telephone='" + a.Telephone + "' WHERE id=" + a.Id + "";
+            string select = "SELECT modifier_apprenant('" + a.Id + "','" + a.Nom + "','" + a.Prenom + "', '" + a.Adresse + "', '" + a.Telephone + "', '" + a.DateNaiss + "' ,'" + a.Email + "', '" + a.DateInscription + "' )";
             BDD.ExecuteNonQuery(select);
         }
     }
