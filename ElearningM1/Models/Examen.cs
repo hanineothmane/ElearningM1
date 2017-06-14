@@ -12,6 +12,14 @@ namespace ElearningM1.Models
         private Module leModule;
 
         public Examen(int id, string date, string type, Module leModule)
+
+        public Examen()
+        {
+
+        }
+
+
+        public Examen(string date, string type, Module leModule)
         {
             this.date = date;
             this.type = type;
@@ -23,4 +31,5 @@ namespace ElearningM1.Models
         public int Id { get => id; set => id = value; }
         public Module LeModule { get => leModule; set => leModule = value; }
     }
+
 }
