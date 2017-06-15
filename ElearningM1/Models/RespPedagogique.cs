@@ -12,9 +12,9 @@ namespace ElearningM1.Models
 
         }
 
-        public void affecterEnseignantModule(TuteurEnseignant te, Module m) { }
+        //public void affecterEnseignantModule(TuteurEnseignant te, Module m) { }
 
-        public void modifierInfosProfil(Profil p) { }
+        public void modifierProfil(Profil p) { }
 
         public void affecterEnseignantApprenant(TuteurEnseignant te, Apprenant a) { }
 
