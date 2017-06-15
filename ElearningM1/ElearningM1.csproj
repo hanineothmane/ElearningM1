@@ -185,6 +185,8 @@
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\TuteurEnseignant.cs" />
     <Compile Include="Models\TuteursEnseignant.cs" />
+    <Compile Include="Models\IDisp.cs" />
+    <Compile Include="Models\Utilisateurs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
