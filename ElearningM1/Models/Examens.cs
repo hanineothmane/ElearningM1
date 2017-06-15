@@ -33,7 +33,6 @@ namespace ElearningM1.Models
                     Type =  row.Field<string>("type_examen"), 
                     Date = row.Field<string>("date"),
                     LeModule = Modules.getModules().FirstOrDefault(c => c.Id == row.Field<int>("id_module"))
-
                 }
 
             ).ToList();

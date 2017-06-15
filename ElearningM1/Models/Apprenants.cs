@@ -38,6 +38,24 @@ namespace ElearningM1.Models
             return apprenant;
         }
 
+        public static List<Apprenant> getApprenant(int id)
+        {
+            string select = "SELECT * FROM \"Apprenant\" WHERE id_apprenant =" + id;
+            List<Apprenant> app = BDD.Execute(select).AsEnumerable().Select(row =>
+                new Apprenant()
+                {
+                    Id = row.Field<int>("id"),
+                    Nom = row.Field<String>("nom"),
+                    Prenom = row.Field<String>("prenom"),
+                    DateNaiss = row.Field<String>("datenaissance"),
+                    Telephone = row.Field<String>("telephone"),
+                    Adresse = row.Field<String>("adresse")
+                }
+            ).ToList();
+            app.Cast<Apprenant>();
+            return app;
+        }
+
         public static void AddApprenant(Apprenant a)
         {
             //string select = "INSERT INTO \"Utilisateur\" VALUES ('" + a.Nom + "','" + a.DateNaiss + "','" + a.Prenom + "','" + a.Email + "','" + a.DateInscription + "', '" + a.Telephone + "', '', 'apprenant', '')";

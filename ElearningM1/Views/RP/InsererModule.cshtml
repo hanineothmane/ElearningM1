@@ -49,7 +49,7 @@
         <div class="form-group">
             @Html.Label("Enseignant")
             @Html.DropDownList("id_te", new SelectList(ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant(), "id", "nom"), new { @class = "form-control" })
-            @Html.ActionLink("+ Ajouter un nouvel enseignant", "InsererEnseignant", "RP")
+            @Html.ActionLink("+ Ajouter un nouvel enseignant", "InsererTE", "RP")
         </div>
 
         <div class="form-group">

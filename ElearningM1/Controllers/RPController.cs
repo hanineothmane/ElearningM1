@@ -34,7 +34,7 @@ namespace ElearningM1.Controllers
             if (module != null)
             {
                 ViewData["Coeff"] = module.Coef;
-                ViewData["ApprenantsModule"] = module.getApprenants();
+               // ViewData["ApprenantsModule"] = module.getApprenants();
                 return View("InfosModule");
             }
             return View("Error");
@@ -103,26 +103,6 @@ namespace ElearningM1.Controllers
         #endregion
 
         #region Apprenant
-
-        //Commun
-        public ActionResult ListeApprenants()
-        {
-            ViewData["Apprenants"] = Apprenants.getApprenants();
-            return View(Apprenants.getApprenants());
-        }
-
-        //Commun
-        public ActionResult ChercheApprenant(string nom)
-        {
-            ViewData["NomApprenant"] = nom;
-            Apprenant apprenant = Apprenants.getApprenants().FirstOrDefault(c => c.Nom == nom);
-            if (apprenant != null)
-            {
-                ViewData["Apprenant"] = apprenant;
-                return View("InfosApprenant");
-            }
-            return View("Error");
-        }
 
         [HttpGet]
         public ActionResult InsererApprenant()
@@ -223,7 +203,7 @@ namespace ElearningM1.Controllers
             tut.Adresse = te.Adresse;
             tut.Mdp = te.Mdp;
 
-            TuteursEnseignant.Update(tut);
+            TuteursEnseignant.UpdateTE(tut);
             
             return View("ListeTuteursEnseignant");
         }
@@ -296,7 +276,122 @@ namespace ElearningM1.Controllers
 
         #endregion
 
+        #region Affectation Module Apprenant
 
+        [HttpGet]
+        public ActionResult Affecter_A_Module()
+        {
+            var list_principale = new A_TE_Module_View();
+            list_principale.Apprenant = Apprenants.getApprenants();
+            list_principale.Module = Modules.getModules();
+            return View(list_principale);
+        }
 
+        [HttpPost]
+        public ActionResult Affecter_A_Module(int id_module, int id_A)
+        {
+            try
+            {
+                RespPedagogiques.Aff_A_Module(id_module, id_A);
+                ViewBag.Message = "Affectation réalisée avec succès !";
+            }
+            catch (NpgsqlException)
+            {
+                ViewBag.Message = "Erreur lors de l'affectation !";
+                return Redirect("Affecter_A_Module");
+            }
+            return View();// il faut creer une page de succées ! 
+        }
+
+        #endregion
+
+        #region Affectation Tuteur Apprenant
+
+        [HttpGet]
+        public ActionResult Affecter_A_Te()
+        {
+            var list_principale = new A_TE_Module_View();
+            list_principale.Te = TuteursEnseignant.getTuteursEnseignant();
+            list_principale.Apprenant = Apprenants.getApprenants();
+            list_principale.Module = Modules.getModules();
+            return View(list_principale);
+        }
+
+        [HttpPost]
+        public ActionResult Affecter_A_Te(int id_app, int id_tuteur)
+        {
+            try
+            {
+                RespPedagogiques.Aff_A_Te(id_app, id_tuteur);
+                ViewBag.Message = "Affectation réalisée avec succès !";
+            }
+            catch (NpgsqlException)
+            {
+                ViewBag.Message = "Erreur lors de l'affectation !";
+                return View();
+            }
+            return View();
+        }
+
+        #endregion
+
+        #region Affectation Module à Semestre
+
+        [HttpGet]
+        public ActionResult Affecter_Module_Semestre()
+        {
+            var list_principal = new A_TE_Module_View();
+            // si la liste semestre et vide ou module et vide on le redirige vers la page saisir un module ou un semestre
+            list_principal.Semestre = Semestres.getAllSemestre();
+            list_principal.Module = Modules.getModules();
+            return View(list_principal);
+        }
+
+        [HttpPost]
+        public ActionResult Affecter_Module_Semestre(int id_semestre, int id_module)
+        {
+            try
+            {
+                RespPedagogiques.Aff_Module_Semestre(id_semestre, id_module);
+                ViewBag.Message = "Affectation réalisée avec succès !";
+            }
+            catch (NpgsqlException)
+            {
+                ViewBag.Message = "Erreur lors de l'affectation !";
+                return Redirect("Error");
+            }
+            return View();
+        }
+
+        #endregion
+
+        #region Affectation Examen à Module
+
+        [HttpGet]
+        public ActionResult Affecter_A_Examen()
+        {
+            var list_principal = new A_TE_Module_View();
+            // si la liste semestre et vide ou module et vide on le redirige vers la page saisir un module ou un semestre
+            list_principal.Apprenant = Apprenants.getApprenants();
+            list_principal.Examen = Examens.getAllExamen();
+            return View(list_principal);
+        }
+
+        [HttpPost]
+        public ActionResult Affecter_A_Examen(int id_A, int id_Exam)
+        {
+            try
+            {
+                RespPedagogiques.Aff_A_Exam(id_A, id_Exam);
+            }
+            catch (NpgsqlException)
+            {
+                ViewBag.erreur = "Erreur lors de l'affectation !";
+                return Redirect("Error");
+            }
+            return View("Succees");
+        }
+
+        #endregion
     }
 }

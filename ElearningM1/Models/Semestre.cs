@@ -10,22 +10,21 @@ namespace ElearningM1.Models
     {
         private int id, numSemestre;
         private string dateDebut, dateFin;
-        private int numSemestre;
         private List<Module> lesModules;
+
+        public Semestre() { }
 
         public Semestre(string dateDebut, string dateFin, int numSemestre)
         {
-            this.Id = id;
-            this.NumSemestre = numSemestre;
+            this.Id = Id;
             this.dateDebut = dateDebut;
             this.dateFin = dateFin;
-            this.numSemestre = numSemestre;
+            this.NumSemestre = numSemestre;
         }
 
         public string DateDebut { get => dateDebut; set => dateDebut = value; }
         public string DateFin { get => dateFin; set => dateFin = value; }
-
-        public int NumSemestre { get; set; }
-
+        public int Id { get => id; set => id = value; }
+        public int NumSemestre { get => numSemestre; set => numSemestre = value; }
     }
 }
