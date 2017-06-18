@@ -12,6 +12,8 @@ namespace ElearningM1.Controllers
 {
     public class RPController : Controller
     {
+        private RespPedagogique rp = new RespPedagogique("Benzakki", "hier", "Judith", "j@b.fr", 1, "jb", "0123456789", "IBGBI");
+
         // GET: RP
         public ActionResult Index()
         {
@@ -24,20 +26,6 @@ namespace ElearningM1.Controllers
         public ActionResult ListeModules()
         {
             return View(Modules.getModules());
-        }
-
-        //Commun
-        public ActionResult ChercheModule(string nom)
-        {
-            ViewData["NomModule"] = nom;
-            Module module = Modules.getModules().FirstOrDefault(c => c.Nom == nom);
-            if (module != null)
-            {
-                ViewData["Coeff"] = module.Coef;
-               // ViewData["ApprenantsModule"] = module.getApprenants();
-                return View("InfosModule");
-            }
-            return View("Error");
         }
 
         [HttpGet]
@@ -54,11 +42,7 @@ namespace ElearningM1.Controllers
             {
                 try
                 {
-                    TuteurEnseignant te = TuteursEnseignant.getTuteursEnseignant().FirstOrDefault(c => c.Id == id_te);
-                    SessionRegroupement sr = SessionsRegroupement.getSessionsRegroupement().FirstOrDefault(c => c.Id == id_sr);
-                    m.Ens = te;
-                    m.Sr = sr;
-                    Modules.AddModule(m);
+                    rp.AjouterModule(m, id_te, id_sr);
                     return Redirect("ListeModules");
                 }
                 catch (NpgsqlException)
@@ -82,22 +66,18 @@ namespace ElearningM1.Controllers
         [HttpPost]
         public ActionResult ModifierModule(int id, Module m, int id_te, int id_sr)
         {
-            var mod = Modules.getModules().Single(mo => mo.Id == id);
-
-            TuteurEnseignant te = TuteursEnseignant.getTuteursEnseignant().FirstOrDefault(c => c.Id == id_te);
-            SessionRegroupement sr = SessionsRegroupement.getSessionsRegroupement().FirstOrDefault(c => c.Id == id_sr);
-
-            mod.Id = m.Id;
-            mod.Nom = m.Nom;
-            mod.DateCreation = m.DateCreation;
-            mod.Coef = m.Coef;
-            mod.TypeModule = m.TypeModule;
-            mod.Ens = te;
-            mod.Sr = sr;
-
-            Modules.Update(mod);
-            
-
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    rp.ModifierModule(id, m, id_te, id_sr);
+                }
+                    catch (NpgsqlException)
+                {
+                    ViewBag.MessageErreur = "Erreur lors de l'affectation !";
+                    return View(Modules.getModules().SingleOrDefault(mo => mo.Id == id));
+                }
+            }
             return View("ListeModules");
         }
         #endregion
@@ -114,7 +94,18 @@ namespace ElearningM1.Controllers
         [HttpPost]
         public ActionResult InsererApprenant(Apprenant a)
         {
-            Apprenants.AddApprenant(a);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    rp.AjouterApprenant(a);
+                }
+                catch (NpgsqlException)
+                {
+                    ViewBag.MessageErreur = "Erreur lors de l'affectation !";
+                    return View();
+                }
+            }
             return Redirect("ListeApprenants");
         }
 
@@ -130,30 +121,25 @@ namespace ElearningM1.Controllers
         [HttpPost]
         public ActionResult ModifierApprenant(int id, Apprenant a)
         {
-            var app = Apprenants.getApprenants().Single(ap => ap.Id == id);
-
-            app.Id = a.Id;
-            app.Nom = a.Nom;
-            app.Prenom = a.Prenom;
-            app.DateNaiss = a.DateNaiss;
-            app.Email = a.Email;
-            app.Telephone = a.Telephone;
-            app.Adresse = a.Adresse;
-            app.DateInscription = a.DateInscription;
-
-            Apprenants.Update(app);
-
-
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    rp.ModifierApprenant(id, a);
+                }
+                catch (NpgsqlException)
+                {
+                    ViewBag.MessageErreur = "Erreur lors de l'affectation !";
+                    return View(Apprenants.getApprenants().SingleOrDefault(app => app.Id == id));
+                }
+            }
             return View("ListeApprenants");
         }
 
         public ActionResult getModulesApprenant(int id)
         {
-            var app = Apprenants.getApprenants().Single(a => a.Id == id);
-
-            ViewBag.Apprenant = app;
-
-            return View(Affecter_A_Modules.getAffectations(app));
+            ViewBag.Apprenant = rp.LesModulesParApprenant(id);
+            return View(rp.LesModulesParApprenant(id));
         }
         #endregion
 
@@ -162,7 +148,6 @@ namespace ElearningM1.Controllers
         //Commun
         public ActionResult ListeTuteursEnseignant()
         {
-            ViewData["TuteursEnseignant"] = TuteursEnseignant.getTuteursEnseignant();
             return View(TuteursEnseignant.getTuteursEnseignant());
         }
 
@@ -174,9 +159,20 @@ namespace ElearningM1.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsererTE(TuteurEnseignant te)
+        public ActionResult InsererTE(Profil te)
         {
-            TuteursEnseignant.AddTE(te);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    rp.AjouterProfil(te);
+                }
+                catch (NpgsqlException)
+                {
+                    ViewBag.MessageErreur = "Erreur lors de l'affectation !";
+                    return View();
+                }
+            }
             return Redirect("ListeTuteursEnseignant");
         }
 
@@ -192,19 +188,18 @@ namespace ElearningM1.Controllers
         [HttpPost]
         public ActionResult ModifierTE(int id, TuteurEnseignant te)
         {
-            var tut = TuteursEnseignant.getTuteursEnseignant().Single(t => t.Id == id);
-
-            tut.Id = te.Id;
-            tut.Nom = te.Nom;
-            tut.Prenom = te.Prenom;
-            tut.DateNaiss = te.DateNaiss;
-            tut.Email = te.Email;
-            tut.Telephone = te.Telephone;
-            tut.Adresse = te.Adresse;
-            tut.Mdp = te.Mdp;
-
-            TuteursEnseignant.UpdateTE(tut);
-            
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    rp.ModifierProfil(id, te);
+                }
+                catch (NpgsqlException)
+                {
+                    ViewBag.MessageErreur = "Erreur lors de l'affectation !";
+                    return View(TuteursEnseignant.getTuteursEnseignant().Single(tut => tut.Id == id));
+                }
+            }
             return View("ListeTuteursEnseignant");
         }
         #endregion
@@ -383,13 +378,15 @@ namespace ElearningM1.Controllers
             try
             {
                 RespPedagogiques.Aff_A_Exam(id_A, id_Exam);
+                ViewBag.Message = "Affectation réalisée avec succès !";
             }
-            catch (NpgsqlException)
+            catch (NpgsqlException )
             {
-                ViewBag.erreur = "Erreur lors de l'affectation !";
+               
+                ViewBag.Message = "Erreur lors de l'affectation !";
                 return Redirect("Error");
             }
-            return View("Succees");
+            return View();
         }
 
         #endregion

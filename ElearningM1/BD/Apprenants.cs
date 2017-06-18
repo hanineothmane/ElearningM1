@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using ElearningM1.Models;
-using Npgsql;
-using NpgsqlTypes;
 using System.Data;
-using System.Web.Mvc;
 using ElearningM1.BD;
 
 namespace ElearningM1.Models
@@ -15,12 +10,12 @@ namespace ElearningM1.Models
     {
         public static List<Apprenant> getApprenants()
         {
-            
-            string select = "SELECT * FROM \"Apprenant\" ORDER BY nom";
-            
-            List<Apprenant> apprenant = BDD.Execute(select).AsEnumerable().Select(row =>
 
-                new Apprenant(row.Field<string>("nom"), row.Field<string>("datenaissance"), row.Field<string>("prenom"), row.Field<string>("email"), row.Field<int>("id_apprenant"), row.Field<string>("telephone"), row.Field<string>("dateinscription"), row.Field<string>("adresse"))
+            string select = "SELECT * FROM \"Apprenant\" ORDER BY nom";
+
+            return BDD.Execute(select).AsEnumerable().Select(row =>
+
+                new Apprenant()
                 {
                     Id = row.Field<int>("id_apprenant"),
                     Nom = row.Field<String>("nom"),
@@ -33,9 +28,6 @@ namespace ElearningM1.Models
                 }
 
             ).ToList();
-            apprenant.Cast<Apprenant>();
-            
-            return apprenant;
         }
 
         public static List<Apprenant> getApprenant(int id)
@@ -58,15 +50,33 @@ namespace ElearningM1.Models
 
         public static void AddApprenant(Apprenant a)
         {
-            //string select = "INSERT INTO \"Utilisateur\" VALUES ('" + a.Nom + "','" + a.DateNaiss + "','" + a.Prenom + "','" + a.Email + "','" + a.DateInscription + "', '" + a.Telephone + "', '', 'apprenant', '')";
-            string select = "SELECT inserer_apprenant('" + a.Nom + "','" + a.Prenom + "', '" + a.Adresse + "', '" + a.Telephone + "', '" + a.DateNaiss + "' ,'" + a.Email + "', '" + a.DateInscription + "' )";
-            BDD.ExecuteNonQuery(select);
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@nom", a.Nom},
+                {"@prenom", a.Prenom},
+                {"@adresse", a.Adresse},
+                {"@telephone", a.Telephone},
+                {"@datenaissance", a.DateNaiss},
+                {"@email", a.Email},
+                {"@dateinscription", a.DateInscription}
+            };
+            BDD.ExecuteNonQueryPS("modifier_apprenant", dico);
         }
 
         public static void Update(Apprenant a)
         {
-            string select = "SELECT modifier_apprenant('" + a.Id + "','" + a.Nom + "','" + a.Prenom + "', '" + a.Adresse + "', '" + a.Telephone + "', '" + a.DateNaiss + "' ,'" + a.Email + "', '" + a.DateInscription + "' )";
-            BDD.ExecuteNonQuery(select);
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_a", a.Id},
+                {"@n", a.Nom},
+                {"@p", a.Prenom},
+                {"@adr", a.Adresse},
+                {"@tel", a.Telephone},
+                {"@datenaiss", a.DateNaiss},
+                {"@e", a.Email},
+                {"@dateinsc", a.DateInscription}
+            };
+            BDD.ExecuteNonQueryPS("modifier_apprenant", dico);
         }
     }
 }

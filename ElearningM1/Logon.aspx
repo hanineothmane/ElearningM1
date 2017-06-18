@@ -103,9 +103,6 @@
         </td>
       </tr>
       <tr>
-        <td>
-          Se souvenir ?</td>
-        <td>
           <asp:CheckBox ID="Persist" runat="server" /></td>
       </tr>
     </table>
@@ -115,6 +112,9 @@
       <asp:Label ID="Msg" ForeColor="red" runat="server" />
     </p>
   </form>
+    <img src="C:\Users\wassi\Desktop\Projet MIAGE\emiage.png">
+    <img src="C:\Users\wassi\Desktop\Projet MIAGE\miage.png" height="84" width="240">
 </body>
 </div>
+
 </html>

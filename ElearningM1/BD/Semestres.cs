@@ -31,14 +31,25 @@ namespace ElearningM1.Models
 
         public static void AddSemestre(Semestre s)
         {
-            string select = "SELECT inserer_semestre(" + s.NumSemestre + ",'" + s.DateDebut + "', '" + s.DateFin + "')";
-            BDD.ExecuteNonQuery(select);
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@numero_semestre", s.NumSemestre},
+                {"@date_debut", s.DateDebut},
+                {"@date_fin", s.DateFin}
+            };
+            BDD.ExecuteNonQueryPS("inserer_semestre", dico);
         }
 
         public static void UpdateSemestre(Semestre s)
         {
-            string select = "SELECT modifier_semestre(" + s.Id + "," + s.NumSemestre + ",'" + s.DateDebut + "', '" + s.DateFin + "')";
-            BDD.ExecuteNonQuery(select);
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_s", s.NumSemestre},
+                {"@num_s", s.NumSemestre},
+                {"@date_d", s.DateDebut},
+                {"@date_f", s.DateFin}
+            };
+            BDD.ExecuteNonQueryPS("inserer_semestre", dico);
         }
     }
 }

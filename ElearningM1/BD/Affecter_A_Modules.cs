@@ -26,9 +26,13 @@ namespace ElearningM1.Models
 
         public static void AddNote(Affecter_A_Module aff)
         {
-            // string select = "INSERT INTO \"Module\" VALUES ('" + m.Nom + "'," + m.Coef + ",'" + m.EstNational + "', '')";
-            string select = "SELECT ajouter_note(" + aff.Apprenant.Id + "," + aff.Module.Id + ", " + aff.NoteFinale + ")";
-            BDD.ExecuteNonQuery(select);
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_a", aff.Apprenant.Id},
+                {"@id_m", aff.Module.Id},
+                {"@nf", aff.NoteFinale}
+            };
+            BDD.ExecuteNonQueryPS("ajouter_note", dico);
         }
     }
 }

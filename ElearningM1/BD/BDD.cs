@@ -19,9 +19,7 @@ namespace ElearningM1.BD
     {
         private static NpgsqlConnection conn;
 
-        public static void Initialize() { 
-            // conn = new NpgsqlConnection("Server=localhost:5432;User Id=postgres;Password=root;Database=Elearning;");
-            // conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=wassim;Database=elearningM1;port=5432");
+        public static void Initialize() {
             conn = new NpgsqlConnection(WebConfigurationManager.ConnectionStrings["elearningM1"].ConnectionString);
         }
 
@@ -61,6 +59,26 @@ namespace ElearningM1.BD
             Open();
             NpgsqlCommand MyCmd = new NpgsqlCommand(requete, Connexion());
             MyCmd.ExecuteNonQuery();
+            Close();
+        }
+
+        public static void ExecuteNonQueryPS(string nomPS, Dictionary<string, Object> dic)
+        {
+            Initialize();
+            Open();
+            NpgsqlCommand command = new NpgsqlCommand();
+            command = Connexion().CreateCommand();
+            // On indique que l'on souhaite utiliser une procédure stockée
+            command.CommandType = CommandType.StoredProcedure;
+            // On donne le nom de cette procédure stockée
+            command.CommandText = nomPS;
+            // On ajoute les paramèstres liés à la procédure stockée
+            foreach (var kv in dic)
+            {
+                command.Parameters.AddWithValue(kv.Key, kv.Value);
+            }
+            // On execute la commande
+            command.ExecuteNonQuery();
             Close();
         }
 

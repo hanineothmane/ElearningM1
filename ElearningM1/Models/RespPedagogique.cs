@@ -14,21 +14,90 @@ namespace ElearningM1.Models
 
         //public void affecterEnseignantModule(TuteurEnseignant te, Module m) { }
 
-        public void modifierProfil(Profil p) { }
+        
 
         public void affecterEnseignantApprenant(TuteurEnseignant te, Apprenant a) { }
 
-        public void ajouterProfil(Profil p) { }
+        public void AjouterNote(double note) { }
 
-        public void ajouterModule(Module m) { }
+        public void AjouterProfil(Profil p)
+        {
+            TuteursEnseignant.AddTE(p);
+        }
+
+        public void ModifierProfil(int id, Profil p)
+        {
+            var tut = TuteursEnseignant.getTuteursEnseignant().Single(t => t.Id == id);
+
+            tut.Id = p.Id;
+            tut.Nom = p.Nom;
+            tut.Prenom = p.Prenom;
+            tut.DateNaiss = p.DateNaiss;
+            tut.Email = p.Email;
+            tut.Telephone = p.Telephone;
+            tut.Adresse = p.Adresse;
+            tut.Mdp = p.Mdp;
+
+            TuteursEnseignant.UpdateTE(tut);
+        }
+
+        public void AjouterApprenant(Apprenant a)
+        {
+            Apprenants.AddApprenant(a);
+        }
+
+        public void ModifierApprenant(int id, Apprenant a)
+        {
+            var app = Apprenants.getApprenants().Single(ap => ap.Id == id);
+
+            app.Id = a.Id;
+            app.Nom = a.Nom;
+            app.Prenom = a.Prenom;
+            app.DateNaiss = a.DateNaiss;
+            app.Email = a.Email;
+            app.Telephone = a.Telephone;
+            app.Adresse = a.Adresse;
+            app.DateInscription = a.DateInscription;
+
+            Apprenants.Update(app);
+        }
+
+        public void AjouterModule(Module m, int id_te, int id_sr)
+        {
+            TuteurEnseignant te = TuteursEnseignant.getTuteursEnseignant().FirstOrDefault(c => c.Id == id_te);
+            SessionRegroupement sr = SessionsRegroupement.getSessionsRegroupement().FirstOrDefault(c => c.Id == id_sr);
+            m.Ens = te;
+            m.Sr = sr;
+            Modules.AddModule(m);
+        }
+
+        public void ModifierModule(int id, Module m, int id_te, int id_sr) {
+            var mod = Modules.getModules().Single(mo => mo.Id == id);
+
+            TuteurEnseignant te = TuteursEnseignant.getTuteursEnseignant().FirstOrDefault(c => c.Id == id_te);
+            SessionRegroupement sr = SessionsRegroupement.getSessionsRegroupement().FirstOrDefault(c => c.Id == id_sr);
+
+            mod.Id = m.Id;
+            mod.Nom = m.Nom;
+            mod.DateCreation = m.DateCreation;
+            mod.Coef = m.Coef;
+            mod.TypeModule = m.TypeModule;
+            mod.Ens = te;
+            mod.Sr = sr;
+
+            Modules.Update(mod);
+        }
 
         public void consulterInfoApprenant(Apprenant a) { }
 
         public void consulterInfoTE(TuteurEnseignant te) { }
 
         public void affecterApprenantModule(Apprenant a, Module m) {
-            a.add(m);
-            m.add(a);
+        }
+
+        public Apprenant LesModulesParApprenant(int id)
+        {
+            return Apprenants.getApprenants().Single(a => a.Id == id);
         }
 
 

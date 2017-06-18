@@ -1,4 +1,4 @@
-﻿
+﻿@using ElearningM1.Models;
 @{
     ViewBag.Title = "Liste des tuteurs";
     Layout = "~/Views/Shared/_LayoutRP.cshtml";
@@ -23,9 +23,9 @@
                 <th>Téléphone</th>
             </tr>
         </thead>
-        @if (ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant().Count > 0)
+        @if (TuteursEnseignant.getTuteursEnseignant().Count > 0)
         {
-            foreach (ElearningM1.Models.TuteurEnseignant te in ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant() as List<ElearningM1.Models.TuteurEnseignant>)
+            foreach (var te in TuteursEnseignant.getTuteursEnseignant())
             {
             <tr>
                 <td>@Html.ActionLink(te.Nom, "ModifierTE", "RP", new { id = te.Id }, null)</td>
