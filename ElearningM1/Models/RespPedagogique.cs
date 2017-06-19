@@ -18,8 +18,15 @@ namespace ElearningM1.Models
 
         public void affecterEnseignantApprenant(TuteurEnseignant te, Apprenant a) { }
 
-        public void AjouterNote(double note) { }
-
+        public void AjouterNote(Affecter_A_Module aff, int id_app, int id_module)
+        {
+            Apprenant app = Apprenants.getApprenants().FirstOrDefault(a => a.Id == id_app);
+            Module mod = Modules.getModules().FirstOrDefault(m => m.Id == id_module);
+            aff.Apprenant = app;
+            aff.Module = mod;
+            Affecter_A_Modules.AddNote(aff);
+        }
+        
         public void AjouterProfil(Profil p)
         {
             TuteursEnseignant.AddTE(p);

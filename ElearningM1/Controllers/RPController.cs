@@ -222,12 +222,7 @@ namespace ElearningM1.Controllers
             {
                 try
                 {
-                    Apprenant app = Apprenants.getApprenants().FirstOrDefault(a => a.Id == id_app);
-                    Module mod = Modules.getModules().FirstOrDefault(m => m.Id == id_module);
-                    aff.Apprenant = app;
-                    aff.Module = mod;
-                    Affecter_A_Modules.AddNote(aff);
-                    return Redirect("getModulesApprenant/" + app.Id);
+                    rp.AjouterNote(aff, id_app, id_module);
                 }
                 catch (NpgsqlException)
                 {
@@ -235,39 +230,39 @@ namespace ElearningM1.Controllers
                     return View();
                 }
             }
-            return View();
+            return Redirect("getModulesApprenant/" + id_app);
         }
 
-        [HttpGet]
-        public ActionResult ModifierNote(int id)
-        {
-            var module = Modules.getModules().SingleOrDefault(m => m.Id == id);
-            if (module == null)
-                return HttpNotFound();
-            return View(module);
-        }
+        //[HttpGet]
+        //public ActionResult ModifierNote(int id)
+        //{
+        //    var module = Modules.getModules().SingleOrDefault(m => m.Id == id);
+        //    if (module == null)
+        //        return HttpNotFound();
+        //    return View(module);
+        //}
 
-        [HttpPost]
-        public ActionResult ModifierNote(int id, Module m, int id_te, int id_sr)
-        {
-            var mod = Modules.getModules().Single(mo => mo.Id == id);
+        //[HttpPost]
+        //public ActionResult ModifierNote(int id, Module m, int id_te, int id_sr)
+        //{
+        //    var mod = Modules.getModules().Single(mo => mo.Id == id);
 
-            TuteurEnseignant te = TuteursEnseignant.getTuteursEnseignant().FirstOrDefault(c => c.Id == id_te);
-            SessionRegroupement sr = SessionsRegroupement.getSessionsRegroupement().FirstOrDefault(c => c.Id == id_sr);
+        //    TuteurEnseignant te = TuteursEnseignant.getTuteursEnseignant().FirstOrDefault(c => c.Id == id_te);
+        //    SessionRegroupement sr = SessionsRegroupement.getSessionsRegroupement().FirstOrDefault(c => c.Id == id_sr);
 
-            mod.Id = m.Id;
-            mod.Nom = m.Nom;
-            mod.DateCreation = m.DateCreation;
-            mod.Coef = m.Coef;
-            mod.TypeModule = m.TypeModule;
-            mod.Ens = te;
-            mod.Sr = sr;
+        //    mod.Id = m.Id;
+        //    mod.Nom = m.Nom;
+        //    mod.DateCreation = m.DateCreation;
+        //    mod.Coef = m.Coef;
+        //    mod.TypeModule = m.TypeModule;
+        //    mod.Ens = te;
+        //    mod.Sr = sr;
 
-            Modules.Update(mod);
+        //    Modules.Update(mod);
 
 
-            return View("ListeModules");
-        }
+        //    return View("ListeModules");
+        //}
 
         #endregion
 
