@@ -12,6 +12,7 @@ using System.Web.Security;
 using System.Web.Mvc;
 using System.Web.Configuration;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 
 namespace ElearningM1.BD
 {
@@ -98,6 +99,13 @@ namespace ElearningM1.BD
             else return false;
         }
 
+
+
+
+        public static string GenerateMD5(string yourString)
+        {
+            return string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(yourString)).Select(s => s.ToString("x2")));
+        }
 
 
     }

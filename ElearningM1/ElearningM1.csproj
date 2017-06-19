@@ -143,6 +143,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BD\BDD.cs" />
+    <Compile Include="BD\IDal.cs" />
     <Compile Include="Controllers\ApprenantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RPController.cs" />
@@ -169,8 +170,6 @@
     <Compile Include="Models\Affecter_A_Modules.cs" />
     <Compile Include="Models\Apprenant.cs" />
     <Compile Include="Models\Apprenants.cs" />
-	
-   
     <Compile Include="Models\A_TE_Module_View.cs" />
     <Compile Include="Models\Examens.cs" />
     <Compile Include="Models\RespPedagogiques.cs" />
@@ -186,6 +185,7 @@
     <Compile Include="Models\SessionRegroupement.cs" />
     <Compile Include="Models\TuteurEnseignant.cs" />
     <Compile Include="Models\TuteursEnseignant.cs" />
+    <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

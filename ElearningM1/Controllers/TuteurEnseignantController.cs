@@ -14,6 +14,12 @@ namespace ElearningM1.Controllers
     public class TuteurEnseignantController : Controller
     {
         
+        // utiliser les fichiers pour log les erreurs. 
+        //flash 
+        //DAL pour la base de données 
+
+
+
 
         // GET: TuteurEnseignant
         public ActionResult Index()
