@@ -1,4 +1,5 @@
-﻿
+﻿@model List<ElearningM1.Models.Apprenant>
+
 @{
     ViewBag.Title = "ListeApprenants";
     Layout = "~/Views/Shared/_LayoutRP.cshtml";
@@ -26,9 +27,9 @@
                 <th>Les modules suivis</th>
             </tr>
         </thead>
-        @if (ElearningM1.Models.Apprenants.getApprenants().Count > 0)
+        @if (Model.Count > 0)
         {
-            foreach (ElearningM1.Models.Apprenant apprenant in ElearningM1.Models.Apprenants.getApprenants() as List<ElearningM1.Models.Apprenant>)
+            foreach (var apprenant in Model)
             {
                 <tr>
                     <td>@Html.ActionLink(apprenant.Nom, "ModifierApprenant", "RP", new { id = apprenant.Id }, null)</td>

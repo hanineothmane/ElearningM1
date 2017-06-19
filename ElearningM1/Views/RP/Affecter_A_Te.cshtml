@@ -1,0 +1,30 @@
+﻿@model ElearningM1.Models.A_TE_Module_View
+@{
+    ViewBag.Title = "Affectation Apprenant à Tuteur";
+    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+}
+<head>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<body>
+    <h4>Affectation d'un apprenant a un tuteur</h4>
+    <span style="color:red">@ViewBag.Message</span>
+    @using (Html.BeginForm("Affecter_A_TE", "RP", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.Label("Apprenant")
+            @Html.DropDownList("id_app", new SelectList(ElearningM1.Models.Apprenants.getApprenants(), "id", "nom"), new { @class = "form-control"})
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Enseignant")
+            @Html.DropDownList("id_tuteur", new SelectList(ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant(), "id", "nom"), new { @class = "form-control"})
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Valider" />
+    }
+</body>

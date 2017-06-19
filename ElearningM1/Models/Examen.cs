@@ -11,6 +11,8 @@ namespace ElearningM1.Models
         private int id;
         private Module leModule;
 
+        public Examen() { }
+
         public Examen(int id, string date, string type, Module leModule)
 
         public Examen()

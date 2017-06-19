@@ -7,11 +7,10 @@ using System.Web;
 
 namespace ElearningM1.Models
 {
-    public static class Semestres
+    public class Examens
     {
 
-
-        public static List<Semestre> getAllSemestre()
+        public static List<Examen> getAllExamen()
         {
             NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearningM1;port=5433");
 
@@ -19,7 +18,7 @@ namespace ElearningM1.Models
             NpgsqlDataAdapter da;
 
             conn.Open();
-            string select = "SELECT * FROM \"Semestre\"";
+            string select = "SELECT * FROM \"Examen\"";
             NpgsqlCommand MyCmd = new NpgsqlCommand(select, conn);
             da = new NpgsqlDataAdapter(MyCmd);
             da.Fill(MyData);
@@ -27,27 +26,22 @@ namespace ElearningM1.Models
 
 
 
-            List<Semestre> semestre = MyData.AsEnumerable().Select(row =>
+            List<Examen> examen = MyData.AsEnumerable().Select(row =>
 
-                new Semestre(row.Field<string>("date_debut"), row.Field<string>("date_fin"), row.Field<int>("numero_semestre"))
+                new Examen()
                 {
-                    DateDebut = row.Field<string>("date_debut"),
-                    DateFin = row.Field<string>("date_fin"),
-                    NumSemestre = row.Field<int>("numero_semestre")
-
+                    Type =  row.Field<string>("type_examen"), 
+                    Date = row.Field<string>("date"),
+                    LeModule = Modules.getModules().FirstOrDefault(c => c.Id == row.Field<int>("id_module"))
                 }
 
             ).ToList();
-            semestre.Cast<Semestre>();
-
-
-
-            return semestre;
-
-
+            examen.Cast<Examen>();
             
+            return examen;
         }
+    }
 
 
     }
-}
+

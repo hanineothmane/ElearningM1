@@ -8,15 +8,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Affecter_A_Examen</title>
-</head>
 <body>
-    <fieldset>
         Affectation d'un module a un semestre
 
         <span style="color:red">@ViewBag.erreur</span>
 
-        @using (Html.BeginForm("insert_A_Examen", "TuteurEnseignant", FormMethod.Post))
+        @using (Html.BeginForm("Affecter_A_Examen", "RP", FormMethod.Post))
         {
             <div class="form-group">
                 @Html.Label("Apprenant")
