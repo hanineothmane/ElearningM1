@@ -35,41 +35,18 @@ namespace ElearningM1.Controllers
             }
         }
 
-
-        public ActionResult consulterInfoApprenants(int id) //A modifier pour n'afficher que les apprenants liés au TE 
-        {
-            try
-            {
-                Apprenant apprenant = Apprenants.getApprenant(id).FirstOrDefault(a => a.Id == id);
-                return View(apprenant);
-            }
-            catch (NpgsqlException)
-            {
-                ViewBag.MessageErreur = "Une erreur a été détectée. Veuillez contacter votre administrateur.";
-                return View();
-            }
-        }
-        
-        
-
-
         public ActionResult getAffectationTe(int id)
         {
             var listApp = new List<Apprenant>();
             try
             {
-
                listApp =  TuteursEnseignant.getAllApprenant(id);
-
-
             }
             catch (NpgsqlException)
             {
                 ViewBag.erreur = "Erreur lors de l'affectation !";
                 return Redirect("Error");
             }
-
-
             return View(listApp);
         }
     }

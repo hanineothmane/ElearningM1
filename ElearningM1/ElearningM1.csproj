@@ -167,25 +167,25 @@
     </Compile>
     <Compile Include="Models\Administration.cs" />
     <Compile Include="Models\Affecter_A_Module.cs" />
-    <Compile Include="Models\Affecter_A_Modules.cs" />
+    <Compile Include="BD\Affecter_A_Modules.cs" />
     <Compile Include="Models\Apprenant.cs" />
-    <Compile Include="Models\Apprenants.cs" />
+    <Compile Include="BD\Apprenants.cs" />
     <Compile Include="Models\A_TE_Module_View.cs" />
-    <Compile Include="Models\Examens.cs" />
-    <Compile Include="Models\RespPedagogiques.cs" />
-    <Compile Include="Models\Semestres.cs" />
-    <Compile Include="Models\SessionsRegroupement.cs" />
+    <Compile Include="BD\Examens.cs" />
+    <Compile Include="BD\RespPedagogiques.cs" />
+    <Compile Include="BD\Semestres.cs" />
+    <Compile Include="BD\SessionsRegroupement.cs" />
     <Compile Include="Models\Devoir.cs" />
     <Compile Include="Models\Etablissement.cs" />
     <Compile Include="Models\Examen.cs" />
     <Compile Include="Models\Module.cs" />
-    <Compile Include="Models\Modules.cs" />
+    <Compile Include="BD\Modules.cs" />
     <Compile Include="Models\Profil.cs" />
     <Compile Include="Models\RespPedagogique.cs" />
     <Compile Include="Models\Semestre.cs" />
     <Compile Include="Models\SessionRegroupement.cs" />
     <Compile Include="Models\TuteurEnseignant.cs" />
-    <Compile Include="Models\TuteursEnseignant.cs" />
+    <Compile Include="BD\TuteursEnseignant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

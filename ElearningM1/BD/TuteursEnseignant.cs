@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using ElearningM1.Models;
 using Npgsql;
-using NpgsqlTypes;
 using System.Data;
-using System.Web.Mvc;
 using ElearningM1.BD;
 
 namespace ElearningM1.Models
@@ -93,16 +89,35 @@ namespace ElearningM1.Models
            
         }
 
-        public static void AddTE(TuteurEnseignant te)
+        public static void AddTE(Profil te)
         {
-            string select = "SELECT inserer_te('" + te.Nom + "','" + te.Prenom + "', '" + te.Adresse + "', '" + te.Telephone + "', '" + te.DateNaiss + "' ,'" + te.Email + "', '" + te.Mdp + "' )";
-            BDD.ExecuteNonQuery(select);
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@nom", te.Nom},
+                {"@prenom", te.Prenom},
+                {"@adresse", te.Adresse},
+                {"@telephone", te.Telephone},
+                {"@datenaissance", te.DateNaiss},
+                {"@email", te.Email},
+                {"@mdp", te.Mdp}
+            };
+            BDD.ExecuteNonQueryPS("inserer_te", dico);
         }
 
         public static void UpdateTE(TuteurEnseignant te)
         {
-            string select = "SELECT modifier_te('" + te.Id + "','" + te.Nom + "','" + te.Prenom + "', '" + te.Adresse + "', '" + te.Telephone + "', '" + te.DateNaiss + "' ,'" + te.Email + "', '" + te.Mdp + "' )";
-            BDD.ExecuteNonQuery(select);
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_t", te.Id},
+                {"@n", te.Nom},
+                {"@p", te.Prenom},
+                {"@adr", te.Adresse},
+                {"@tel", te.Telephone},
+                {"@datenaiss", te.DateNaiss},
+                {"@mail", te.Email},
+                {"@pass", te.Mdp}
+            };
+            BDD.ExecuteNonQueryPS("modifier_te", dico);
         }
     }
 }

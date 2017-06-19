@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ElearningM1.Models
 {
@@ -28,29 +26,22 @@ namespace ElearningM1.Models
             this.adresse = adresse;
         }
 
+        [Required(ErrorMessage = "Le nom est obligatoire.")]
         public string Nom { get => nom; set => nom = value; }
+        [Required(ErrorMessage = "La date de naissance est obligatoire.")]
         public string DateNaiss { get => dateNaiss; set => dateNaiss = value; }
+        [Required(ErrorMessage = "Le prénom est obligatoire.")]
         public string Prenom { get => prenom; set => prenom = value; }
+        [Required(ErrorMessage = "L'email est obligatoire.")]
         public string Email { get => email; set => email = value; }
+        [Required(ErrorMessage = "Le numéro de téléphone est obligatoire.")]
         public string Telephone { get => telephone; set => telephone = value; }
+        [Required(ErrorMessage = "L'adresse est obligatoire.")]
         public string Adresse { get => adresse; set => adresse = value; }
+        [Required(ErrorMessage = "La date d'inscription est obligatoire.")]
         public string DateInscription { get => dateInscription; set => dateInscription = value; }
         public int Id { get => id; set => id = value; }
         public List<Module> LesModules { get => Modules.getModules(Id); set => lesModules = value; }
-
-        public void add(Module m)
-        {
-            this.LesModules.Add(m);
-        }
-
-        public Boolean aRendu(Devoir d)
-        {
-            return false;
-        }
-
-        public void modifierInfos()
-        {
-
-        }
+        
     }
 }

@@ -27,7 +27,7 @@ namespace ElearningM1.Models
         public int Id { get => id; set => id = value; }
         public string Nom { get => nom; set => nom = value; }
 
-        public bool isPresent(Apprenant a)
+        public bool estPresent(Apprenant a)
         {
             return false;
         }

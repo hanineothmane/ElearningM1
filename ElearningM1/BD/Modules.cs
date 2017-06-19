@@ -53,15 +53,31 @@ namespace ElearningM1.Models
 
         public static void AddModule(Module m)
         {
-            // string select = "INSERT INTO \"Module\" VALUES ('" + m.Nom + "'," + m.Coef + ",'" + m.EstNational + "', '')";
-            string select = "SELECT inserer_module('" + m.Nom + "','" + m.DateCreation + "', " + m.Coef + ", '" + m.TypeModule + "', '" + m.Ens.Id + "' ,'" + m.Sr.Id + "' )";
-            BDD.ExecuteNonQuery(select);
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@nom", m.Nom},
+                {"@datecreation", m.DateCreation},
+                {"@coef", m.Coef},
+                {"@typemodule", m.TypeModule},
+                {"@id_te", m.Ens.Id},
+                {"@id_session", m.Sr.Id}
+            };
+            BDD.ExecuteNonQueryPS("inserer_module", dico);
         }
 
         public static void Update(Module m)
         {
-            string select = "SELECT modifier_module('" + m.Id + "','" + m.Nom + "','" + m.DateCreation + "', " + m.Coef + ", '" + m.TypeModule + "', '" + m.Ens.Id + "' ,'" + m.Sr.Id + "' )";
-            BDD.ExecuteNonQuery(select);
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_m", m.Id},
+                {"@n", m.Nom},
+                {"@datecre", m.DateCreation},
+                {"@c", m.Coef},
+                {"@type", m.TypeModule},
+                {"@id_t", m.Ens.Id},
+                {"@id_sr", m.Sr.Id}
+            };
+            BDD.ExecuteNonQueryPS("modifier_module", dico);
         }
 
 
