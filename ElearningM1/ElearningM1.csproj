@@ -143,7 +143,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BD\BDD.cs" />
-    <Compile Include="BD\Utilisateurs.cs" />
     <Compile Include="Controllers\ApprenantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RPController.cs" />
@@ -166,28 +165,27 @@
       <DependentUpon>Logon.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Administration.cs" />
+    <Compile Include="Models\Affecter_A_Module.cs" />
+    <Compile Include="Models\Affecter_A_Modules.cs" />
     <Compile Include="Models\Apprenant.cs" />
     <Compile Include="Models\Apprenants.cs" />
+	
+   
     <Compile Include="Models\A_TE_Module_View.cs" />
     <Compile Include="Models\Examens.cs" />
     <Compile Include="Models\RespPedagogiques.cs" />
+    <Compile Include="Models\SessionsRegroupement.cs" />
     <Compile Include="Models\Devoir.cs" />
     <Compile Include="Models\Etablissement.cs" />
     <Compile Include="Models\Examen.cs" />
-    <Compile Include="Models\ExamenLocal.cs" />
-    <Compile Include="Models\ExamenNational.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Models\Profil.cs" />
     <Compile Include="Models\RespPedagogique.cs" />
     <Compile Include="Models\Semestre.cs" />
-    <Compile Include="Models\Semestres.cs" />
     <Compile Include="Models\SessionRegroupement.cs" />
-    <Compile Include="Models\Test.cs" />
     <Compile Include="Models\TuteurEnseignant.cs" />
     <Compile Include="Models\TuteursEnseignant.cs" />
-    <Compile Include="Models\IDisp.cs" />
-    <Compile Include="Models\Utilisateurs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +275,18 @@
     <Content Include="Views\TuteurEnseignant\Affecter_A_Examen.cshtml" />
     <Content Include="Views\Shared\Navigateur.cshtml" />
     <Content Include="Views\TuteurEnseignant\AffectationTe.cshtml" />
+    <Content Include="Views\RP\InsererModule.cshtml" />
+    <Content Include="Views\RP\ListeApprenants.cshtml" />
+    <Content Include="Views\RP\ListeTuteursEnseignant.cshtml" />
+    <Content Include="Views\RP\ModifierModule.cshtml" />
+    <Content Include="Views\RP\InsererApprenant.cshtml" />
+    <Content Include="Views\RP\ModifierApprenant.cshtml" />
+    <Content Include="Views\Shared\_LayoutRP.cshtml" />
+    <Content Include="Views\RP\InsererTE.cshtml" />
+    <Content Include="Views\RP\ModifierTE.cshtml" />
+    <Content Include="Views\RP\getModulesApprenant.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\RP\InsererNote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

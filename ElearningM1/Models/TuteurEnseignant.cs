@@ -10,14 +10,13 @@ namespace ElearningM1.Models
         private List<Module> lesModules;
         //private string nom, dateNaiss, prenom, courriel,  mdp, telephone;
         //private int id;
-        public TuteurEnseignant(string nom, string dateNaiss, string prenom, string courriel, int id, string mdp, string telephone,String adresse) : base(nom, dateNaiss, prenom, courriel, id, mdp, telephone,adresse)
+
+        public TuteurEnseignant() : base() {}
+
+        public TuteurEnseignant(string nom, string dateNaiss, string prenom, string email, int id, string mdp, string telephone, string adresse) : base(nom, dateNaiss, prenom, email, id, mdp, telephone,adresse)
         {
-             
+            
         }
-        
-        
-
-
 
         public void verifierRenduDevoir(Apprenant a, Devoir d)
         {

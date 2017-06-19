@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "InfosModule";
+    Layout = "~/Views/Shared/_LayoutRP.cshtml";
 }
 
 <h2>Informations concernant le module</h2>
@@ -22,7 +23,7 @@
                 <td>@Html.ActionLink(apprenant.Nom, "#", "#", new { nom = apprenant.Nom }, null)</td>
                 <td>@apprenant.Prenom</td>
                 <td>@apprenant.DateNaiss</td>
-                <td>@apprenant.Courriel</td>
+                <td>@apprenant.Email</td>
             </tr>
         }
     </table>

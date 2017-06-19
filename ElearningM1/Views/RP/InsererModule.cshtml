@@ -1,0 +1,65 @@
+﻿@model ElearningM1.Models.Module
+@{
+    ViewBag.Title = "Ajout Module";
+    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+}
+<head>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<body>
+    <h4>Ajouter un nouveau module</h4>
+    <span style="color:red">@ViewBag.MessageErreur</span>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.Label("Nom")
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.Nom, new { @class = "form-control", @id = "inlineFormInputGroup" })
+                @Html.ValidationMessageFor(m => m.Nom, null, new { @style = "color:red;"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Date de création")
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.DateCreation, new { @class = "form-control", @id = "inlineFormInputGroup" })
+                @Html.ValidationMessageFor(m => m.DateCreation, null, new { @style = "color:red;" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Coefficient")
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.Coef, new { @class = "form-control", @id = "inlineFormInputGroup", @Value = "" })
+                @Html.ValidationMessageFor(m => m.Coef, null, new { @style = "color:red;" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Type de module")
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.TypeModule, new { @class = "form-control", @id = "inlineFormInputGroup" })
+                @Html.ValidationMessageFor(m => m.TypeModule, null, new { @style = "color:red;" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Enseignant")
+            @Html.DropDownList("id_te", new SelectList(ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant(), "id", "nom"), new { @class = "form-control" })
+            @Html.ActionLink("+ Ajouter un nouvel enseignant", "InsererEnseignant", "RP")
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Session de regroupement")
+            @Html.DropDownList("id_sr", new SelectList(ElearningM1.Models.SessionsRegroupement.getSessionsRegroupement(), "id", "date"), new { @class = "form-control" })
+            @Html.ActionLink("+ Ajouter une nouvelle session", "#", "RP")
+        </div>
+
+
+
+        <input type="submit" class="btn btn-primary" value="Valider" />
+    }
+</body>

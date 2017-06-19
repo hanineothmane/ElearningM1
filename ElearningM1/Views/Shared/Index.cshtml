@@ -1,29 +1,24 @@
-﻿@{
-    ViewBag.Title = "Accueil";
-    if ((string)Session["typeUtilisateur"] == "RP")
+﻿
+@{
+    ViewBag.Title = "Index";
+    if (Session["typeUtilisateur"].ToString() == "RP")
     {
         Layout = "~/Views/Shared/_LayoutRP.cshtml";
     }
-    else if((string)Session["typeUtilisateur"] == "TE")
+    else if(Session["typeUtilisateur"].ToString() == "TE")
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
-    else if ((string)Session["typeUtilisateur"] == "Admin")
+    else if (Session["typeUtilisateur"].ToString() == "Admin")
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 }
-
 <head>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
 </head>
 <body>
-    <div class="jumbotron">
-        <h1>Bienvenue sur votre plateforme MIAGE</h1>
-        <p class="lead">Ce site est créé afin de simplifier le suivi des différentes activités concernant l'enseignement en MIAGE</p>
-        <!-- <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>-->
-    </div>
-
+    <h2>Bienvenue RP</h2>
 </body>

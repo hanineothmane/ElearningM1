@@ -8,12 +8,15 @@ namespace ElearningM1.Models
 
     public class Semestre
     {
+        private int id, numSemestre;
         private string dateDebut, dateFin;
         private int numSemestre;
         private List<Module> lesModules;
 
         public Semestre(string dateDebut, string dateFin, int numSemestre)
         {
+            this.Id = id;
+            this.NumSemestre = numSemestre;
             this.dateDebut = dateDebut;
             this.dateFin = dateFin;
             this.numSemestre = numSemestre;

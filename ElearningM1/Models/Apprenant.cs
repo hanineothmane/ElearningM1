@@ -1,42 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace ElearningM1.Models
 {
-    public class Apprenant 
+    public class Apprenant
     {
-        private string dateInscription;
-        private string nom, dateNaiss, prenom, telephone, adresse;
-        private int id; 
+        private string nom, dateNaiss, prenom, email, telephone, adresse, dateInscription;
+        private int id;
         private List<Module> lesModules;
-        
-        public Apprenant(string nom, string dateNaiss, string prenom, int id, string telephone, string dateInscription, string adresse)
+
+        public Apprenant()
         {
-            this.nom = nom; 
-            this.prenom = prenom;
-            this.dateNaiss = dateNaiss;
-            this.telephone = telephone;
-            this.adresse = adresse;
-            this.id = id;
-            this.dateInscription = dateInscription;
+
         }
 
+        public Apprenant(string nom, string dateNaiss, string prenom, string email, int id, string telephone, string dateInscription, string adresse)
+        {
+            this.nom = nom;
+            this.dateNaiss = dateNaiss;
+            this.prenom = prenom;
+            this.email = email;
+            this.id = id;
+            this.telephone = telephone;
+            this.dateInscription = dateInscription;
+            this.adresse = adresse;
+        }
 
-        public int Id { get; set; }
-        public String Nom { get; set; }
-
-        public String Prenom { get; set; }
-        public string Telephone { get; set; }
-        public String DateNaiss { get; set; }
-        public String DateInscription { get; set; }
-        public String Adresse { get; set; }
+        public string Nom { get => nom; set => nom = value; }
+        public string DateNaiss { get => dateNaiss; set => dateNaiss = value; }
+        public string Prenom { get => prenom; set => prenom = value; }
+        public string Email { get => email; set => email = value; }
+        public string Telephone { get => telephone; set => telephone = value; }
+        public string Adresse { get => adresse; set => adresse = value; }
+        public string DateInscription { get => dateInscription; set => dateInscription = value; }
+        public int Id { get => id; set => id = value; }
+        public List<Module> LesModules { get => Modules.getModules(Id); set => lesModules = value; }
 
         public void add(Module m)
         {
-            this.lesModules.Add(m);
+            this.LesModules.Add(m);
         }
 
         public Boolean aRendu(Devoir d)
