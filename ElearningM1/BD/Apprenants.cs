@@ -60,7 +60,7 @@ namespace ElearningM1.Models
                 {"@email", a.Email},
                 {"@dateinscription", a.DateInscription}
             };
-            BDD.ExecuteNonQueryPS("modifier_apprenant", dico);
+            BDD.ExecuteNonQueryPS("inserer_apprenant", dico);
         }
 
         public static void Update(Apprenant a)

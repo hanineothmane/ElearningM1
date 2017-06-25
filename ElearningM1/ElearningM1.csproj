@@ -287,6 +287,8 @@
     <Content Include="Views\RP\getModulesApprenant.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\RP\InsererNote.cshtml" />
+    <Content Include="Views\RP\ListeApprenants.cshtml" />
+    <Content Include="Views\RP\ListeExamens.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

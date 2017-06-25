@@ -16,7 +16,7 @@ namespace ElearningM1.Models
         public static List<Module> getModules()
         {
             string select = "SELECT * FROM \"Module\" ORDER BY nom";
-            List<Module> module = BDD.Execute(select).AsEnumerable().Select(row =>
+            return BDD.Execute(select).AsEnumerable().Select(row =>
                 new Module()
                 {
                     Id = row.Field<int>("id_module"),
@@ -28,8 +28,6 @@ namespace ElearningM1.Models
                     Sr = SessionsRegroupement.getSessionsRegroupement().FirstOrDefault(c => c.Id == row.Field<int>("id_session")),
                 }
             ).ToList();
-            module.Cast<Module>();
-            return module;
         }
 
         public static List<Module> getModules(int id)

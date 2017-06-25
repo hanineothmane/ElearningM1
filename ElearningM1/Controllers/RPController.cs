@@ -106,7 +106,7 @@ namespace ElearningM1.Controllers
                     return View();
                 }
             }
-            return Redirect("ListeApprenants");
+            return View("ListeApprenants");
         }
 
         [HttpGet]
@@ -138,7 +138,7 @@ namespace ElearningM1.Controllers
 
         public ActionResult getModulesApprenant(int id)
         {
-            ViewBag.Apprenant = rp.LesModulesParApprenant(id);
+            ViewBag.Apprenant = Apprenants.getApprenants().Single(ap => ap.Id == id);
             return View(rp.LesModulesParApprenant(id));
         }
         #endregion
@@ -202,6 +202,40 @@ namespace ElearningM1.Controllers
             }
             return View("ListeTuteursEnseignant");
         }
+        #endregion
+
+        #region Examen
+        [HttpGet]
+        public ActionResult InsererExamen()
+        {
+            var examen = new Examen();
+            return View(examen);
+        }
+
+        [HttpPost]
+        public ActionResult InsererExamen(Examen examen)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    rp.AjouterExamen(examen);
+                }
+                catch (NpgsqlException)
+                {
+                    ViewBag.MessageErreur = "Erreur lors de l'affectation !";
+                    return View();
+                }
+            }
+            return Redirect("ListeExamens");
+        }
+
+        //Commun
+        public ActionResult ListeExamens()
+        {
+            return View(Examens.getExamens());
+        }
+
         #endregion
 
         #region NoteFinale
@@ -361,27 +395,25 @@ namespace ElearningM1.Controllers
         public ActionResult Affecter_A_Examen()
         {
             var list_principal = new A_TE_Module_View();
-            // si la liste semestre et vide ou module et vide on le redirige vers la page saisir un module ou un semestre
             list_principal.Apprenant = Apprenants.getApprenants();
-            list_principal.Examen = Examens.getAllExamen();
+            list_principal.Examen = Examens.getExamens();
             return View(list_principal);
         }
 
         [HttpPost]
-        public ActionResult Affecter_A_Examen(int id_A, int id_Exam)
+        public ActionResult Affecter_A_Examen(string id_A, string id_Exam)
         {
             try
             {
-                RespPedagogiques.Aff_A_Exam(id_A, id_Exam);
+                rp.AffecterApprenantExamen(Int32.Parse(id_A), Int32.Parse(id_Exam));
                 ViewBag.Message = "Affectation réalisée avec succès !";
             }
-            catch (NpgsqlException )
+            catch (NpgsqlException)
             {
-               
                 ViewBag.Message = "Erreur lors de l'affectation !";
-                return Redirect("Error");
+                return View(new A_TE_Module_View());
             }
-            return View();
+            return Redirect("ListeExamens");
         }
 
         #endregion

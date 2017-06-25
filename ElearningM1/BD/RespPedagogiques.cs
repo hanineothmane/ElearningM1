@@ -34,7 +34,7 @@ namespace ElearningM1.Models
         
         public static void Aff_A_Exam(int id_app, int id_exam)
         {
-            string select = "Insert Into \"Affecter_Module_Semestrex\"(id_semestre,id_module) Values(" + id_app + "," + id_exam + ") ";
+            string select = "Insert Into \"Affecter_A_Examen\"(id_apprenant,id_examen,note_examen) Values(" + id_app + "," + id_exam + ",NULL) ";
             BDD.ExecuteNonQuery(select);
         }
     }
