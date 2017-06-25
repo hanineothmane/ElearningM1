@@ -32,5 +32,35 @@ namespace ElearningM1.Models
             
             return sr;
         }
+
+        public static void AddSessionReg(SessionRegroupement sr)
+        {
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@nom", sr.Nom},
+                {"@datesession", sr.Date}
+            };
+            BDD.ExecuteNonQueryPS("inserer_sr", dico);
+        }
+
+        public static void UpdateSessionReg(SessionRegroupement sr)
+        {
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_s", sr.Id},
+                {"@n", sr.Nom},
+                {"@d", sr.Date}
+            };
+            BDD.ExecuteNonQueryPS("modifier_sr", dico);
+        }
+
+        public static void DeleteSessionReg(SessionRegroupement sr)
+        {
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_s", sr.Id},
+            };
+            BDD.ExecuteNonQueryPS("supprimer_sr", dico);
+        }
     }
 }
