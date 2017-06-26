@@ -218,8 +218,7 @@ namespace ElearningM1.Controllers
                 }
             }
             return View("ListeTuteursEnseignant");
-        }
-        #endregion  
+        }  
 
         public ActionResult SupprimerTE(int id, TuteurEnseignant te)
         {
