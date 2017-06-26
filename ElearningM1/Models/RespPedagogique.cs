@@ -170,6 +170,8 @@ namespace ElearningM1.Models
             Examens.AddExamen(e);
         }
 
+
+
         public void ModifierModule(int id, Examen e, int id_m)
         {
             var examen = Examens.getExamens().Single(ex => ex.Id == id);
@@ -181,6 +183,14 @@ namespace ElearningM1.Models
             examen.LeModule = m;
 
             Examens.Update(examen);
+        }
+
+        public void SupprimerExamen(int id,Examen e)
+        {
+            var examen = Examens.getExamens().Single(ex => ex.Id == id);
+
+            examen.Id = e.Id;
+            examen.Type = e.Type;
         }
 
         public void AjouterSessionReg(SessionRegroupement sr)

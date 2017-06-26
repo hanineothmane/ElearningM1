@@ -47,6 +47,15 @@ namespace ElearningM1.Models
             };
             BDD.ExecuteNonQueryPS("modifier_examen", dico);
         }
+
+        public static void DeleteExamen(Examen e)
+        {
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_e", e.Id},
+            };
+            BDD.ExecuteNonQueryPS("supprimer_examen", dico);
+        }
     }
 
 
