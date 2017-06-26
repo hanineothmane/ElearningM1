@@ -25,13 +25,13 @@ namespace ElearningM1.Models
             ).ToList();
         }
 
-        public static void AddModule(Examen e)
+        public static void AddExamen(Examen e)
         {
             Dictionary<string, Object> dico = new Dictionary<string, Object>()
             {
                 {"@type_examen", e.Type},
-                {"@date", e.Date},
-                {"@id_module", e.LeModule.Id}
+                {"@id_module", e.LeModule.Id},
+                {"@ladate", e.Date}
             };
             BDD.ExecuteNonQueryPS("inserer_examen", dico);
         }

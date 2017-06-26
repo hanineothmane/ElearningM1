@@ -27,21 +27,35 @@ namespace ElearningM1.Models
         }
 
         [Required(ErrorMessage = "Le nom est obligatoire.")]
+        [RegularExpression(@"^([a-zA-Z'àâéèêëôùûçîïÀÂÉÈÔÙÛÇ\s-]{1,30})$", ErrorMessage = "Veuillez saisir un nom correct.")]
         public string Nom { get => nom; set => nom = value; }
+
         [Required(ErrorMessage = "La date de naissance est obligatoire.")]
-        [RegularExpression(@"(\d{2}/\d{2}/\d{4})")]
+        [RegularExpression(@"(\d{2}/\d{2}/\d{4})", ErrorMessage = "Le format saisit doit être de type : jj/mm/aaaa.")]
         public string DateNaiss { get => dateNaiss; set => dateNaiss = value; }
+
         [Required(ErrorMessage = "Le prénom est obligatoire.")]
+        [RegularExpression(@"^([a-zA-Z'àâéèêëôùûçîïÀÂÉÈÔÙÛÇ\s-]{1,30})$", ErrorMessage = "Veuillez saisir un nom correct.")]
         public string Prenom { get => prenom; set => prenom = value; }
+
         [Required(ErrorMessage = "L'email est obligatoire.")]
+        [RegularExpression(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", 
+            ErrorMessage = "Veuillez saisir une adresse mail correcte.")]
         public string Email { get => email; set => email = value; }
+
         [Required(ErrorMessage = "Le numéro de téléphone est obligatoire.")]
+        [RegularExpression(@"#^0[1-68]([-. ]?[0-9]{2}){4}$#", ErrorMessage = "Veuillez saisir un numéro de téléphone à 10 chiffres.")]
         public string Telephone { get => telephone; set => telephone = value; }
+
         [Required(ErrorMessage = "L'adresse est obligatoire.")]
         public string Adresse { get => adresse; set => adresse = value; }
+
         [Required(ErrorMessage = "La date d'inscription est obligatoire.")]
+        [RegularExpression(@"(\d{2}/\d{2}/\d{4})", ErrorMessage = "Le format saisit doit être de type : jj/mm/aaaa.")]
         public string DateInscription { get => dateInscription; set => dateInscription = value; }
+
         public int Id { get => id; set => id = value; }
+
         public List<Module> LesModules { get => Modules.getModules(Id); set => lesModules = value; }
         
     }
