@@ -1,7 +1,14 @@
 ﻿@using ElearningM1.Models;
 @{
     ViewBag.Title = "Liste des tuteurs";
-    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    if (Session["TypeUtilisateur"] == "RP")
+    {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["TypeUtilisateur"] == "TE" || Session["TypeUtilisateur"] == "Admin")
+    {
+        Response.Redirect("Index");
+    }
 }
 <head>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
@@ -33,6 +40,8 @@
                 <td>@te.DateNaiss</td>
                 <td>@te.Email</td>
                 <td>@te.Adresse</td>
+                <td>@Html.ActionLink("Supprimer", "SupprimerTE", "RP", new { id = te.Id }, new { @class = "btn btn-danger" })</td>
+
             </tr>
             }
         }

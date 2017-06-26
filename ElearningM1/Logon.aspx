@@ -42,24 +42,49 @@
     void Logon_Click(object sender, EventArgs e)
     {
 
-        if (BDD.ConnexionRP(UserEmail.Text, UserPass.Text))
+        if (BDD.ConnexionRP(UserEmail.Text, UserPass.Text)!=null)
         {
             FormsAuthentication.RedirectFromLoginPage
                 (UserEmail.Text, Persist.Checked);
+            var utilisateur = BDD.ConnexionRP(UserEmail.Text, UserPass.Text);
+            Session["id_utilisateur"] = utilisateur.Id;
+            Session["nom_utilisateur"] = utilisateur.Nom;
+            Session["prenom_utlisateur"] = utilisateur.Prenom;
+            Session["telephone_utilisateur"] = utilisateur.Telephone;
+            Session["adresse_utilisateur"] = utilisateur.Adresse;
+            Session["datenaissance_utilisateur"] = utilisateur.DateNaiss;
+            Session["email_utilisateur"] = utilisateur.Email;
             Session["typeUtilisateur"] = "RP";
             Response.Redirect("Home/Index");
         }
-        else if(BDD.ConnexionTE(UserEmail.Text, UserPass.Text))
+        else if(BDD.ConnexionTE(UserEmail.Text, UserPass.Text)!= null)
         {
             FormsAuthentication.RedirectFromLoginPage
                 (UserEmail.Text, Persist.Checked);
+             var utilisateur = BDD.ConnexionTE(UserEmail.Text, UserPass.Text);
+            Session["id_utilisateur"] = utilisateur.Id;
+            Session["nom_utilisateur"] = utilisateur.Nom;
+            Session["prenom_utlisateur"] =utilisateur.Prenom;
+            Session["telephone_utilisateur"] = utilisateur.Telephone;
+            Session["adresse_utilisateur"] = utilisateur.Adresse;
+            Session["datenaissance_utilisateur"] = utilisateur.DateNaiss;
+            Session["email_utilisateur"] = utilisateur.Email;
             Session["typeUtilisateur"] = "TE";
+
             Response.Redirect("Home/Index");
         }
-        else if(BDD.ConnexionAdministration(UserEmail.Text, UserPass.Text))
+        else if(BDD.ConnexionAdministration(UserEmail.Text, UserPass.Text)!= null)
         {
             FormsAuthentication.RedirectFromLoginPage
                 (UserEmail.Text, Persist.Checked);
+             var utilisateur = BDD.ConnexionAdministration(UserEmail.Text, UserPass.Text);
+            Session["id_utilisateur"] = utilisateur.Id;
+            Session["nom_utilisateur"] = utilisateur.Nom;
+            Session["prenom_utlisateur"] = utilisateur.Prenom;
+            Session["telephone_utilisateur"] = utilisateur.Telephone;
+            Session["adresse_utilisateur"] = utilisateur.Adresse;
+            Session["datenaissance_utilisateur"] =utilisateur.DateNaiss;
+            Session["email_utilisateur"] = utilisateur.Email;
             Session["typeUtilisateur"] = "Admin";
             Response.Redirect("Home/Index");
         }
@@ -114,7 +139,8 @@
   </form>
     <img src="C:\Users\wassi\Desktop\Projet MIAGE\emiage.png">
     <img src="C:\Users\wassi\Desktop\Projet MIAGE\miage.png" height="84" width="240">
+    
 </body>
-</div>
+
 
 </html>

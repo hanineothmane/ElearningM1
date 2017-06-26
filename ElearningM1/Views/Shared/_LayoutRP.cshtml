@@ -30,6 +30,7 @@
                             <li>@Html.ActionLink("Liste des apprenants", "ListeApprenants", "Commun")</li>
                             <li>@Html.ActionLink("Liste des tuteurs", "ListeTuteursEnseignant", "RP")</li>
                             <li>@Html.ActionLink("Liste des examens", "ListeExamens", "RP")</li>
+                            <li>@Html.ActionLink("Liste des sessions de regroupement", "ListeSessionsRegroupement", "RP")</li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -39,6 +40,7 @@
                             <li>@Html.ActionLink("Apprenant", "InsererApprenant", "RP")</li>
                             <li>@Html.ActionLink("Tuteur", "InsererTE", "RP")</li>
                             <li>@Html.ActionLink("Examen", "InsererExamen", "RP")</li>
+                            <li>@Html.ActionLink("Session de regroupement", "InsererSessionReg", "RP")</li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -46,8 +48,10 @@
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Apprenant à un Module", "Affecter_A_Module", "RP")</li>
                             <li>@Html.ActionLink("Apprenant à un Tuteur", "Affecter_A_Te", "RP")</li>
+                            <li>@Html.ActionLink("Apprenant à un Examen", "Affecter_A_Examen", "RP")</li>
                             <li>@Html.ActionLink("Module à un Semestre", "Affecter_Module_Semestre", "RP")</li>
                             <li>@Html.ActionLink("Examen à un Module", "Affecter_A_Examen", "RP")</li>
+
                         </ul>
                     </li>
                 </ul>

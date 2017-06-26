@@ -10,6 +10,7 @@ using ElearningM1.BD;
 
 namespace ElearningM1.Controllers
 {
+    [Authorize]
     public class ApprenantController : Controller
     {
        

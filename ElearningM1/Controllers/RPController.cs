@@ -10,20 +10,25 @@ using Npgsql;
 
 namespace ElearningM1.Controllers
 {
+    [Authorize]
     public class RPController : Controller
     {
-        private RespPedagogique rp = new RespPedagogique("Benzakki", "hier", "Judith", "j@b.fr", 1, "jb", "0123456789", "IBGBI");
 
+        private RespPedagogique rp = new RespPedagogique("Benzakki", "hier", "Judith", "j@b.fr", 1, "jb", "0123456789", "IBGBI");
         // GET: RP
         public ActionResult Index()
         {
             return View();
         }
-        
+       
+
+
+
+
         #region Module
 
-        //Commun
-        public ActionResult ListeModules()
+    //Commun
+    public ActionResult ListeModules()
         {
             return View(Modules.getModules());
         }
@@ -78,6 +83,12 @@ namespace ElearningM1.Controllers
                     return View(Modules.getModules().SingleOrDefault(mo => mo.Id == id));
                 }
             }
+            return View("ListeModules");
+        }
+
+        public ActionResult SupprimerModule(int id, Module m)
+        {
+            rp.SupprimerModule(id, m);
             return View("ListeModules");
         }
         #endregion
@@ -141,6 +152,12 @@ namespace ElearningM1.Controllers
             ViewBag.Apprenant = Apprenants.getApprenants().Single(ap => ap.Id == id);
             return View(rp.LesModulesParApprenant(id));
         }
+
+        public ActionResult SupprimerApprenant(int id, Apprenant a)
+        {
+            rp.SupprimerApprenant(id, a);
+            return View("ListeApprenants");
+        }
         #endregion
 
         #region TE
@@ -203,6 +220,13 @@ namespace ElearningM1.Controllers
             return View("ListeTuteursEnseignant");
         }
         #endregion  
+
+        public ActionResult SupprimerTE(int id, TuteurEnseignant te)
+        {
+            rp.SupprimerTE(id, te);
+            return View("ListeTuteursEnseignant");
+        }
+        #endregion
 
         #region Examen
         [HttpGet]
@@ -419,6 +443,72 @@ namespace ElearningM1.Controllers
             return Redirect("ListeExamens");
         }
 
+        #endregion
+
+        #region Session de regroupement
+
+        public ActionResult ListeSessionsRegroupement()
+        {
+            return View(SessionsRegroupement.getSessionsRegroupement());
+        }
+
+        [HttpGet]
+        public ActionResult InsererSessionReg()
+        {
+            var sessionReg = new SessionRegroupement();
+            return View(sessionReg);
+        }
+
+        [HttpPost]
+        public ActionResult InsererSessionReg(SessionRegroupement sr)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    rp.AjouterSessionReg(sr);
+                }
+                catch (NpgsqlException)
+                {
+                    ViewBag.MessageErreur = "Erreur lors de l'affectation !";
+                    return View();
+                }
+            }
+            return Redirect("ListeSessionsRegroupement");
+        }
+
+        [HttpGet]
+        public ActionResult ModifierSessionReg(int id)
+        {
+            var sr = SessionsRegroupement.getSessionsRegroupement().SingleOrDefault(s => s.Id == id);
+            if (sr == null)
+                return HttpNotFound();
+            return View(sr);
+        }
+
+        [HttpPost]
+        public ActionResult ModifierSessionReg(int id, SessionRegroupement sr)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    rp.ModifierSessionReg(id, sr);
+                }
+                catch (NpgsqlException)
+                {
+                    ViewBag.MessageErreur = "Erreur lors de l'affectation !";
+                    return View(SessionsRegroupement.getSessionsRegroupement().SingleOrDefault(s => s.Id == id));
+                }
+            }
+            return View("ListeSessionsRegroupement");
+        }
+
+        public ActionResult SupprimerSessionReg(int id, SessionRegroupement sr)
+        {
+            rp.SupprimerSessionReg(id, sr);
+            return View("ListeSessionsRegroupement");
+        }
         #endregion
     }
 }

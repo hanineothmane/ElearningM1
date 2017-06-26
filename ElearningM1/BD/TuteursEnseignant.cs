@@ -52,19 +52,19 @@ namespace ElearningM1.Models
         public static List<Apprenant> getAllApprenant(int id_te)
         {
 
-            String requette = "Select * from \"TE\" where id in(Select * from \"Affecter_A_Te\" where id_Te =" + id_te + ")";
-
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearningM1;port=5433");
-
+           
+            string requete2 = "SELECT * FROM \"Apprenant\" where id_apprenant in (select id_apprenant from \"Affecter_A_TE\" where id_te = "+ id_te+ ")";
+            //NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearningM1;port=5433");
+            BDD.Initialize();
             DataTable MyData = new DataTable();
             NpgsqlDataAdapter da;
 
-            conn.Open();
+            BDD.Open();
            
-            NpgsqlCommand MyCmd = new NpgsqlCommand(requette, conn);
+            NpgsqlCommand MyCmd = new NpgsqlCommand(requete2, BDD.Connexion());
             da = new NpgsqlDataAdapter(MyCmd);
             da.Fill(MyData);
-            conn.Close();
+            BDD.Connexion().Close();
 
             List<Apprenant> apprenant = MyData.AsEnumerable().Select(row =>
 
@@ -91,17 +91,20 @@ namespace ElearningM1.Models
 
         public static void AddTE(Profil te)
         {
+           //string requette = "Insert Into \"TE\"(nom,prenom,adresse,telephone,datenaissance,email,mdp) Values(" + te.Nom+ "," + te.Prenom + "," + te.Adresse + "," + te.Telephone + "," + te.DateNaiss + "," + te.Email + "," + te.Mdp + ") ";
             Dictionary<string, Object> dico = new Dictionary<string, Object>()
             {
+                
                 {"@nom", te.Nom},
                 {"@prenom", te.Prenom},
                 {"@adresse", te.Adresse},
                 {"@telephone", te.Telephone},
                 {"@datenaissance", te.DateNaiss},
                 {"@email", te.Email},
-                {"@mdp", te.Mdp}
+                {"@mdp", BDD.GenerateMD5(te.Mdp)}
             };
             BDD.ExecuteNonQueryPS("inserer_te", dico);
+            //BDD.Execute(requette);
         }
 
         public static void UpdateTE(TuteurEnseignant te)
@@ -115,9 +118,41 @@ namespace ElearningM1.Models
                 {"@tel", te.Telephone},
                 {"@datenaiss", te.DateNaiss},
                 {"@mail", te.Email},
-                {"@pass", te.Mdp}
+                {"@pass",  BDD.GenerateMD5(te.Mdp)}
             };
             BDD.ExecuteNonQueryPS("modifier_te", dico);
         }
+
+
+        public static void DeleteTE(TuteurEnseignant te)
+        {
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_t", te.Id},
+            };
+            BDD.ExecuteNonQueryPS("supprimer_te", dico);
+        }
+
+        public static List<Module> getModuleAffecterTe(int id_te)
+        {
+           
+            string select =  "Select * from \"Module\" where id_te = " + id_te ;
+            
+
+            List<Module> module = BDD.Execute(select).AsEnumerable().Select(row =>
+
+            new Module()
+            {
+                Id = row.Field<int>("id_module"),
+                Nom = row.Field<string>("nom"),
+                DateCreation = row.Field<string>("datecreation"),
+                Coef = row.Field<Double>("coef"),
+                TypeModule = row.Field<string>("typemodule")
+            }
+
+          ).ToList();
+            return module;
+        }
+
     }
 }
