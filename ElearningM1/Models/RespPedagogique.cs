@@ -48,6 +48,23 @@ namespace ElearningM1.Models
             TuteursEnseignant.UpdateTE(tut);
         }
 
+        public void SupprimerTE(int id, TuteurEnseignant te)
+        {
+            var tu = TuteursEnseignant.getTuteursEnseignant().Single(t => t.Id == id);
+
+            tu.Id = te.Id;
+            tu.Nom = te.Nom;
+            tu.Prenom = te.Prenom;
+            tu.DateNaiss = te.DateNaiss;
+            tu.Email = te.Email;
+            tu.Telephone = te.Telephone;
+            tu.Adresse = te.Adresse;
+            tu.Mdp = te.Mdp;
+
+            TuteursEnseignant.DeleteTE(tu);
+
+        }
+
         public void AjouterApprenant(Apprenant a)
         {
             Apprenants.AddApprenant(a);
@@ -67,6 +84,24 @@ namespace ElearningM1.Models
             app.DateInscription = a.DateInscription;
 
             Apprenants.Update(app);
+        }
+
+        public void SupprimerApprenant(int id, Apprenant a)
+        {
+            var app = Apprenants.getApprenants().Single(ap => ap.Id == id);
+
+            app.Id = a.Id;
+            app.Nom = a.Nom;
+            app.Prenom = a.Prenom;
+            app.DateNaiss = a.DateNaiss;
+            app.Email = a.Email;
+            app.Telephone = a.Telephone;
+            app.Adresse = a.Adresse;
+            app.DateInscription = a.DateInscription;
+
+
+            Apprenants.DeleteApprenant(app);
+
         }
 
         public void AjouterModule(Module m, int id_te, int id_sr)
@@ -93,6 +128,21 @@ namespace ElearningM1.Models
             mod.Sr = sr;
 
             Modules.Update(mod);
+        }
+
+        public void SupprimerModule(int id, Module m)
+        {
+            var mod = Modules.getModules().Single(mo => mo.Id == id);
+
+            mod.Id = m.Id;
+            mod.Nom = m.Nom;
+            mod.DateCreation = m.DateCreation;
+            mod.Coef = m.Coef;
+            mod.TypeModule = m.TypeModule;
+
+
+            Modules.DeleteModule(mod);
+
         }
 
         public void consulterInfoApprenant(Apprenant a) { }
@@ -129,6 +179,34 @@ namespace ElearningM1.Models
             examen.LeModule = m;
 
             Examens.Update(examen);
+        }
+
+        public void AjouterSessionReg(SessionRegroupement sr)
+        {
+            SessionsRegroupement.AddSessionReg(sr);
+        }
+
+        public void ModifierSessionReg(int id, SessionRegroupement sr)
+        {
+            var s = SessionsRegroupement.getSessionsRegroupement().Single(ser => ser.Id == id);
+
+            s.Id = sr.Id;
+            s.Nom = sr.Nom;
+            s.Date = sr.Date;
+
+            SessionsRegroupement.UpdateSessionReg(s);
+        }
+
+        public void SupprimerSessionReg(int id, SessionRegroupement sr)
+        {
+            var s = SessionsRegroupement.getSessionsRegroupement().Single(ser => ser.Id == id);
+
+            s.Id = sr.Id;
+            s.Nom = sr.Nom;
+            s.Date = sr.Date;
+
+            SessionsRegroupement.DeleteSessionReg(s);
+
         }
 
     }

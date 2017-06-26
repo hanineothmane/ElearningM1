@@ -78,6 +78,16 @@ namespace ElearningM1.Models
             BDD.ExecuteNonQueryPS("modifier_module", dico);
         }
 
+        public static void DeleteModule(Module m)
+        {
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_m", m.Id},
+
+            };
+            BDD.ExecuteNonQueryPS("supprimer_module", dico);
+        }
+
 
     }
 }

@@ -123,6 +123,16 @@ namespace ElearningM1.Models
             BDD.ExecuteNonQueryPS("modifier_te", dico);
         }
 
+
+        public static void DeleteTE(TuteurEnseignant te)
+        {
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_t", te.Id},
+            };
+            BDD.ExecuteNonQueryPS("supprimer_te", dico);
+        }
+
         public static List<Module> getModuleAffecterTe(int id_te)
         {
            
@@ -143,6 +153,6 @@ namespace ElearningM1.Models
           ).ToList();
             return module;
         }
-        
+
     }
 }
