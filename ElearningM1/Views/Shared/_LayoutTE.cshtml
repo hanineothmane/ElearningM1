@@ -26,34 +26,13 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informations <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Liste des modules", "ListeModules", "RP")</li>
+                            <li>@Html.ActionLink("Liste des modules", "getModuleTe", "TuteurEnseignant")</li>
                             <li>@Html.ActionLink("Liste des apprenants", "ListeApprenants", "Commun")</li>
-                            <li>@Html.ActionLink("Liste des tuteurs", "ListeTuteursEnseignant", "RP")</li>
-                            <li>@Html.ActionLink("Liste des sessions de regroupement", "ListeSessionsRegroupement", "RP")</li>
-
+                            
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ajout <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Module", "InsererModule", "RP")</li>
-                            <li>@Html.ActionLink("Apprenant", "InsererApprenant", "RP")</li>
-                            <li>@Html.ActionLink("Tuteur", "InsererTE", "RP")</li>
-                            <li>@Html.ActionLink("Session de regroupement", "InsererSessionReg", "RP")</li>
-
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Affectation <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Apprenant à un Module", "Affecter_A_Module", "RP")</li>
-                            <li>@Html.ActionLink("Apprenant à un Tuteur", "Affecter_A_Te", "RP")</li>
-                            <li>@Html.ActionLink("Apprenant à un Examen", "Affecter_A_Examen", "RP")</li>
-                            <li>@Html.ActionLink("Module à un Semestre", "Affecter_Module_Semestre", "RP")</li>
-                            <li>@Html.ActionLink("Examen à un Module", "Affecter_A_Examen", "RP")</li>
-
-                        </ul>
-                    </li>
+                   
+                
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Déconnexion", "SignOut", "Home")</li>
@@ -74,3 +53,4 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+

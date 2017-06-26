@@ -4,6 +4,7 @@ using System.Web.Security;
 
 namespace ElearningM1.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

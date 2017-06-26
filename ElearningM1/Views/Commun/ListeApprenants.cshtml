@@ -2,7 +2,18 @@
 
 @{
     ViewBag.Title = "ListeApprenants";
-    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    if (Session["typeUtilisateur"] == "RP")
+    {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["typeUtilisateur"] == "TE")
+    {
+        Layout = "~/Views/Shared/_LayoutTE.cshtml";
+    }
+    else if (Session["typeUtilisateur"] == "Admin")
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
 }
 
 <head>
@@ -29,8 +40,11 @@
         </thead>
         @if (Model.Count > 0)
         {
-            foreach (var apprenant in Model)
+            if (Session["typeUtilisateur"] == "RP")
             {
+                foreach (var apprenant in Model)
+                {
+
                 <tr>
                     <td>@Html.ActionLink(apprenant.Nom, "ModifierApprenant", "RP", new { id = apprenant.Id }, null)</td>
                     <td>@Html.ActionLink(apprenant.Prenom, "ModifierApprenant", "RP", new { id = apprenant.Id }, null)</td>
@@ -39,12 +53,31 @@
                     <td>@apprenant.Adresse</td>
                     <td>@Html.ActionLink("Les Modules", "getModulesApprenant", "RP", new { id = apprenant.Id }, null)</td>
                 </tr>
+                }
+            }
+            else if (Session["typeUtilisateur"] == "TE")
+            {
+                foreach (var apprenant in ElearningM1.Models.TuteursEnseignant.getAllApprenant((int)Session["id_utilisateur"]))
+                {
+
+                    <tr>
+                        <td>@apprenant.Nom</td>
+                        <td>@apprenant.Prenom</td>
+                        <td>@apprenant.DateNaiss</td>
+                        <td>@apprenant.Email</td>
+                        <td>@apprenant.Adresse</td>
+                        <td>@Html.ActionLink("Les Modules", "getModulesApprenant", "RP", new { id = apprenant.Id }, null)</td>
+                    </tr>
+
+                }
             }
         }
         else
         {
             <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour ajouter un nouvel apprenant @Html.ActionLink("Cliquer ici", "InsererApprenant", "RP")</td></tr>
         }
+
+        
            
         
     </table>

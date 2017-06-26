@@ -1,16 +1,17 @@
 ﻿@{
     ViewBag.Title = "Accueil";
-    if ((string)Session["typeUtilisateur"] == "RP")
+
+    if (Session["typeUtilisateur"] == "RP")
     {
         Layout = "~/Views/Shared/_LayoutRP.cshtml";
     }
-    else if((string)Session["typeUtilisateur"] == "TE")
+    else if (Session["typeUtilisateur"] == "TE")
     {
-        Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_LayoutTE.cshtml";
     }
-    else if ((string)Session["typeUtilisateur"] == "Admin")
+    else if (Session["typeUtilisateur"] == "Admin")
     {
-        Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     }
 }
 
@@ -25,5 +26,6 @@
         <p class="lead">Ce site est créé afin de simplifier le suivi des différentes activités concernant l'enseignement en MIAGE</p>
         <!-- <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>-->
     </div>
+    <p>je suis la session @Session["id_utilisateur"] et je suis de type @Session["typeUtilisateur"]</p>
 
 </body>

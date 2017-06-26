@@ -13,8 +13,9 @@ namespace ElearningM1.Models
 
         public Examen() { }
 
+
         public Examen(int id, string date, string type, Module leModule) { }
-        
+
         public Examen(string date, string type, Module leModule)
         {
             this.date = date;

@@ -2,7 +2,17 @@
 @using ElearningM1.Models;
 @{
     ViewBag.Title = "Affectation Apprenant à Examen";
-    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+
+   
+
+    if (Session["TypeUtilisateur"] == "RP") {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["TypeUtilisateur"] == "TE" || Session["TypeUtilisateur"] == "Admin")
+    {
+        Response.Redirect("Index");
+    }
+
 }
 
 <head>
@@ -11,8 +21,10 @@
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
 </head>
 <body>
+
     <h4>Affectation d'un apprenant à un examen</h4>
     <span style="color:red">@ViewBag.Message</span>
+
 
     @using (Html.BeginForm("Affecter_A_Examen", "RP", FormMethod.Post))
     {

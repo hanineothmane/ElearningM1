@@ -1,24 +1,28 @@
-﻿
+﻿@model  List<ElearningM1.Models.Module>
 @{
-    ViewBag.Title = "ListeModules";
-    if (Session["TypeUtilisateur"] == "RP")
+    if (Session["typeUtilisateur"] == "RP")
     {
         Layout = "~/Views/Shared/_LayoutRP.cshtml";
     }
-    else if (Session["TypeUtilisateur"] == "TE" || Session["TypeUtilisateur"] == "Admin")
+    else if (Session["typeUtilisateur"] == "TE")
     {
-        Response.Redirect("Index");
+        Layout = "~/Views/Shared/_LayoutTE.cshtml";
+    }
+    else if (Session["typeUtilisateur"] == "Admin")
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     }
 }
+
 <head>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
-    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css"/>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
 </head>
 <body>
     <div class="input-group">
         <h3>Les modules</h3>
-        @Html.ActionLink("+ Ajouter", "InsererModule", "RP", new { @class = "btn btn-default" })
+        @*@Html.ActionLink("+ Ajouter", "InsererModule", "RP", new { @class = "btn btn-default" })*@
     </div>
 
     <table class="striped">
@@ -29,22 +33,20 @@
                 <th>Type de module</th>
             </tr>
         </thead>
-        @if (ElearningM1.Models.Modules.getModules().Count > 0)
-        {
-            foreach (ElearningM1.Models.Module module in ElearningM1.Models.Modules.getModules() as List<ElearningM1.Models.Module>)
+        @{
+
+            foreach (ElearningM1.Models.Module module in  Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(module.Nom, "ModifierModule", "RP", new { id = module.Id }, null)</td>
+                    <td>@module.Nom</td>
                     <td>@module.Coef</td>
                     <td>@module.TypeModule</td>
-                    <td>@Html.ActionLink("Supprimer", "SupprimerModule", "RP", new { id = module.Id }, new { @class = "btn btn-danger" })</td>
-
                 </tr>
             }
         }
-        else
-        {
+       
+        @*{
             <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour ajouter un nouveau module @Html.ActionLink("Cliquer ici", "InsererModule", "RP")</td></tr>
-        }
+        }*@
     </table>
 </body>

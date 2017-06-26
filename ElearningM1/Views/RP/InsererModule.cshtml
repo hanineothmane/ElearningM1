@@ -1,7 +1,14 @@
 ﻿@model ElearningM1.Models.Module
 @{
     ViewBag.Title = "Ajout Module";
-    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    if (Session["TypeUtilisateur"] == "RP")
+    {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["TypeUtilisateur"] == "TE" || Session["TypeUtilisateur"] == "Admin")
+    {
+        Response.Redirect("Index");
+    }
 }
 <head>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
