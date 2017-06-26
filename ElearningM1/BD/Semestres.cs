@@ -49,7 +49,7 @@ namespace ElearningM1.Models
                 {"@date_d", s.DateDebut},
                 {"@date_f", s.DateFin}
             };
-            BDD.ExecuteNonQueryPS("inserer_semestre", dico);
+            BDD.ExecuteNonQueryPS("modifier_semestre", dico);
         }
     }
 }

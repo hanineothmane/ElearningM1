@@ -102,11 +102,34 @@ namespace ElearningM1.Models
         public void affecterApprenantModule(Apprenant a, Module m) {
         }
 
-        public Apprenant LesModulesParApprenant(int id)
-        {
-            return Apprenants.getApprenants().Single(a => a.Id == id);
+        public void AffecterApprenantExamen(int id_A, int id_Exam)
+        { 
+            RespPedagogiques.Aff_A_Exam(id_A, id_Exam);
         }
 
+        public List<Affecter_A_Module> LesModulesParApprenant(int id)
+        {
+            var app = Apprenants.getApprenants().Single(ap => ap.Id == id);
+            return Affecter_A_Modules.getAffectations(app);
+        }
+
+        public void AjouterExamen(Examen e)
+        {
+            Examens.AddModule(e);
+        }
+
+        public void ModifierModule(int id, Examen e, int id_m)
+        {
+            var examen = Examens.getExamens().Single(ex => ex.Id == id);
+
+            Module m = Modules.getModules().FirstOrDefault(mo => mo.Id == id_m);
+
+            examen.Id = e.Id;
+            examen.Type = e.Type;
+            examen.LeModule = m;
+
+            Examens.Update(examen);
+        }
 
     }
 }

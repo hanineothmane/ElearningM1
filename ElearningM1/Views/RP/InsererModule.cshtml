@@ -25,7 +25,7 @@
             @Html.Label("Nom")
             <div class="input-group">
                 @Html.TextBoxFor(m => m.Nom, new { @class = "form-control", @id = "inlineFormInputGroup" })
-                @Html.ValidationMessageFor(m => m.Nom, null, new { @style = "color:red;"})
+                @Html.ValidationMessageFor(m => m.Nom, null, new { @class = "text-danger" })
             </div>
         </div>
 
@@ -33,7 +33,7 @@
             @Html.Label("Date de création")
             <div class="input-group">
                 @Html.TextBoxFor(m => m.DateCreation, new { @class = "form-control", @id = "inlineFormInputGroup" })
-                @Html.ValidationMessageFor(m => m.DateCreation, null, new { @style = "color:red;" })
+                @Html.ValidationMessageFor(m => m.DateCreation, null, new { @class = "text-danger" })
             </div>
         </div>
 
@@ -41,7 +41,7 @@
             @Html.Label("Coefficient")
             <div class="input-group">
                 @Html.TextBoxFor(m => m.Coef, new { @class = "form-control", @id = "inlineFormInputGroup", @Value = "" })
-                @Html.ValidationMessageFor(m => m.Coef, null, new { @style = "color:red;" })
+                @Html.ValidationMessageFor(m => m.Coef, null, new { @class = "text-danger" })
             </div>
         </div>
 
@@ -49,7 +49,7 @@
             @Html.Label("Type de module")
             <div class="input-group">
                 @Html.TextBoxFor(m => m.TypeModule, new { @class = "form-control", @id = "inlineFormInputGroup" })
-                @Html.ValidationMessageFor(m => m.TypeModule, null, new { @style = "color:red;" })
+                @Html.ValidationMessageFor(m => m.TypeModule, null, new { @class = "text-danger" })
             </div>
         </div>
 

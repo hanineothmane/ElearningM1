@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using ElearningM1.BD;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,38 +11,44 @@ namespace ElearningM1.Models
     public class Examens
     {
 
-        public static List<Examen> getAllExamen()
+        public static List<Examen> getExamens()
         {
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=root;Database=elearningM1;port=5433");
-
-            DataTable MyData = new DataTable();
-            NpgsqlDataAdapter da;
-
-            conn.Open();
             string select = "SELECT * FROM \"Examen\"";
-            NpgsqlCommand MyCmd = new NpgsqlCommand(select, conn);
-            da = new NpgsqlDataAdapter(MyCmd);
-            da.Fill(MyData);
-            conn.Close();
-
-
-
-            List<Examen> examen = MyData.AsEnumerable().Select(row =>
-
+            return BDD.Execute(select).AsEnumerable().Select(row =>
                 new Examen()
                 {
-                    Type =  row.Field<string>("type_examen"), 
+                    Id = row.Field<int>("id_examen"),
+                    Type = row.Field<string>("type_examen"),
                     Date = row.Field<string>("date"),
-                    LeModule = Modules.getModules().FirstOrDefault(c => c.Id == row.Field<int>("id_module"))
+                    LeModule = Modules.getModules().FirstOrDefault(m => m.Id == row.Field<int>("id_module"))
                 }
-
             ).ToList();
-            examen.Cast<Examen>();
-            
-            return examen;
+        }
+
+        public static void AddModule(Examen e)
+        {
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@type_examen", e.Type},
+                {"@date", e.Date},
+                {"@id_module", e.LeModule.Id}
+            };
+            BDD.ExecuteNonQueryPS("inserer_examen", dico);
+        }
+
+        public static void Update(Examen e)
+        {
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_e", e.Type},
+                {"@type_e", e.Type},
+                {"@d", e.Date},
+                {"@id_m", e.LeModule.Id}
+            };
+            BDD.ExecuteNonQueryPS("modifier_examen", dico);
         }
     }
 
 
-    }
+}
 

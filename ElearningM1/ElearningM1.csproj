@@ -289,6 +289,9 @@
     <Content Include="Views\RP\InsererNote.cshtml" />
     <Content Include="Views\Shared\_LayoutTE.cshtml" />
     <Content Include="Views\TuteurEnseignant\getModuleTe.cshtml" />
+    <Content Include="Views\RP\ListeApprenants.cshtml" />
+    <Content Include="Views\RP\ListeExamens.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

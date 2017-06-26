@@ -29,6 +29,7 @@ namespace ElearningM1.Models
         [Required(ErrorMessage = "Le nom est obligatoire.")]
         public string Nom { get => nom; set => nom = value; }
         [Required(ErrorMessage = "La date de naissance est obligatoire.")]
+        [RegularExpression(@"(\d{2}/\d{2}/\d{4})")]
         public string DateNaiss { get => dateNaiss; set => dateNaiss = value; }
         [Required(ErrorMessage = "Le prénom est obligatoire.")]
         public string Prenom { get => prenom; set => prenom = value; }

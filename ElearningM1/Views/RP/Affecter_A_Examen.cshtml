@@ -1,6 +1,8 @@
-﻿
+﻿@model ElearningM1.Models.A_TE_Module_View
+@using ElearningM1.Models;
 @{
     ViewBag.Title = "Affectation Apprenant à Examen";
+
    
 
     if (Session["TypeUtilisateur"] == "RP") {
@@ -10,30 +12,80 @@
     {
         Response.Redirect("Index");
     }
+
 }
 
-<!DOCTYPE html>
-
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
 <body>
-    <h4>Affectation d'un Apprenant a un Examen</h4>
 
-        <span style="color:red">@ViewBag.erreur</span>
+    <h4>Affectation d'un apprenant à un examen</h4>
+    <span style="color:red">@ViewBag.Message</span>
 
-        @using (Html.BeginForm("Affecter_A_Examen", "RP", FormMethod.Post))
+
+    @using (Html.BeginForm("Affecter_A_Examen", "RP", FormMethod.Post))
+    {
+        
+
+        if (Apprenants.getApprenants().Count > 0)
+        {
+            var apprenants = Apprenants.getApprenants();
+            IEnumerable<SelectListItem> selectList = from a in apprenants
+                                                     select new SelectListItem
+                                                     {
+                                                         Value = a.Id.ToString(),
+                                                         Text = a.Nom + " " + a.Prenom
+                                                     };
+            <div class="form-group">
+                @Html.Label("Apprenant")
+                @Html.DropDownList("id_A", new SelectList(selectList, "Value", "Text"), new { @class = "form-control" })
+            </div>
+        }
+        else
         {
             <div class="form-group">
                 @Html.Label("Apprenant")
-                @Html.DropDownList("id_A", new SelectList(ElearningM1.Models.Apprenants.getApprenants(), "id", "nom"), new { @class = "form-control" })
+                @Html.DropDownList("id_A", new SelectList(Apprenants.getApprenants(), "id", "nom"), new { @class = "form-control", @disabled = "disabled" })
             </div>
+            <div class="form-group">
+                <table>
+                    <tr><td style="color:red;">Il n'y a aucun apprenant dans la base de données. Pour ajouter un nouvel apprenant @Html.ActionLink("Cliquer ici", "InsererApprenant", "RP")</td></tr>
+                </table>
+            </div>
+        }
 
+        if (Examens.getExamens().Count > 0)
+        {
+            var examens = Examens.getExamens();
+            IEnumerable<SelectListItem> selectList = from e in examens
+                                                     select new SelectListItem
+                                                     {
+                                                         Value = e.Id.ToString(),
+                                                         Text = e.Date + " -- " + e.LeModule.Nom
+                                                     };
             <div class="form-group">
                 @Html.Label("Examen")
-                @Html.DropDownList("id_Exam", new SelectList(ElearningM1.Models.Examens.getAllExamen(), "id", "nom"), new { @class = "form-control" })
+                @Html.DropDownList("id_Exam", new SelectList(selectList, "Value", "Text"), new { @class = "form-control" })
             </div>
             <input type="submit" class="btn btn-primary" value="Valider" />
         }
+        else
+        {
+            <div class="form-group">
+                @Html.Label("Examen")
+                @Html.DropDownList("id_Exam", new SelectList(Examens.getExamens(), "id", "date"), new { @class = "form-control", @disabled = "disabled" })
+            </div>
+            <div class="form-group">
+                <table>
+                    <tr><td style="color:red;">Aucune examen n'est disponible. Pour ajouter un nouvel examen @Html.ActionLink("Cliquer ici", "InsererExamen", "RP")</td></tr>
+                </table>
+            </div>
+        }
+        
+    }
 </body>
-</html>
+
+

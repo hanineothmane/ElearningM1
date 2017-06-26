@@ -13,10 +13,8 @@ namespace ElearningM1.Models
 
         public Examen() { }
 
-   
 
-        
-
+        public Examen(int id, string date, string type, Module leModule) { }
 
         public Examen(string date, string type, Module leModule)
         {
@@ -24,7 +22,7 @@ namespace ElearningM1.Models
             this.type = type;
             this.LeModule = leModule;
         }
-
+        
         public string Date { get => date; set => date = value; }
         public string Type { get => type; set => type = value; }
         public int Id { get => id; set => id = value; }
