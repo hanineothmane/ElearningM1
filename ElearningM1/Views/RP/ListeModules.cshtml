@@ -37,7 +37,7 @@
                     <td>@Html.ActionLink(module.Nom, "ModifierModule", "RP", new { id = module.Id }, null)</td>
                     <td>@module.Coef</td>
                     <td>@module.TypeModule</td>
-                    <td>@Html.ActionLink("Supprimer", "SupprimerModule", "RP", new { id = module.Id }, new { @class = "btn btn-danger" })</td>
+                    <td>@Html.ActionLink("Supprimer", "SupprimerModule", "RP", new { id = module.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Etes-vous sûr de vouloir supprimer?');" })</td>
 
                 </tr>
             }
