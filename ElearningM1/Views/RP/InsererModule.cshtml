@@ -65,7 +65,7 @@
         <div class="form-group">
             @Html.Label("Session de regroupement")
             @Html.DropDownList("id_sr", new SelectList(ElearningM1.Models.SessionsRegroupement.getSessionsRegroupement(), "id", "date"), new { @class = "form-control" })
-            @Html.ActionLink("+ Ajouter une nouvelle session", "#", "RP")
+            @Html.ActionLink("+ Ajouter une nouvelle session", "InsererSessionReg", "RP")
         </div>
 
 
