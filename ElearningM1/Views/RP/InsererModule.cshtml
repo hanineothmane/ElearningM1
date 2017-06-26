@@ -1,4 +1,7 @@
 ﻿@model ElearningM1.Models.Module
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
 @{
     ViewBag.Title = "Ajout Module";
     if (Session["TypeUtilisateur"] == "RP")

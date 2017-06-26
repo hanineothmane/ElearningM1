@@ -1,4 +1,7 @@
 ﻿@model ElearningM1.Models.Module
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
 @{
     ViewBag.Title = "Modifier : " + Model.Nom;
     if (Session["TypeUtilisateur"] == "RP")
@@ -21,25 +24,38 @@
 
     @using (Html.BeginForm("ModifierModule", "RP", FormMethod.Post))
     {
-
+        
+        @Html.ValidationSummary(true)
         <div class="form-group">
             @Html.Label("Nom")
-            @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.Nom, new { @class = "form-control", @id = "inlineFormInputGroup" })
+                @Html.ValidationMessageFor(m => m.Nom, null, new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Date de création")
-            @Html.TextBoxFor(m => m.DateCreation, new { @class = "form-control" })
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.DateCreation, new { @class = "form-control", @id = "inlineFormInputGroup" })
+                @Html.ValidationMessageFor(m => m.DateCreation, null, new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Coefficient")
-            @Html.TextBoxFor(m => m.Coef, new { @class = "form-control" })
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.Coef, new { @class = "form-control", @id = "inlineFormInputGroup", @Value = "" })
+                @Html.ValidationMessageFor(m => m.Coef, null, new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Type de module")
-            @Html.TextBoxFor(m => m.TypeModule, new { @class = "form-control" })
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.TypeModule, new { @class = "form-control", @id = "inlineFormInputGroup" })
+                @Html.ValidationMessageFor(m => m.TypeModule, null, new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">

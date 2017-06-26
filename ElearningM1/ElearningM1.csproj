@@ -291,13 +291,10 @@
     <Content Include="Views\TuteurEnseignant\getModuleTe.cshtml" />
     <Content Include="Views\RP\ListeApprenants.cshtml" />
     <Content Include="Views\RP\ListeExamens.cshtml" />
-
+    <Content Include="Views\RP\InsererExamen.cshtml" />
     <Content Include="Views\RP\ListeSessionsRegroupement.cshtml" />
     <Content Include="Views\RP\InsererSessionReg.cshtml" />
     <Content Include="Views\RP\ModifierSessionReg.cshtml" />
-
-
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

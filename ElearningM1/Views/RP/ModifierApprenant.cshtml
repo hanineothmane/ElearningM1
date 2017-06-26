@@ -1,4 +1,7 @@
 ﻿@model ElearningM1.Models.Apprenant
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
 @{
     ViewBag.Title = "Modifier : " + Model.Nom;
     if (Session["TypeUtilisateur"] == "RP")
@@ -21,39 +24,39 @@
     @using (Html.BeginForm("ModifierApprenant", "RP", FormMethod.Post))
     {
 
-        <div class="form-group">
-            @Html.LabelFor(a => a.Nom)
-            @Html.TextBoxFor(a => a.Nom, new { @class = "form-control" })
+        <div class="input-group form-group">
+            @Html.TextBoxFor(a => a.Nom, new { @class = "form-control", placeholder = "Nom", @id = "inlineFormInputGroup" })
+            @Html.ValidationMessageFor(a => a.Nom, null, new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(a => a.Prenom)
-            @Html.TextBoxFor(a => a.Prenom, new { @class = "form-control" })
+        <div class="input-group form-group">
+            @Html.TextBoxFor(a => a.Prenom, new { @class = "form-control", placeholder = "Prénom", @id = "inlineFormInputGroup" })
+            @Html.ValidationMessageFor(a => a.Prenom, null, new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(a => a.DateNaiss)
-            @Html.TextBoxFor(a => a.DateNaiss, new { @class = "form-control" })
+        <div class="input-group form-group">
+            @Html.TextBoxFor(a => a.DateNaiss, new { @class = "form-control", placeholder = "Date de naissance", @id = "inlineFormInputGroup" })
+            @Html.ValidationMessageFor(a => a.DateNaiss, null, new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(a => a.Email)
-            @Html.TextBoxFor(a => a.Email, new { @class = "form-control" })
+        <div class="input-group form-group">
+            @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Email", @id = "inlineFormInputGroup" })
+            @Html.ValidationMessageFor(a => a.Email, null, new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(a => a.DateInscription)
-            @Html.TextBoxFor(a => a.DateInscription, new { @class = "form-control" })
+        <div class="input-group form-group">
+            @Html.TextBoxFor(a => a.DateInscription, "{0:dd/MM/yyyy}", new { @class = "form-control", placeholder = "Date d'inscription", @id = "inlineFormInputGroup" })
+            @Html.ValidationMessageFor(a => a.DateInscription, null, new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(a => a.Telephone)
-            @Html.TextBoxFor(a => a.Telephone, new { @class = "form-control" })
+        <div class="input-group form-group">
+            @Html.TextBoxFor(a => a.Telephone, new { @class = "form-control", placeholder = "Numéro de téléphone", @id = "inlineFormInputGroup" })
+            @Html.ValidationMessageFor(a => a.Telephone, null, new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(a => a.Adresse)
-            @Html.TextBoxFor(a => a.Adresse, new { @class = "form-control" })
+        <div class="input-group form-group">
+            @Html.TextBoxFor(a => a.Adresse, new { @class = "form-control", placeholder = "Adresse", @id = "inlineFormInputGroup" })
+            @Html.ValidationMessageFor(a => a.Adresse, null, new { @class = "text-danger" })
         </div>
 
         <input type="submit" class="btn btn-primary" value="Modifier" />

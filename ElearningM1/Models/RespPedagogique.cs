@@ -163,9 +163,11 @@ namespace ElearningM1.Models
             return Affecter_A_Modules.getAffectations(app);
         }
 
-        public void AjouterExamen(Examen e)
+        public void AjouterExamen(Examen e, int id_module)
         {
-            Examens.AddModule(e);
+            Module module = Modules.getModules().FirstOrDefault(m => m.Id == id_module);
+            e.LeModule = module;
+            Examens.AddExamen(e);
         }
 
         public void ModifierModule(int id, Examen e, int id_m)
