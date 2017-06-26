@@ -1,4 +1,7 @@
 ﻿@model ElearningM1.Models.Affecter_A_Module
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
 @{
     ViewBag.Title = "Insérer une note";
      if (Session["TypeUtilisateur"] == "RP") {
@@ -19,7 +22,6 @@
     <span style="color:red">@ViewBag.MessageErreur</span>
     @using (Html.BeginForm())
     {
-        @Html.ValidationSummary(true)
 
         <div class="form-group">
             @Html.Label("Apprenant")
@@ -49,7 +51,7 @@
             @Html.Label("Note finale")
             <div class="input-group">
                 @Html.TextBoxFor(m => m.NoteFinale, new { @class = "form-control", @id = "inlineFormInputGroup" })
-                @Html.ValidationMessageFor(m => m.NoteFinale, null, new { @style = "color:red;" })
+                @Html.ValidationMessageFor(m => m.NoteFinale, null, new { @class = "text-danger" })
             </div>
         </div>
 

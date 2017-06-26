@@ -219,6 +219,7 @@ namespace ElearningM1.Controllers
             }
             return View("ListeTuteursEnseignant");
         }
+        #endregion  
 
         public ActionResult SupprimerTE(int id, TuteurEnseignant te)
         {
@@ -236,18 +237,18 @@ namespace ElearningM1.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsererExamen(Examen examen)
+        public ActionResult InsererExamen(Examen examen, int id_module)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    rp.AjouterExamen(examen);
+                    rp.AjouterExamen(examen, id_module);
                 }
                 catch (NpgsqlException)
                 {
                     ViewBag.MessageErreur = "Erreur lors de l'affectation !";
-                    return View();
+                    return View(new Examen());
                 }
             }
             return Redirect("ListeExamens");
@@ -440,7 +441,10 @@ namespace ElearningM1.Controllers
             catch (NpgsqlException)
             {
                 ViewBag.Message = "Erreur lors de l'affectation !";
-                return View(new A_TE_Module_View());
+                var list_principal = new A_TE_Module_View();
+                list_principal.Apprenant = Apprenants.getApprenants();
+                list_principal.Examen = Examens.getExamens();
+                return View(list_principal);
             }
             return Redirect("ListeExamens");
         }

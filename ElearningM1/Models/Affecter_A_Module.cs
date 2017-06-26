@@ -25,7 +25,9 @@ namespace ElearningM1.Models
 
         public Apprenant Apprenant { get => apprenant; set => apprenant = value; }
         public Module Module { get => module; set => module = value; }
-        [Required(ErrorMessage = "La note est obligatoire")]
+
+
+        [Range(0, 20, ErrorMessage = "La note doit être comprise entre 0 et 20.")]
         public Nullable<double> NoteFinale { get => noteFinale; set => noteFinale = value; }
 
         
