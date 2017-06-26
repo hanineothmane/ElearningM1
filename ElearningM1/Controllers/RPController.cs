@@ -10,20 +10,25 @@ using Npgsql;
 
 namespace ElearningM1.Controllers
 {
+    [Authorize]
     public class RPController : Controller
     {
-        private RespPedagogique rp = new RespPedagogique("Benzakki", "hier", "Judith", "j@b.fr", 1, "jb", "0123456789", "IBGBI");
 
+        private RespPedagogique rp = new RespPedagogique("Benzakki", "hier", "Judith", "j@b.fr", 1, "jb", "0123456789", "IBGBI");
         // GET: RP
         public ActionResult Index()
         {
             return View();
         }
-        
+       
+
+
+
+
         #region Module
 
-        //Commun
-        public ActionResult ListeModules()
+    //Commun
+    public ActionResult ListeModules()
         {
             return View(Modules.getModules());
         }
