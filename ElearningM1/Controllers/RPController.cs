@@ -259,6 +259,12 @@ namespace ElearningM1.Controllers
             return View(Examens.getExamens());
         }
 
+        public ActionResult SupprimerExamen(int id,Examen examen)
+        {
+            rp.SupprimerExamen(id, examen);
+            return View("ListeExamens");
+        }
+
         #endregion
 
         #region NoteFinale
