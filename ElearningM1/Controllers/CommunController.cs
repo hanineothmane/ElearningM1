@@ -10,6 +10,7 @@ using Npgsql;
 
 namespace ElearningM1.Controllers
 {
+    [Authorize]
     public class CommunController : Controller
     {
         // GET: Commun
@@ -24,6 +25,7 @@ namespace ElearningM1.Controllers
             var apprenants = Apprenants.getApprenants();
             return View(apprenants);
         }
+        
         
     }
 }

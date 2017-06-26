@@ -2,7 +2,18 @@
 
 @{
     ViewBag.Title = "Modules suivis par " + ViewBag.Apprenant.Nom + " " + ViewBag.Apprenant.Prenom;
-    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    if (Session["typeUtilisateur"] == "RP")
+    {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["typeUtilisateur"] == "TE")
+    {
+        Layout = "~/Views/Shared/_LayoutTE.cshtml";
+    }
+    else if (Session["typeUtilisateur"] == "Admin")
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
 }
 <head>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />

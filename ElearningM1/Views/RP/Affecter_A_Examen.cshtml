@@ -1,6 +1,15 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "Affectation Apprenant à Examen";
+   
+
+    if (Session["TypeUtilisateur"] == "RP") {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["TypeUtilisateur"] == "TE" || Session["TypeUtilisateur"] == "Admin")
+    {
+        Response.Redirect("Index");
+    }
 }
 
 <!DOCTYPE html>
@@ -9,7 +18,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
 <body>
-        Affectation d'un module a un semestre
+    <h4>Affectation d'un Apprenant a un Examen</h4>
 
         <span style="color:red">@ViewBag.erreur</span>
 

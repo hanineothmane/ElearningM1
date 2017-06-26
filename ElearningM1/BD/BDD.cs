@@ -13,10 +13,11 @@ using System.Web.Mvc;
 using System.Web.Configuration;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
+using ElearningM1.Models;
 
 namespace ElearningM1.BD
 {
-    public static class BDD
+    public static class BDD 
     {
         private static NpgsqlConnection conn;
 
@@ -60,6 +61,7 @@ namespace ElearningM1.BD
             return MyData;
         }
 
+      
         public static void ExecuteNonQuery(String requete)
         {
             Initialize();
@@ -69,42 +71,101 @@ namespace ElearningM1.BD
             Close();
         }
 
-        public static bool ConnexionRP(string mail, string mdp)
+        public static RespPedagogique ConnexionRP(string mail, string mdp)
         {
-            string select = "select * from \"RP\" where email = '" + mail + "' and mdp = '" + mdp + "'";
+            string select = "select * from \"RP\" where email = '" + mail + "' and mdp = '" + GenerateMD5(mdp) + "'";
             if (Execute(select).Rows.Count > 0)
             {
-                return true;
+                List<RespPedagogique> Rp =  BDD.Execute(select).AsEnumerable().Select(row =>
+                   new RespPedagogique(row.Field<string>("nom"), row.Field<String>("datenaissance"), row.Field<String>("prenom"), row.Field<String>("email"), row.Field<int>("id_rp"), row.Field<String>("mdp"), row.Field<String>("telephone"), row.Field<String>("adresse"))
+                   {
+                       Id = row.Field<int>("id_rp"),
+                       Nom = row.Field<String>("nom") ,
+                       Prenom = row.Field<String>("prenom"),
+                       DateNaiss = row.Field<String>("datenaissance"),
+                       Email = row.Field<String>("email"),
+                       Mdp = GenerateMD5(row.Field<String>("mdp")),
+                       Telephone = row.Field<String>("telephone"),
+                       Adresse = row.Field<String>("adresse")
+                   }
+               ).ToList();
+                return Rp.First();
+                 
             }
-            else return false;
+            return null;
         }
 
-        public static bool ConnexionTE(string mail, string mdp)
+        public static TuteurEnseignant ConnexionTE(string mail, string mdp)
         {
-            string select = "select * from \"TE\" where email = '" + mail + "' and mdp = '" + mdp + "'";
+            string select = "select * from \"TE\" where email = '" + mail + "' and mdp = '" + GenerateMD5(mdp) + "'";
             if (Execute(select).Rows.Count > 0)
             {
-                return true;
+                List<TuteurEnseignant> te =  BDD.Execute(select).AsEnumerable().Select(row =>
+                new TuteurEnseignant()
+                {
+                    Id = row.Field<int>("id_te"),
+                    Nom = row.Field<String>("nom"),
+                    Prenom = row.Field<String>("prenom"),
+                    DateNaiss = row.Field<String>("datenaissance"),
+                    Email = row.Field<String>("email"),
+                    Mdp = GenerateMD5(row.Field<String>("mdp")),
+                    Telephone = row.Field<String>("telephone"),
+                    Adresse = row.Field<String>("adresse")
+                }
+            ).ToList();
+                return te.First();
             }
-            else return false;
+            else return null;
         }
 
-        public static bool ConnexionAdministration(string mail, string mdp)
+        public static Administration ConnexionAdministration(string mail, string mdp)
         {
-            string select = "select * from \"Administration\" where email = '" + mail + "' and mdp = '" + mdp + "'";
+            string select = "select * from \"Administration\" where email = '" + mail + "' and mdp = '" + GenerateMD5(mdp) + "'";
             if (Execute(select).Rows.Count > 0)
             {
-                return true;
+                 List<Administration> admin =  BDD.Execute(select).AsEnumerable().Select(row =>
+                new Administration(row.Field<String>("nom"), row.Field<String>("datenaissance"), row.Field<String>("prenom"), row.Field<String>("email"), row.Field<int>("id_admin"), row.Field<String>("mdp"), row.Field<String>("telephone"), row.Field<String>("adresse"))
+                {
+                    Id = row.Field<int>("id_te"),
+                    Nom = row.Field<String>("nom"),
+                    Prenom = row.Field<String>("prenom"),
+                    DateNaiss = row.Field<String>("datenaissance"),
+                    Email = row.Field<String>("email"),
+                    Mdp = GenerateMD5( row.Field<String>("mdp")),
+                    Telephone = row.Field<String>("telephone"),
+                    Adresse = row.Field<String>("adresse")
+                }
+            ).ToList();
+                return admin.First();
             }
-            else return false;
+            else return null;
+        }
+        public static void ExecuteNonQueryPS(string nomPS, Dictionary<string, Object> dic)
+        {
+            Initialize();
+            Open();
+            NpgsqlCommand command = new NpgsqlCommand();
+            command = Connexion().CreateCommand();
+            // On indique que l'on souhaite utiliser une procédure stockée
+            command.CommandType = CommandType.StoredProcedure;
+            // On donne le nom de cette procédure stockée
+            command.CommandText = nomPS;
+            // On ajoute les paramèstres liés à la procédure stockée
+            foreach (var kv in dic)
+            {
+                command.Parameters.AddWithValue(kv.Key, kv.Value);
+            }
+            // On execute la commande
+            command.ExecuteNonQuery();
+            Close();
         }
 
 
+        
 
-
-        public static string GenerateMD5(string yourString)
+        public static string GenerateMD5(string mdp)
         {
-            return string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(yourString)).Select(s => s.ToString("x2")));
+            return string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(mdp)).Select(s => s.ToString("x2")));
         }
 
 

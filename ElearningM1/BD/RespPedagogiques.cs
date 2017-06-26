@@ -34,8 +34,20 @@ namespace ElearningM1.Models
         
         public static void Aff_A_Exam(int id_app, int id_exam)
         {
-            string select = "Insert Into \"Affecter_Module_Semestrex\"(id_semestre,id_module) Values(" + id_app + "," + id_exam + ") ";
+            string select = "Insert Into \"Affecter_Module_Semestre\"(id_semestre,id_module) Values(" + id_app + "," + id_exam + ") ";
             BDD.ExecuteNonQuery(select);
+        }
+
+        public static string Utilisateur_Nom
+        {
+            get
+            {
+                if (HttpContext.Current.Session["nom_utlisateur"] != null)
+                    return HttpContext.Current.Session["nom_utlisateur"].ToString();
+                else
+                    return null;
+            }
+            set { HttpContext.Current.Session["nom_utlisateur"] = value; }
         }
     }
 }
