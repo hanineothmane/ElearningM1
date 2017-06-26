@@ -1,7 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    ViewBag.Title = "Probleme d'accées";
+    if (Session["typeUtilisateur"] == "RP")
+    {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["typeUtilisateur"] == "TE")
+    {
+        Layout = "~/Views/Shared/_LayoutTE.cshtml";
+    }
+    else if (Session["typeUtilisateur"] == "Admin")
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    
 }
 <head>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
@@ -9,5 +21,5 @@
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
 </head>
 <body>
-    <h2>Bienvenue RP</h2>
+    <h4>Bienvenue Mr @Session["nom_utilisateur"] vous n'avez pas accées à cette page veuillez contacter la responsable du service pour plus d'informations </h4>
 </body>
