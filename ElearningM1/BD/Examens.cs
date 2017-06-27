@@ -48,6 +48,17 @@ namespace ElearningM1.Models
             BDD.ExecuteNonQueryPS("modifier_examen", dico);
         }
 
+        public static void AddNoteExamen(int id_examen, int id_app, double note)
+        {
+            Dictionary<string, Object> dico = new Dictionary<string, Object>()
+            {
+                {"@id_examen", id_examen},
+                {"@id_apprenant", id_app},
+                {"@note_examen", note}
+            };
+            BDD.ExecuteNonQueryPS("ajouter_note_examen", dico);
+
+
         public static void DeleteExamen(Examen e)
         {
             Dictionary<string, Object> dico = new Dictionary<string, Object>()
@@ -55,6 +66,7 @@ namespace ElearningM1.Models
                 {"@id_e", e.Id},
             };
             BDD.ExecuteNonQueryPS("supprimer_examen", dico);
+
         }
     }
 

@@ -29,8 +29,10 @@
         </thead>
         @if (Apprenants.getApprenants().Count > 0)
         {
-            foreach (var apprenant in Apprenants.getApprenants())
+            if (Session["TypeUtilisateur"] == "RP")
             {
+                foreach (var apprenant in Apprenants.getApprenants())
+                {
                 <tr>
                     <td>@Html.ActionLink(apprenant.Nom, "ModifierApprenant", "RP", new { id = apprenant.Id }, null)</td>
                     <td>@Html.ActionLink(apprenant.Prenom, "ModifierApprenant", "RP", new { id = apprenant.Id }, null)</td>
@@ -40,7 +42,23 @@
                     <td>@Html.ActionLink("Les Modules", "getModulesApprenant", "RP", new { id = apprenant.Id }, null)</td>
                     <td>@Html.ActionLink("Supprimer", "SupprimerApprenant", "RP", new { id = apprenant.Id }, new { @class = "btn btn-danger" })</td>
                 </tr>
+                    }
+                } else if (Session["TypeUtilisateur"] == "TE" || Session["TypeUtilisateur"] == "Admin")
+                {
+                    foreach (var apprenant in TuteursEnseignant.getAllApprenant((int)Session["id_utilisateur"]))
+                    {
+                <tr>
+                    <td > @apprenant.Nom</td >
+                    <td > @apprenant.Prenom </td >
+                    <td > @apprenant.DateNaiss </td >
+                    <td > @apprenant.Email </td >
+                    <td > @apprenant.Adresse </td >
+                    <td > @Html.ActionLink("Les Modules", "getModulesApprenant", "RP", new { id = apprenant.Id }, null) </td >
+                </tr >
+            
+                }
             }
+
         }
         else
         {

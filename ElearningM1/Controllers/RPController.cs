@@ -270,7 +270,7 @@ namespace ElearningM1.Controllers
         #region NoteFinale
 
         [HttpGet]
-        public ActionResult InsererNote(int id_app, int id_module, int? nf)
+        public ActionResult InsererNote(int id_app, int id_module, int nf)
         {
             Apprenant app = Apprenants.getApprenants().FirstOrDefault(a => a.Id == id_app);
             Module module = Modules.getModules().FirstOrDefault(m => m.Id == id_module);

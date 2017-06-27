@@ -85,7 +85,7 @@ namespace ElearningM1.Controllers
             }
             else
             {
-                return Redirect("logon.aspx");
+                return Redirect("Index");
             }
         }
     }
