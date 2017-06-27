@@ -23,7 +23,13 @@
 <body>
     <div class="input-group">
         <h3>Modules suivis par @ViewBag.Apprenant.Nom @ViewBag.Apprenant.Prenom</h3>
-        @Html.ActionLink("+ Affecter", "Affecter_A_Module", "RP", new { @class = "btn btn-default" })
+        @{ 
+            if (Session["typeUtilisateur"] == "RP") { 
+
+             @Html.ActionLink("+ Affecter", "Affecter_A_Module", "RP", new { @class = "btn btn-default" })
+
+            }
+        }
     </div>
 
     <table class="striped">

@@ -37,7 +37,7 @@
 
                     <td>@Html.ActionLink(sr.Nom, "ModifierSessionReg", "RP", new { id = sr.Id }, null)</td>
                     <td>@sr.Date</td>
-                    <td>@Html.ActionLink("Supprimer", "SupprimerSessionReg", "RP", new { id = sr.Id }, new { @class = "btn btn-danger" })</td>
+                    <td>@Html.ActionLink("Supprimer", "SupprimerSessionReg", "RP", new { id = sr.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Etes-vous sûr de vouloir supprimer?');" })</td>
                 </tr>
             }
         }
