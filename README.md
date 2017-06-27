@@ -14,7 +14,7 @@ Internet connection
 
 There is no installation required.
 
-## Features
+# Features
 *
 *
 *
