@@ -55,6 +55,7 @@
             Session["datenaissance_utilisateur"] = utilisateur.DateNaiss;
             Session["email_utilisateur"] = utilisateur.Email;
             Session["typeUtilisateur"] = "RP";
+            Session["utilisateur"] = utilisateur;
             Response.Redirect("Home/Index");
         }
         else if(BDD.ConnexionTE(UserEmail.Text, UserPass.Text)!= null)

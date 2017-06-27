@@ -1,17 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "Liste des Sessions de Regroupement";
-    
-        ViewBag.Title = "Inserer Apprenant";
-        if (Session["TypeUtilisateur"] == "RP")
-        {
-            Layout = "~/Views/Shared/_LayoutRP.cshtml";
-        }
-        else if (Session["TypeUtilisateur"] == "TE" || Session["TypeUtilisateur"] == "Admin")
-        {
-            Response.Redirect("Index");
-        }
-    
+    ViewBag.Title = "ListeSessionsRegroupement";
+    if (Session["TypeUtilisateur"] == "RP")
+    {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["TypeUtilisateur"] == "TE" || Session["TypeUtilisateur"] == "Admin")
+    {
+        Response.Redirect("Index");
+    }
 }
 <head>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />

@@ -1,0 +1,75 @@
+﻿@model ElearningM1.Models.Profil
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@{
+    ViewBag.Title = "Inserer Tuteur Enseignant";
+    if (Session["TypeUtilisateur"] == "RP")
+    {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["TypeUtilisateur"] == "TE" || Session["TypeUtilisateur"] == "Admin")
+    {
+        Response.Redirect("Index");
+    }
+}
+
+<head>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<body>
+    <h4>Ajouter un nouveau profil</h4>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.Label("Type")
+            @Html.DropDownList("type", new List<SelectListItem>
+            {
+                new SelectListItem() {Text = "Responsable Pédagogique", Value="RP"},
+                new SelectListItem() {Text = "Tuteur Enseignant", Value="TE"},
+                new SelectListItem() {Text = "Administration", Value="Admin"}
+            }, new { @class = "form-control" })
+        </div>
+        
+        <div class="form-group input-group">
+            @Html.TextBoxFor(m => m.Nom, new { @class = "form-control", placeholder = "Nom", @id = "inlineFormInputGroup" })
+            @Html.ValidationMessageFor(m => m.Nom, null, new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group input-group">
+            @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control", placeholder = "Prénom" })
+            @Html.ValidationMessageFor(m => m.Prenom, null, new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group input-group">
+            @Html.TextBoxFor(m => m.DateNaiss, new { @class = "form-control", placeholder = "Date de naissance" })
+            @Html.ValidationMessageFor(m => m.DateNaiss, null, new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group input-group">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "inlineFormInputGroup", placeholder = "Email" })
+            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group input-group">
+            @Html.PasswordFor(m => m.Mdp, new { @class = "form-control", placeholder = "Mot de passe" })
+            @Html.ValidationMessageFor(m => m.Mdp, null, new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group input-group">
+            @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control", placeholder = "Numéro de téléphone" })
+            @Html.ValidationMessageFor(m => m.Telephone, null, new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group input-group">
+            @Html.TextBoxFor(m => m.Adresse, new { @class = "form-control", placeholder = "Adresse" })
+            @Html.ValidationMessageFor(m => m.Adresse, null, new { @class = "text-danger" })
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Valider" />
+    }
+</body>

@@ -8,8 +8,6 @@ namespace ElearningM1.Models
     public class TuteurEnseignant : Profil
     {
         private List<Module> lesModules;
-        //private string nom, dateNaiss, prenom, courriel,  mdp, telephone;
-        //private int id;
 
         public TuteurEnseignant() : base() {}
 

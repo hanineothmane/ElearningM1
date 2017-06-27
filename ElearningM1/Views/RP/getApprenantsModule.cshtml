@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ElearningM1.Models.Affecter_A_Module>
 
 @{
-    ViewBag.Title = "Modules suivis par " + ViewBag.Apprenant.Nom + " " + ViewBag.Apprenant.Prenom;
+    ViewBag.Title = "Apprenants affectés à " + ViewBag.Module.Nom;
     if (Session["typeUtilisateur"] == "RP")
     {
         Layout = "~/Views/Shared/_LayoutRP.cshtml";
@@ -22,21 +22,16 @@
 </head>
 <body>
     <div class="input-group">
-        <h3>Modules suivis par @ViewBag.Apprenant.Nom @ViewBag.Apprenant.Prenom</h3>
-        @{ 
-            if (Session["typeUtilisateur"] == "RP") { 
-
-             @Html.ActionLink("+ Affecter", "Affecter_A_Module", "RP", new { @class = "btn btn-default" })
-
-            }
-        }
+        <h3>Apprenants affectés à @ViewBag.Module.Nom</h3>
+        @Html.ActionLink("+ Affecter un apprenant", "Affecter_A_Module", "RP", new { @class = "btn btn-default" })
     </div>
 
     <table class="striped">
         <thead>
             <tr>
                 <th>Nom</th>
-                <th>Note finale</th>
+                <th>Prénom</th>
+                <th>Note finale de la matière</th>
             </tr>
         </thead>
         @if (Model.Any())
@@ -44,11 +39,14 @@
             foreach (var affectation in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(affectation.Module.Nom, "ModifierModule", "RP", new { id = affectation.Module.Id }, null)</td>
+                    <td>@Html.ActionLink(affectation.Apprenant.Nom, "ModifierApprenant", "RP", new { id = affectation.Apprenant.Id }, null)</td>
+                    <td>@Html.ActionLink(affectation.Apprenant.Prenom, "ModifierApprenant", "RP", new { id = affectation.Apprenant.Id }, null)</td>
                     @if (affectation.NoteFinale != null)
                     {
-                        <td>@affectation.NoteFinale / 20
-                        @Html.ActionLink("+ Modifier", "InsererNote", "RP", new { id_app = affectation.Apprenant.Id, id_module = affectation.Module.Id, nf = affectation.NoteFinale }, null)</td>
+                        <td>
+                            @affectation.NoteFinale / 20
+                        @Html.ActionLink("+ Modifier", "InsererNote", "RP", new { id_app = affectation.Apprenant.Id, id_module = affectation.Module.Id, nf = affectation.NoteFinale }, null)
+                    </td>
                     }
                     else
                     {
@@ -59,7 +57,7 @@
         }
         else
         {
-            <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour affecter un module à @ViewBag.Apprenant.Nom @ViewBag.Apprenant.Prenom @Html.ActionLink("Cliquer ici", "Affecter_A_Module", "RP")</td></tr>
+            <tr><td colspan="5" style="color:red; text-align:center;">Aucune apprenant n'a été affecté pour ce module. Pour en affecter @Html.ActionLink("Cliquer ici", "Affecter_A_Module", "RP")</td></tr>
         }
     </table>
 </body>

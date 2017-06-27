@@ -45,7 +45,7 @@
         <div class="form-group">
             @Html.Label("Coefficient")
             <div class="input-group">
-                @Html.TextBoxFor(m => m.Coef, new { @class = "form-control", @id = "inlineFormInputGroup", @Value = "" })
+                @Html.TextBoxFor(m => m.Coef, new { @class = "form-control", @id = "inlineFormInputGroup"})
                 @Html.ValidationMessageFor(m => m.Coef, null, new { @class = "text-danger" })
             </div>
         </div>
@@ -61,13 +61,13 @@
         <div class="form-group">
             @Html.Label("Enseignant")
             @Html.DropDownList("id_te", new SelectList(ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant(), "id", "nom", Model.Ens.Id), new { @class = "form-control" })
-            @Html.ActionLink("+ Ajouter un nouvel enseignant", "InsererEnseignant", "RP")
+            @Html.ActionLink("+ Ajouter un nouvel enseignant", "InsererProfil", "RP")
         </div>
 
         <div class="form-group">
             @Html.Label("Session de regroupement")
             @Html.DropDownList("id_sr", new SelectList(ElearningM1.Models.SessionsRegroupement.getSessionsRegroupement(), "id", "date", Model.Sr.Id), new { @class = "form-control" })
-            @Html.ActionLink("+ Ajouter une nouvelle session", "#", "RP")
+            @Html.ActionLink("+ Ajouter une nouvelle session", "InsererSessionReg", "RP")
         </div>
 
         <input type="submit" class="btn btn-primary" value="Modifier" />
