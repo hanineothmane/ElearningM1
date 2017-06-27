@@ -291,7 +291,6 @@
     <Content Include="Views\TuteurEnseignant\getModuleTe.cshtml" />
     <Content Include="Views\RP\ListeApprenants.cshtml" />
     <Content Include="Views\RP\ListeExamens.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

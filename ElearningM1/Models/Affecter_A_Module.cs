@@ -13,6 +13,7 @@ namespace ElearningM1.Models
         private Apprenant apprenant;
         private Module module;
         private Nullable<double> noteFinale;
+        
 
         public Affecter_A_Module() { }
 
@@ -22,6 +23,8 @@ namespace ElearningM1.Models
             this.module = m;
             this.noteFinale = nf;
         }
+
+     
 
         public Apprenant Apprenant { get => apprenant; set => apprenant = value; }
         public Module Module { get => module; set => module = value; }
