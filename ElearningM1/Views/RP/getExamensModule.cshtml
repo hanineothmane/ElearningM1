@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ElearningM1.Models.Examen>
+
+@{
+    if (Session["typeUtilisateur"] == "RP")
+    {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["typeUtilisateur"] == "TE")
+    {
+        Layout = "~/Views/Shared/_LayoutTE.cshtml";
+    }
+    else if (Session["typeUtilisateur"] == "Admin")
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+}
+<head>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<body>
+    <div class="input-group">
+        <h3>Examens affecté à @ViewBag.Module.Nom</h3>
+        @Html.ActionLink("+ Affecter", "Affecter_A_Examen", "RP", new { @class = "btn btn-default" })
+    </div>
+
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Date d'examen</th>
+                <th>Type d'examen</th>
+            </tr>
+        </thead>
+        @if (Model.Any())
+        {
+            foreach (var examen in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(examen.Date, "Index", "RP", new { id = examen.Id }, null)</td>
+                    <td>@examen.Type</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour ajouter un examen à @ViewBag.Module.Nom @Html.ActionLink("Cliquer ici", "InsererExamen", "RP")</td></tr>
+        }
+    </table>
+</body>
+
+

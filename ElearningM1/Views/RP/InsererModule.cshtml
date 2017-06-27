@@ -55,21 +55,51 @@
                 @Html.ValidationMessageFor(m => m.TypeModule, null, new { @class = "text-danger" })
             </div>
         </div>
+        
+        if (ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant().Count > 0)
+        {
 
-        <div class="form-group">
-            @Html.Label("Enseignant")
-            @Html.DropDownList("id_te", new SelectList(ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant(), "id", "nom"), new { @class = "form-control" })
-            @Html.ActionLink("+ Ajouter un nouvel enseignant", "InsererTE", "RP")
-        </div>
+            <div class="form-group">
+                @Html.Label("Enseignant")
+                @Html.DropDownList("id_te", new SelectList(ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant(), "id", "nom"), new { @class = "form-control" })
+                @Html.ActionLink("+ Ajouter un nouvel enseignant", "InsererTE", "RP")
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.Label("Enseignant")
+                @Html.DropDownList("id_te", new SelectList(ElearningM1.Models.TuteursEnseignant.getTuteursEnseignant(), "id", "nom"), new { @class = "form-control", @disabled = "disabled" })
+            </div>
+            <div class="form-group">
+                <table>
+                    <tr><td style="color:red;">Il n'y a aucun enseignant dans la base de données. Pour ajouter un nouvel enseignant @Html.ActionLink("Cliquer ici", "InsererTE", "RP")</td></tr>
+                </table>
+            </div>
+        }
+        
+        if (ElearningM1.Models.SessionsRegroupement.getSessionsRegroupement().Count > 0)
+        {
+            <div class="form-group">
+                @Html.Label("Session de regroupement")
+                @Html.DropDownList("id_sr", new SelectList(ElearningM1.Models.SessionsRegroupement.getSessionsRegroupement(), "id", "date"), new { @class = "form-control" })
+                @Html.ActionLink("+ Ajouter une nouvelle session", "#", "RP")
+            </div>
+            <input type="submit" class="btn btn-primary" value="Valider" />
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.Label("Session de regroupement")
+                @Html.DropDownList("id_sr", new SelectList(ElearningM1.Models.SessionsRegroupement.getSessionsRegroupement(), "id", "date"), new { @class = "form-control", @disabled = "disabled" })
+            </div>
+            <div class="form-group">
+                <table>
+                    <tr><td style="color:red;">Il n'y a aucune session de regroupement dans la base de données. Pour ajouter une nouvelle session @Html.ActionLink("Cliquer ici", "InsererSessionReg", "RP")</td></tr>
+                </table>
+            </div>
+        }
 
-        <div class="form-group">
-            @Html.Label("Session de regroupement")
-            @Html.DropDownList("id_sr", new SelectList(ElearningM1.Models.SessionsRegroupement.getSessionsRegroupement(), "id", "date"), new { @class = "form-control" })
-            @Html.ActionLink("+ Ajouter une nouvelle session", "#", "RP")
-        </div>
 
-
-
-        <input type="submit" class="btn btn-primary" value="Valider" />
     }
 </body>

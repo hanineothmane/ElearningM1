@@ -44,7 +44,7 @@ namespace ElearningM1.Models
         public string Email { get => email; set => email = value; }
 
         [Required(ErrorMessage = "Le numéro de téléphone est obligatoire.")]
-        [RegularExpression(@"#^0[1-68]([-. ]?[0-9]{2}){4}$#", ErrorMessage = "Veuillez saisir un numéro de téléphone à 10 chiffres.")]
+        [RegularExpression(@"(0|\\+33|0033)[1-9][0-9]{8}", ErrorMessage = "Veuillez saisir un numéro de téléphone à 10 chiffres.")]
         public string Telephone { get => telephone; set => telephone = value; }
 
         [Required(ErrorMessage = "L'adresse est obligatoire.")]

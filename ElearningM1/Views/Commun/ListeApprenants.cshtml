@@ -24,9 +24,15 @@
 <body>
     <div class="input-group">
         <h3>Les apprenants</h3>
-        @Html.ActionLink("+ Ajouter", "InsererApprenant", "RP", new { @class = "btn btn-default" })
+        @if (Model.Count > 0)
+        {
+            if (Session["typeUtilisateur"] == "RP")
+            {
+                @Html.ActionLink("+ Ajouter", "InsererApprenant", "RP", null, new { @class = "btn btn-default" })
+            }
+        }
     </div>
-    
+
     <table class="striped">
         <thead>
             <tr>
@@ -35,7 +41,7 @@
                 <th>Date de naissance</th>
                 <th>Courriel</th>
                 <th>Adresse</th>
-                <th>Les modules suivis</th>
+                <th>Modules</th>
             </tr>
         </thead>
         @if (Model.Count > 0)
@@ -45,14 +51,15 @@
                 foreach (var apprenant in Model)
                 {
 
-                <tr>
-                    <td>@Html.ActionLink(apprenant.Nom, "ModifierApprenant", "RP", new { id = apprenant.Id }, null)</td>
-                    <td>@Html.ActionLink(apprenant.Prenom, "ModifierApprenant", "RP", new { id = apprenant.Id }, null)</td>
-                    <td>@apprenant.DateNaiss</td>
-                    <td>@apprenant.Email</td>
-                    <td>@apprenant.Adresse</td>
-                    <td>@Html.ActionLink("Les Modules", "getModulesApprenant", "RP", new { id = apprenant.Id }, null)</td>
-                </tr>
+                    <tr>
+                        <td>@Html.ActionLink(apprenant.Nom, "ModifierApprenant", "RP", new { id = apprenant.Id }, null)</td>
+                        <td>@Html.ActionLink(apprenant.Prenom, "ModifierApprenant", "RP", new { id = apprenant.Id }, null)</td>
+                        <td>@apprenant.DateNaiss</td>
+                        <td>@apprenant.Email</td>
+                        <td>@apprenant.Adresse</td>
+                        <td>@Html.ActionLink("Modules suivis", "getModulesApprenant", "RP", new { id = apprenant.Id }, null)</td>
+                        <td>@Html.ActionLink("Supprimer", "SupprimerApprenant", "RP", new { id = apprenant.Id }, new { @class = "btn btn-danger" })</td>
+                    </tr>
                 }
             }
             else if (Session["typeUtilisateur"] == "TE")
@@ -77,9 +84,9 @@
             <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour ajouter un nouvel apprenant @Html.ActionLink("Cliquer ici", "InsererApprenant", "RP")</td></tr>
         }
 
-        
-           
-        
+
+
+
     </table>
 </body>
 

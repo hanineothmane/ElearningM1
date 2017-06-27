@@ -143,6 +143,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BD\BDD.cs" />
+    <Compile Include="BD\Profils.cs" />
     <Compile Include="Controllers\ApprenantController.cs" />
     <Compile Include="Controllers\CommunController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -276,25 +277,27 @@
     <Content Include="Views\Shared\Navigateur.cshtml" />
     <Content Include="Views\TuteurEnseignant\AffectationTe.cshtml" />
     <Content Include="Views\RP\InsererModule.cshtml" />
-    <Content Include="Views\Commun\ListeApprenants.cshtml" />
     <Content Include="Views\RP\ListeTuteursEnseignant.cshtml" />
     <Content Include="Views\RP\ModifierModule.cshtml" />
     <Content Include="Views\RP\InsererApprenant.cshtml" />
     <Content Include="Views\RP\ModifierApprenant.cshtml" />
     <Content Include="Views\Shared\_LayoutRP.cshtml" />
-    <Content Include="Views\RP\InsererTE.cshtml" />
-    <Content Include="Views\RP\ModifierTE.cshtml" />
+    <Content Include="Views\RP\InsererProfil.cshtml" />
+    <Content Include="Views\RP\ModifierProfil.cshtml" />
     <Content Include="Views\RP\getModulesApprenant.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\RP\InsererNote.cshtml" />
     <Content Include="Views\Shared\_LayoutTE.cshtml" />
     <Content Include="Views\TuteurEnseignant\getModuleTe.cshtml" />
-    <Content Include="Views\RP\ListeApprenants.cshtml" />
+    <Content Include="Views\Commun\ListeApprenants.cshtml" />
     <Content Include="Views\RP\ListeExamens.cshtml" />
     <Content Include="Views\RP\InsererExamen.cshtml" />
     <Content Include="Views\RP\ListeSessionsRegroupement.cshtml" />
     <Content Include="Views\RP\InsererSessionReg.cshtml" />
     <Content Include="Views\RP\ModifierSessionReg.cshtml" />
+    <Content Include="Views\RP\ListeRP.cshtml" />
+    <Content Include="Views\RP\getApprenantsModule.cshtml" />
+    <Content Include="Views\RP\getExamensModule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

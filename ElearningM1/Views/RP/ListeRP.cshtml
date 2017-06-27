@@ -1,6 +1,6 @@
 ﻿@using ElearningM1.Models;
 @{
-    ViewBag.Title = "Liste des tuteurs";
+    ViewBag.Title = "Liste des responsables pédagogiques";
     if (Session["TypeUtilisateur"] == "RP")
     {
         Layout = "~/Views/Shared/_LayoutRP.cshtml";
@@ -30,23 +30,23 @@
                 <th>Téléphone</th>
             </tr>
         </thead>
-        @if (TuteursEnseignant.getTuteursEnseignant().Count > 0)
+        @if (RespPedagogiques.getRPs().Count > 0)
         {
-            foreach (var te in TuteursEnseignant.getTuteursEnseignant())
+            foreach (var rp in RespPedagogiques.getRPs())
             {
-            <tr>
-                <td>@Html.ActionLink(te.Nom, "ModifierProfil", "RP", new { id = te.Id, type = "TE" }, null)</td>
-                <td>@Html.ActionLink(te.Prenom, "ModifierProfil", "RP", new { id = te.Id, type = "TE" }, null)</td>
-                <td>@te.DateNaiss</td>
-                <td>@te.Email</td>
-                <td>@te.Telephone</td>
-                <td>@Html.ActionLink("Supprimer", "SupprimerProfil", "RP", new { id = te.Id, type="TE" }, new { @class = "btn btn-danger" })</td>
-            </tr>
+                <tr>
+                    <td>@Html.ActionLink(rp.Nom, "ModifierProfil", "RP", new { id = rp.Id, type = "RP" }, null)</td>
+                    <td>@Html.ActionLink(rp.Prenom, "ModifierProfil", "RP", new { id = rp.Id, type = "RP" }, null)</td>
+                    <td>@rp.DateNaiss</td>
+                    <td>@rp.Email</td>
+                    <td>@rp.Telephone</td>
+                    <td>@Html.ActionLink("Supprimer", "SupprimerProfil", "RP", new { id = rp.Id, type = "RP" }, new { @class = "btn btn-danger" })</td>
+                </tr>
             }
         }
         else
         {
-            <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour ajouter un nouvel enseignant @Html.ActionLink("Cliquer ici", "InsererProfil", "RP")</td></tr>
+            <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour ajouter un nouveau responsable pédagogique @Html.ActionLink("Cliquer ici", "InsererProfil", "RP")</td></tr>
         }
     </table>
 </body>

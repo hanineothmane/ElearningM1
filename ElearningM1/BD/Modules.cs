@@ -49,6 +49,20 @@ namespace ElearningM1.Models
             return module;
         }
 
+        public static List<Examen> getAffectations(Module m)
+        {
+            string select = "select \"Module\".id_module, \"Examen\".* from \"Module\", \"Examen\" where \"Module\".id_module = \"Examen\".id_module and \"Module\".id_module = " + m.Id + "";
+            return BDD.Execute(select).AsEnumerable().Select(row =>
+                new Examen()
+                {
+                    Id = row.Field<int>("id_examen"),
+                    Type = row.Field<string>("type_examen"),
+                    LeModule = Modules.getModules().FirstOrDefault(mo => mo.Id == row.Field<int>("id_module")),
+                    Date = row.Field<string>("date"),
+                }
+            ).ToList();
+        }
+
         public static void AddModule(Module m)
         {
             Dictionary<string, Object> dico = new Dictionary<string, Object>()

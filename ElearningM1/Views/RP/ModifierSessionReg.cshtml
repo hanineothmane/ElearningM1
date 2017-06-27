@@ -1,7 +1,14 @@
 ﻿@model ElearningM1.Models.SessionRegroupement
 @{
     ViewBag.Title = "Modifier : " + Model.Nom;
-    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    if (Session["TypeUtilisateur"] == "RP")
+    {
+        Layout = "~/Views/Shared/_LayoutRP.cshtml";
+    }
+    else if (Session["TypeUtilisateur"] == "TE" || Session["TypeUtilisateur"] == "Admin")
+    {
+        Response.Redirect("Index");
+    }
 }
 <head>
     <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
@@ -14,14 +21,21 @@
     @using (Html.BeginForm("ModifierSessionReg", "RP", FormMethod.Post))
     {
 
+        @Html.ValidationSummary(true)
         <div class="form-group">
             @Html.Label("Nom")
-            @Html.TextBoxFor(sr => sr.Nom, new { @class = "form-control" })
+            <div class="input-group">
+                @Html.TextBoxFor(sr => sr.Nom, new { @class = "form-control", @id = "inlineFormInputGroup" })
+                @Html.ValidationMessageFor(sr => sr.Nom, null, new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">
-            @Html.Label("Date de session")
-            @Html.TextBoxFor(sr => sr.Date, new { @class = "form-control" })
+            @Html.Label("Date de de la Session")
+            <div class="input-group">
+                @Html.TextBoxFor(sr => sr.Date, new { @class = "form-control", @id = "inlineFormInputGroup" })
+                @Html.ValidationMessageFor(sr => sr.Date, null, new { @class = "text-danger" })
+            </div>
         </div>
 
         <input type="submit" class="btn btn-primary" value="Modifier" />

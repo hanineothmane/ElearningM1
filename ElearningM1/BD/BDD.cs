@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 //On inclue la librairie
 using Npgsql;
-using NpgsqlTypes;
 //Fin
 using System.Data;
 using System.Text;
-using System.Web.Security;
-using System.Web.Mvc;
 using System.Web.Configuration;
-using System.Data.SqlClient;
 using System.Security.Cryptography;
 using ElearningM1.Models;
 
@@ -73,10 +68,10 @@ namespace ElearningM1.BD
 
         public static RespPedagogique ConnexionRP(string mail, string mdp)
         {
-            string select = "select * from \"RP\" where email = '" + mail + "' and mdp = '" + mdp + "'";
+            string select = "select * from \"RP\" where email = '" + mail + "' and mdp = '" + GenerateMD5(mdp) + "'";
             if (Execute(select).Rows.Count > 0)
             {
-                List<RespPedagogique> Rp =  BDD.Execute(select).AsEnumerable().Select(row =>
+                List<RespPedagogique> Rp = Execute(select).AsEnumerable().Select(row =>
                    new RespPedagogique(row.Field<string>("nom"), row.Field<String>("datenaissance"), row.Field<String>("prenom"), row.Field<String>("email"), row.Field<int>("id_rp"), row.Field<String>("mdp"), row.Field<String>("telephone"), row.Field<String>("adresse"))
                    {
                        Id = row.Field<int>("id_rp"),
@@ -84,7 +79,7 @@ namespace ElearningM1.BD
                        Prenom = row.Field<String>("prenom"),
                        DateNaiss = row.Field<String>("datenaissance"),
                        Email = row.Field<String>("email"),
-                       Mdp = row.Field<String>("mdp"),
+                       Mdp = GenerateMD5(row.Field<String>("mdp")),
                        Telephone = row.Field<String>("telephone"),
                        Adresse = row.Field<String>("adresse")
                    }
