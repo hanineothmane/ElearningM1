@@ -1,0 +1,30 @@
+﻿@model ElearningM1.Models.SessionRegroupement
+@{
+    ViewBag.Title = "Modifier : " + Model.Nom;
+    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+}
+<head>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<body>
+    <h4>Modifier informations concernant : @Model.Nom</h4>
+    <span style="color:red">@ViewBag.MessageErreur</span>
+    @using (Html.BeginForm("ModifierSessionReg", "RP", FormMethod.Post))
+    {
+
+        <div class="form-group">
+            @Html.Label("Nom")
+            @Html.TextBoxFor(sr => sr.Nom, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Date de session")
+            @Html.TextBoxFor(sr => sr.Date, new { @class = "form-control" })
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Modifier" />
+    }
+</body>
+

@@ -56,6 +56,7 @@
                     <td>@apprenant.Email</td>
                     <td>@apprenant.Adresse</td>
                     <td>@Html.ActionLink("Les Modules", "getModulesApprenant", "RP", new { id = apprenant.Id }, null)</td>
+                    <td>@Html.ActionLink("Supprimer", "SupprimerApprenant", "RP", new { id = apprenant.Id }, new { @class = "btn btn-danger" })</td>
                 </tr>
                 }
             }

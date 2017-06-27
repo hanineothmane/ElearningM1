@@ -85,6 +85,12 @@ namespace ElearningM1.Controllers
             }
             return View("ListeModules");
         }
+
+        public ActionResult SupprimerModule(int id, Module m)
+        {
+            rp.SupprimerModule(id, m);
+            return View("ListeModules");
+        }
         #endregion
 
         #region Apprenant
@@ -146,6 +152,12 @@ namespace ElearningM1.Controllers
             ViewBag.Apprenant = Apprenants.getApprenants().Single(ap => ap.Id == id);
             return View(rp.LesModulesParApprenant(id));
         }
+
+        public ActionResult SupprimerApprenant(int id, Apprenant a)
+        {
+            rp.SupprimerApprenant(id, a);
+            return View("ListeApprenants");
+        }
         #endregion
 
         #region TE
@@ -206,6 +218,12 @@ namespace ElearningM1.Controllers
                 }
             }
             return View("ListeTuteursEnseignant");
+        }  
+
+        public ActionResult SupprimerTE(int id, TuteurEnseignant te)
+        {
+            rp.SupprimerTE(id, te);
+            return View("ListeTuteursEnseignant");
         }
         #endregion
 
@@ -218,18 +236,18 @@ namespace ElearningM1.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsererExamen(Examen examen)
+        public ActionResult InsererExamen(Examen examen, int id_module)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    rp.AjouterExamen(examen);
+                    rp.AjouterExamen(examen, id_module);
                 }
                 catch (NpgsqlException)
                 {
                     ViewBag.MessageErreur = "Erreur lors de l'affectation !";
-                    return View();
+                    return View(new Examen());
                 }
             }
             return Redirect("ListeExamens");
@@ -239,6 +257,12 @@ namespace ElearningM1.Controllers
         public ActionResult ListeExamens()
         {
             return View(Examens.getExamens());
+        }
+
+        public ActionResult SupprimerExamen(int id,Examen examen)
+        {
+            rp.SupprimerExamen(id, examen);
+            return View("ListeExamens");
         }
 
         #endregion
@@ -416,11 +440,80 @@ namespace ElearningM1.Controllers
             catch (NpgsqlException)
             {
                 ViewBag.Message = "Erreur lors de l'affectation !";
-                return View(new A_TE_Module_View());
+                var list_principal = new A_TE_Module_View();
+                list_principal.Apprenant = Apprenants.getApprenants();
+                list_principal.Examen = Examens.getExamens();
+                return View(list_principal);
             }
             return Redirect("ListeExamens");
         }
 
+        #endregion
+
+        #region Session de regroupement
+
+        public ActionResult ListeSessionsRegroupement()
+        {
+            return View(SessionsRegroupement.getSessionsRegroupement());
+        }
+
+        [HttpGet]
+        public ActionResult InsererSessionReg()
+        {
+            var sessionReg = new SessionRegroupement();
+            return View(sessionReg);
+        }
+
+        [HttpPost]
+        public ActionResult InsererSessionReg(SessionRegroupement sr)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    rp.AjouterSessionReg(sr);
+                }
+                catch (NpgsqlException)
+                {
+                    ViewBag.MessageErreur = "Erreur lors de l'affectation !";
+                    return View();
+                }
+            }
+            return Redirect("ListeSessionsRegroupement");
+        }
+
+        [HttpGet]
+        public ActionResult ModifierSessionReg(int id)
+        {
+            var sr = SessionsRegroupement.getSessionsRegroupement().SingleOrDefault(s => s.Id == id);
+            if (sr == null)
+                return HttpNotFound();
+            return View(sr);
+        }
+
+        [HttpPost]
+        public ActionResult ModifierSessionReg(int id, SessionRegroupement sr)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    rp.ModifierSessionReg(id, sr);
+                }
+                catch (NpgsqlException)
+                {
+                    ViewBag.MessageErreur = "Erreur lors de l'affectation !";
+                    return View(SessionsRegroupement.getSessionsRegroupement().SingleOrDefault(s => s.Id == id));
+                }
+            }
+            return View("ListeSessionsRegroupement");
+        }
+
+        public ActionResult SupprimerSessionReg(int id, SessionRegroupement sr)
+        {
+            rp.SupprimerSessionReg(id, sr);
+            return View("ListeSessionsRegroupement");
+        }
         #endregion
     }
 }

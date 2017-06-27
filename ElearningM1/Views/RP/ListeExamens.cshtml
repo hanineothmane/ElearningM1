@@ -31,6 +31,7 @@
                     <td>@Html.ActionLink(module.Nom, "ModifierModule", "RP", new { id = module.Id }, null)</td>
                     <td>@examen.Type</td>
                     <td>@examen.Date</td>
+                    <td>@Html.ActionLink("Supprimer", "SupprimerExamen", "RP", new { id = examen.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Etes-vous sur de vouloir supprimer?');" })</td>
                 </tr>
             }
         }

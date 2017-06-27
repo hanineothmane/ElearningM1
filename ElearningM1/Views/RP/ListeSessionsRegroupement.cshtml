@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "ListeSessionsRegroupement";
+    Layout = "~/Views/Shared/_LayoutRP.cshtml";
+}
+<head>
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/materialize.min.css" />
+    <link rel="stylesheet" media="screen" type="text/css" title="Exemple" href="~/Content/css/style.css" />
+</head>
+<body>
+    <div class="input-group">
+        <h3>Les sessions de regroupement</h3>
+        @Html.ActionLink("+ Ajouter", "InsererSessionReg", "RP", new { @class = "btn btn-default" })
+
+    </div>
+    <table class="striped">
+        <thead>
+            <tr>
+
+                <th>Nom</th>
+                <th>Date de session</th>
+            </tr>
+        </thead>
+        @if (ElearningM1.Models.SessionsRegroupement.getSessionsRegroupement().Count > 0)
+        {
+            foreach (ElearningM1.Models.SessionRegroupement sr in ElearningM1.Models.SessionsRegroupement.getSessionsRegroupement() as List<ElearningM1.Models.SessionRegroupement>)
+            {
+                <tr>
+
+                    <td>@Html.ActionLink(sr.Nom, "ModifierSessionReg", "RP", new { id = sr.Id }, null)</td>
+                    <td>@sr.Date</td>
+                    <td>@Html.ActionLink("Supprimer", "SupprimerSessionReg", "RP", new { id = sr.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Etes-vous sûr de vouloir supprimer?');" })</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="5" style="color:red; text-align:center;">Aucune information n'a été trouvée. Pour ajouter une nouvelle session de regroupement @Html.ActionLink("Cliquer ici", "InsererSessionReg", "RP")</td></tr>
+        }
+    </table>
+</body>
+

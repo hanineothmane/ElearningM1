@@ -73,7 +73,7 @@ namespace ElearningM1.BD
 
         public static RespPedagogique ConnexionRP(string mail, string mdp)
         {
-            string select = "select * from \"RP\" where email = '" + mail + "' and mdp = '" + GenerateMD5(mdp) + "'";
+            string select = "select * from \"RP\" where email = '" + mail + "' and mdp = '" + mdp + "'";
             if (Execute(select).Rows.Count > 0)
             {
                 List<RespPedagogique> Rp =  BDD.Execute(select).AsEnumerable().Select(row =>
@@ -84,7 +84,7 @@ namespace ElearningM1.BD
                        Prenom = row.Field<String>("prenom"),
                        DateNaiss = row.Field<String>("datenaissance"),
                        Email = row.Field<String>("email"),
-                       Mdp = GenerateMD5(row.Field<String>("mdp")),
+                       Mdp = row.Field<String>("mdp"),
                        Telephone = row.Field<String>("telephone"),
                        Adresse = row.Field<String>("adresse")
                    }
