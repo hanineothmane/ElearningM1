@@ -6,19 +6,21 @@ My Plateform Miage
 
 This project was made during the first year of our Master Degree in Computer Science Applied to Business Management.
 
-### Prerequisites
+# Prerequisites
 
 Internet connection
 
-### Installing
+# Installing
 
 There is no installation required.
 
 # Features
-*
-*
-*
-*
+* Create a new Tutor, Module, Learner, Exam, Grouping session, Examination note
+* Modify Tutor, Module, Learner, Exam, Grouping session, Examination note
+* Delete Tutor, Module, Learner, Exam, Grouping session, Examination note
+* Affect a Tutor and Lerners to a Module
+* Affect a Exam to Lerners and Modules
+* Consult list of Tutors, Learners, Exams, Grouping session, Modules and Exmination note
 
 ## Built With
 
@@ -44,5 +46,5 @@ This project is not licensed.
 ## Acknowledgments
 
 * Great experience in Project Mode
-* 
-* 
+* New knowledge in new technologies as C#, Postgresql, MVC architecture
+* Be actors in project from the conception part to the implementation part
